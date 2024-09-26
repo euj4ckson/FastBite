@@ -1,0 +1,3 @@
+ANTES DE EXECUTAR A APLICAÇÃO INSTALAR DEPENDENCIAS
+
+pip install -r requirements.txt
