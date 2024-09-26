@@ -7,7 +7,7 @@ from views import render_login, render_cadastro, render_usuarios, render_editar
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://teste:novasenha@127.0.0.1:3306/minha_aplicacao'
-app.config['SECRET_KEY'] = 'sua_chave_secreta'
+app.config['SECRET_KEY'] = '1q2w3e4rr4e3w2q1'
 db.init_app(app)
 
 @app.route('/')
@@ -51,10 +51,7 @@ def login():
             flash('Email ou senha incorretos. Tente novamente.')
 
     return render_login()
-
-def login():
-    return render_login()
-
+ 
 @app.route('/usuarios', methods=['GET'])
 def listar_usuarios():
     usuarios = Usuario.query.all()
@@ -72,7 +69,7 @@ def editar_usuario(id):
     
     return render_editar(usuario)
 
-@app.route('/deletar/<int:id>', methods=['POST'])
+@app.route('/deletar/<int:id>', methods=['GET','POST'])
 def deletar_usuario(id):
     usuario = Usuario.query.get_or_404(id)
     db.session.delete(usuario)

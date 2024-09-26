@@ -1,14 +1,30 @@
-{% extends './base.html' %}
-
-{% block title %}Login{% endblock %}
-
-{% block content %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Meu Site{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+       <!-- Renderiza as mensagens flash -->
+       {% with messages = get_flashed_messages() %}
+       {% if messages %}
+        
+     
 <div class="login-container">
     <h1>Login</h1>
     <form method="post" action="{{ url_for('login') }}" class="login-form">
         <input type="text" name="nome" placeholder="Nome" required>
         <input type="password" name="senha" placeholder="Senha" required>
         <button type="submit">Login</button>
+        <ul class="flashes">
+            {% for message in messages %}
+                <li  class="{{ 'success' if 'sucesso' in message else 'error' }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
     </form>
 </div>
-{% endblock %}
+{% endif %}
+{% endwith %}

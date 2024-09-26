@@ -8,8 +8,10 @@
     <ul class="usuarios-list">
         {% for usuario in usuarios %}
             <li class="usuario-item">
-                {{ usuario.nome }} 
-                <a href="{{ url_for('editar_usuario', id=usuario.id) }}" class="editar-link">Editar</a>
+                <span class="itemlist">{{ usuario.nome }} </span>
+                <span class="itemlist">{{ usuario.email }} </span>
+                <span class="buttonlist"></span><a href="{{ url_for('editar_usuario', id=usuario.id) }}" class="editar-link">Editar</a></span>
+                <span class="buttonlist"></span><a href="{{ url_for('deletar_usuario', id=usuario.id) }}" class="excluir-button">Excluir</a></span>
             </li>
         {% endfor %}
     </ul>
