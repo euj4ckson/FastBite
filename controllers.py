@@ -1,3 +1,4 @@
+from werkzeug.security import check_password_hash
 from flask import Flask, request, redirect, url_for, flash, render_template
 from models import Usuario
 from database import db
@@ -18,7 +19,7 @@ def home():
 def cadastro():
     if request.method == 'POST':
         nome = request.form['nome']
-        email = request.form['email']
+        email = request.form['nome']
         senha = generate_password_hash(request.form['senha'])
 
         novo_usuario = Usuario(nome=nome, email=email, senha=senha)
@@ -28,8 +29,29 @@ def cadastro():
         return redirect(url_for('login'))
     
     return render_cadastro()
+ 
 
 @app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        print("ENTRANDO EM VERIFICAÇÃO")
+
+
+        nome = request.form['nome']
+        senha = request.form['senha']
+
+        # Verifica se o usuário existe
+        usuario = Usuario.query.filter_by(nome=nome).first()
+        
+        if usuario and check_password_hash(usuario.senha, senha):
+            flash('Login realizado com sucesso!')
+            # Aqui você pode redirecionar para a página inicial ou outra página
+            return listar_usuarios()
+        else:
+            flash('Email ou senha incorretos. Tente novamente.')
+
+    return render_login()
+
 def login():
     return render_login()
 
