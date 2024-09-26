@@ -1,6 +1,17 @@
-<h1>Usuários</h1>
-<ul>
-    {% for usuario in usuarios %}
-        <li>{{ usuario.nome }} - <a href="{{ url_for('editar_usuario', id=usuario.id) }}">Editar</a></li>
-    {% endfor %}
-</ul>
+{% extends './base.html' %}
+
+{% block title %}Usuários{% endblock %}
+
+{% block content %}
+<div class="usuarios-container">
+    <h1>Usuários</h1>
+    <ul class="usuarios-list">
+        {% for usuario in usuarios %}
+            <li class="usuario-item">
+                {{ usuario.nome }} 
+                <a href="{{ url_for('editar_usuario', id=usuario.id) }}" class="editar-link">Editar</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

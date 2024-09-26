@@ -1,5 +1,14 @@
-<form method="post" action="{{ url_for('login') }}">
-    <input type="text" name="nome" placeholder="nome" required>
-    <input type="password" name="senha" placeholder="Senha" required>
-    <button type="submit">Login</button>
-</form>
+{% extends './base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <h1>Login</h1>
+    <form method="post" action="{{ url_for('login') }}" class="login-form">
+        <input type="text" name="nome" placeholder="Nome" required>
+        <input type="password" name="senha" placeholder="Senha" required>
+        <button type="submit">Login</button>
+    </form>
+</div>
+{% endblock %}
