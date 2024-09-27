@@ -10,19 +10,13 @@
 {% block content %}
 
 <body>
-    <div class="container">
+    <div class="cadastro-container">
         <h1 class="mt-5">Editar Usuário</h1>
-        <form method="POST">
-            <div class="form-group">
-                <label for="nome">Nome</label>
-                <input type="text" class="form-control" id="nome" name="nome" value="{{ usuario.nome }}" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" value="{{ usuario.email }}" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Salvar</button>
-            <a href="{{ url_for('listar_usuarios') }}" class="btn btn-secondary">Cancelar</a>
+        <form method="POST" class="cadastro-form">
+                <input type="text" class="form-control" id="nome" name="nome"  placeholder="Nome"value="{{ usuario.nome }}" required>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ usuario.email }}" required>
+            <button type="submit"  >Salvar</button>
+            <a href="{{ url_for('listar_usuarios') }}" class="btneditar">Cancelar</a>
         </form>
     </div>
 
