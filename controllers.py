@@ -6,20 +6,20 @@ from werkzeug.security import generate_password_hash
 from views import render_login, render_cadastro, render_usuarios, render_editar
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://teste:novasenha@127.0.0.1:3306/minha_aplicacao'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@127.0.0.1:3306/minha_aplicacao'
 app.config['SECRET_KEY'] = '1q2w3e4rr4e3w2q1'
 db.init_app(app)
 
 @app.route('/')
 def home():
     print("Acessando a página inicial")  # Para debug
-    return render_template('index.html')  # Página inicial
+    return render_template('login.html')  # Página inicial
 
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
     if request.method == 'POST':
         nome = request.form['nome']
-        email = request.form['nome']
+        email = request.form['email']
         senha = generate_password_hash(request.form['senha'])
 
         novo_usuario = Usuario(nome=nome, email=email, senha=senha)
