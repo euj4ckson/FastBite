@@ -14,8 +14,8 @@
         <h1 class="mt-5">Editar Evento</h1>
         <form method="POST" class="cadastro-form">
                 <input type="text" class="form-control" id="titulo" name="titulo"  placeholder="titulo"value="{{ eventos.titulo }}" required>
-                <input type="email" class="form-control" id="descricao" name="descricao" placeholder="Email" value="{{ eventos.descricao }}" required>
-                <input type="email" class="form-control" id="id_usuario" name="id_usuario" placeholder="Usuario(id)" value="{{ eventos.usuario_id }}" required>
+                <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Email" value="{{ eventos.descricao }}" required>
+                <input type="text" class="form-control" id="id_usuario" name="id_usuario" placeholder="Usuario(id)" value="{{ eventos.usuario_id }}" required>
             <button type="submit"  >Salvar</button>
             <a href="{{ url_for('listar_eventos') }}" class="btneditar">Cancelar</a>
         </form>

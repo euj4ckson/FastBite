@@ -150,7 +150,7 @@ def editar_evento(id):
     if request.method == 'POST':
         evento.titulo = request.form['titulo']
         evento.descricao = request.form['descricao']
-        evento.usuario_id = request.form['usuario_id']
+        evento.usuario_id = request.form['id_usuario']
         db.session.commit()
         flash('Usuário atualizado com sucesso!')
         return redirect(url_for('listar_eventos'))
