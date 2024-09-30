@@ -1,0 +1,15 @@
+{% extends './base.html' %}
+
+{% block title %}Cadastro de eventos{% endblock %}
+
+{% block content %}
+<div class="cadastro-container">
+    <h1>Cadastro-eventos</h1>
+    <form method="post" action="{{ url_for('cadastro_evento') }}" class="cadastro-form">
+        <input type="text" name="titulo" placeholder="Titulo do evento" required>
+        <input type="textbox" name="descricao" placeholder="Descrição" required>
+        <input type="text" name="usuario_id" placeholder="Usuario responsável" required>
+        <button type="submit">Cadastrar</button>
+    </form>
+</div>
+{% endblock %}

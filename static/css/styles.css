@@ -23,26 +23,11 @@ header {
     margin: 0 auto;
 }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: flex-end;
-}
-
-nav ul li {
-    margin-left: 2rem;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-nav ul li a:hover {
-    color: #ffcc00;
-}
-
+nav{
+    position:absolute; 
+    left:90%;
+    top: 6%;
+} 
 main {
     padding: 2rem 0;
 }
@@ -58,10 +43,7 @@ footer a {
     color: #ffcc00;
     text-decoration: none;
 }
-
-footer a:hover {
-    text-decoration: underline;
-}
+  
 
 /* Responsividade */
 @media (max-width: 600px) {
@@ -226,11 +208,7 @@ nav li {
     list-style-type: none; /* Remove os marcadores da lista */
     display: flex; /* Alinha os itens em linha */
     gap: 0.5rem; /* Espaçamento entre os botões */
-}
-.itemlist{
-    padding: 50; /* Remove o padding padrão da lista */
-
-}
+} 
 
 .login-container{
     margin-top: 150px;

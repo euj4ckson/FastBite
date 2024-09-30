@@ -1,0 +1,19 @@
+{% extends './base.html' %}
+
+{% block title %}Usuários{% endblock %}
+
+{% block content %}
+<div class="usuarios-container">
+    <h1>Eventos</h1>
+    <ul class="usuarios-list">
+        {% for evento in eventos %}
+            <li class="usuario-item">
+                <span class="itemlist">{{ evento.titulo }} </span>
+                <span class="itemlist">{{ evento.descricao}} </span>
+                <span class="buttonlist"></span><a href="{{ url_for('editar_evento', id=evento.id) }}" class="editar-link">Editar</a></span>
+                <span class="buttonlist"></span><a href="{{ url_for('deletar_evento', id=evento.id) }}" class="excluir-button">Excluir</a></span>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

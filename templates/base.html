@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Meu Site{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -14,10 +15,27 @@
         <div class="container">
             <h1>MVC PYTHON</h1>
             <nav>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Usuarios
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ url_for('cadastro') }}" >Cadastro de Usuário</a></li>
+                        <li><a href="{{ url_for('login') }}" >Login</a></li>
+                        <li><a href="{{ url_for('listar_usuarios') }}" >Listar Usuários</a>
+                    </ul>
+                  </div>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Eventos
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ url_for('cadastro_evento') }}" >Cadastro de eventos</a></li>
+                        <li><a href="{{ url_for('listar_eventos') }}" >Listar Usuários</a>
+                    </ul>
+                  </div>
                 <ul>
-                    <li><a href="{{ url_for('cadastro') }}" class="btn btn-primary">Cadastro de Usuário</a></li>
-                    <li><a href="{{ url_for('login') }}" class="btn btn-secondary">Login</a></li>
-                    <li><a href="{{ url_for('listar_usuarios') }}" class="btn btn-info">Listar Usuários</a></li>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -35,5 +53,6 @@
             <p>&copy; 2024 python Controller | <a href="#">Política de Privacidade</a></p>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
