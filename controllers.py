@@ -10,7 +10,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@127.0.0.1:3
 app.config['SECRET_KEY'] = '1q2w3e4rr4e3w2q1'
 db.init_app(app)
 
-
+id_logado = None
 # FUNÇÕES DE LOGIN / VERIFICAÇÃO
 
 def verificalogin():
@@ -37,7 +37,8 @@ def login():
 
         # Verifica se o usuário existe
         usuario = Usuario.query.filter_by(nome=nome).first()
-        
+        global id_logado
+        id_logado = usuario.id
         if usuario and check_password_hash(usuario.senha, senha):
             flash('Login realizado com sucesso!')
             session['logado'] =True
@@ -117,7 +118,12 @@ def listar_eventos():
     if redirecionar is not True:
         print('redirecionando')
         return redirect(url_for('login'))
-    eventos = Evento.query.all()
+    global id_logado
+    print(id_logado)
+    eventos = Evento.query.all() if id_logado == 1 else Evento.query.filter(Evento.usuario_id == id_logado).all()
+    
+     
+
     return render_eventos(eventos)
 
 

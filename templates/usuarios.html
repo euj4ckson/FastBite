@@ -10,8 +10,11 @@
             <li class="usuario-item">
                 <span class="itemlist">{{ usuario.nome }} </span>
                 <span class="itemlist">{{ usuario.email }} </span>
-                <span class="buttonlist"></span><a href="{{ url_for('editar_usuario', id=usuario.id) }}" class="editar-link">Editar</a></span>
-                <span class="buttonlist"></span><a href="{{ url_for('deletar_usuario', id=usuario.id) }}" class="excluir-button">Excluir</a></span>
+                <div style="display: inline-flex; gap: 450px; ">
+                    <a href="{{ url_for('editar_usuario', id=usuario.id) }}" class="editar-link">Editar</a></span>
+                    <a href="{{ url_for('deletar_usuario', id=usuario.id) }}" class="excluir-button">Excluir</a></span>
+                </div>
+
             </li>
         {% endfor %}
     </ul>
