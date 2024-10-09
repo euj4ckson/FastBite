@@ -10,7 +10,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@127.0.0.1:3
 app.config['SECRET_KEY'] = '1q2w3e4rr4e3w2q1'
 db.init_app(app)
 
-id_logado = None
+id_logado = 0
 # FUNÇÕES DE LOGIN / VERIFICAÇÃO
 
 def verificalogin():
@@ -25,11 +25,12 @@ def verificalogin():
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
-    session['logado'] =False
+    session['logado'] = False
     logado_status = session.get('logado', 'Sessão não encontrada!')
     print(f'Status de logado: {logado_status}')
+
     if request.method == 'POST':
-        print("ENTRANDO EM VERIFICAÇÃO") 
+        print("ENTRANDO EM VERIFICAÇÃO")
         logado_status = session.get('logado', 'Sessão não encontrada!')
         print(f'Status de logado: {logado_status}')
         nome = request.form['nome']
@@ -37,18 +38,18 @@ def login():
 
         # Verifica se o usuário existe
         usuario = Usuario.query.filter_by(nome=nome).first()
-        global id_logado
-        id_logado = usuario.id
+        
         if usuario and check_password_hash(usuario.senha, senha):
+            global id_logado
+            id_logado = usuario.id
             flash('Login realizado com sucesso!')
-            session['logado'] =True
+            session['logado'] = True
             # Aqui você pode redirecionar para a página inicial ou outra página
-            return listar_usuarios()
+            return listar_usuarios()  # Mantenha o retorno conforme desejado
         else:
-
             flash('Email ou senha incorretos. Tente novamente.')
 
-    return render_login()
+    return render_login()  # Retorno para renderizar a página de login
 
 # FUNÇÕES DE USUARIOS (CRUD)
 @app.route('/cadastro', methods=['GET', 'POST'])
@@ -175,4 +176,4 @@ def deletar_evento(id):
     flash('Usuário deletado com sucesso!')
     return redirect(url_for('listar_eventos'))
 if __name__ == '__main__':
-    app.run(debug=True)  # Ative o modo de debug
+    app.run(debug=True)   
