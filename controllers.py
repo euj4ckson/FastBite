@@ -121,7 +121,12 @@ def listar_eventos():
         return redirect(url_for('login'))
     global id_logado
     print(id_logado)
-    eventos = Evento.query.all() if id_logado == 1 else Evento.query.filter(Evento.usuario_id == id_logado).all()
+    if id_logado == 1:
+        # Para o administrador, traz todos os eventos com o join na tabela Usuario
+        eventos = Evento.query.join(Usuario).options(db.joinedload(Evento.usuario)).all()
+    else:
+        # Para outros usuários, filtra por usuario_id e faz o join
+        eventos = Evento.query.join(Usuario).filter(Evento.usuario_id == id_logado).options(db.joinedload(Evento.usuario)).all()
     
      
 

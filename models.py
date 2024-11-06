@@ -1,4 +1,5 @@
 from database import db
+from sqlalchemy.orm import relationship
 
 class Usuario(db.Model):
     __tablename__ = 'usuarios'
@@ -10,9 +11,13 @@ class Usuario(db.Model):
     criado_em = db.Column(db.DateTime, default=db.func.current_timestamp())
     atualizado_em = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
+    # Define o relacionamento com Evento usando back_populates para evitar conflito
+    eventos = db.relationship("Evento", back_populates="usuario", cascade="all, delete-orphan")
+
     def __repr__(self):
         return f'<Usuario {self.nome}>'
-    
+
+
 class Evento(db.Model):
     __tablename__ = 'eventos'
 
@@ -23,8 +28,8 @@ class Evento(db.Model):
     criado_em = db.Column(db.DateTime, default=db.func.current_timestamp())
     atualizado_em = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
-    usuario = db.relationship('Usuario', backref='eventos')
+    # Define o relacionamento com Usuario usando back_populates para evitar conflito
+    usuario = db.relationship("Usuario", back_populates="eventos")
 
     def __repr__(self):
         return f'<Evento {self.titulo}>'
-

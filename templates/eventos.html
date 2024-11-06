@@ -9,13 +9,80 @@
         {% for evento in eventos %}
             <li class="usuario-item">
                 <span class="itemlist">{{ evento.titulo }} </span>
-                <span class="itemlist">{{ evento.descricao}} </span>
-                <div style="display: inline-flex; gap: 450px; ">
-                    <a href="{{ url_for('editar_evento', id=evento.id) }}" class="editar-link">Editar</a></span>
-                    <a href="{{ url_for('deletar_evento', id=evento.id) }}" class="excluir-button">Excluir</a></span>
+                <span class="itemlist">{{ evento.descricao }} </span>
+                
+                <!-- Checkbox para controlar a exibição do modal -->
+                <input type="checkbox" id="expandir-{{ evento.id }}" class="expandir-checkbox">
+                
+                <!-- Botão de detalhes que controla o checkbox -->
+                <label for="expandir-{{ evento.id }}" class="detalhes-button">Detalhes</label>
+                
+                <div class="modal-expandido">
+                    <label for="expandir-{{ evento.id }}" class="fechar-modal">&times;</label>
+                    <h2>{{ evento.titulo }}</h2>
+                    <p>{{ evento.descricao }}</p>
+                    <p><strong>Data de criação:</strong> {{ evento.criado_em }}</p>
+                    <p><strong>criado por:</strong> {{ evento.usuario.nome }}</p>
+                    <p><strong>Data do evento:</strong> {{ evento.local }}</p>
+                </div>
+
+                <div style="display: inline-flex; gap: 350px;">
+                    <a href="{{ url_for('editar_evento', id=evento.id) }}" class="editar-link">Editar</a>
+                </div>
+                <div style="display: inline-flex; gap: 350px;">
+                    <a href="{{ url_for('deletar_evento', id=evento.id) }}" class="excluir-button">Excluir</a>
                 </div>
             </li>
         {% endfor %}
     </ul>
 </div>
+
+<style>
+    /* Estilos para o modal de expansão */
+    .expandir-checkbox {
+        display: none;
+    }
+
+    .detalhes-button {
+        cursor: pointer;
+        color: #007bff;
+        text-decoration: underline;
+    }
+
+    /* Estilo modal expandido */
+    .modal-expandido {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        max-width: 500px;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        border-radius: 8px;
+        z-index: 1000;
+    }
+
+    /* Exibir modal quando checkbox estiver marcado */
+    .expandir-checkbox:checked + .detalhes-button + .modal-expandido {
+        display: block;
+    }
+
+    /* Botão de fechar no modal */
+    .fechar-modal {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 24px;
+        color: #aaaaaac5;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .fechar-modal:hover {
+        color: black;
+    }
+</style>
 {% endblock %}
