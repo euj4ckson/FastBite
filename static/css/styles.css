@@ -1,39 +1,39 @@
+/* Estilos Globais */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-.navbar{
-    background-color: #007bffec;
-    padding: 1rem 0;
-}
-.linkli{
-    text-decoration: none;
-    color: black;
-    padding: 1rem 0;
 
-}
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
     color: #333;
     background-color: #f4f4f4;
 }
- 
- 
- 
-footer {
-    background: #333;
-    color: #fff;
-    text-align: center;
+
+/* Navegação */
+.navbar {
+    background-color: #007bffec;
     padding: 1rem 0;
 }
 
-footer a {
-    color: #ffcc00;
-    text-decoration: none;
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
 }
-  
+
+nav li {
+    margin: 0 1rem;
+}
+
+.linkli {
+    text-decoration: none;
+    color: black;
+    padding: 1rem 0;
+}
 
 /* Responsividade */
 @media (max-width: 600px) {
@@ -46,163 +46,21 @@ footer a {
         margin: 0.5rem 0;
     }
 }
-.usuarios-container {
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 2rem 0;
+
+/* Rodapé */
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
 }
 
-.usuarios-container h1 {
-    color: #007bff;
-    margin-bottom: 1rem;
-}
-
-.usuarios-list {
-    list-style-type: none; /* Remove os marcadores da lista */
-    padding: 0;
-}
-
-.usuario-item {
-    padding: 0.5rem;
-    border-bottom: 1px solid #e0e0e0;
-    display: flex;
-    justify-content: space-between; /* Alinha os itens */
-    align-items: center; /* Alinha verticalmente */
-}
-
-.usuario-item:last-child {
-    border-bottom: none; /* Remove a borda do último item */
-}
-
-.editar-link {
-    background-color: #007bff; /* Vermelho */
-    border: none;
-    border-radius: 4px;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    color: white;
+footer a {
+    color: #ffcc00;
     text-decoration: none;
-    transition: color 0.3s;
-    margin: 0; /* Remove a margem entre os itens da lista */
-
-    margin-right: -440px;
 }
 
-.editar-link:hover {
-    color: #ffcc00; /* Muda a cor ao passar o mouse */
-}
-.login-container {
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 2rem auto;
-    max-width: 400px; /* Largura máxima do formulário */
-}
-
-.login-container h1 {
-    color: #007bff;
-    margin-bottom: 1.5rem;
-    text-align: center; /* Centraliza o título */
-}
-
-.login-form {
-    display: flex;
-    flex-direction: column; /* Coloca os itens em coluna */
-}
-
-.login-form input {
-    margin-bottom: 1rem; /* Espaçamento entre os campos */
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-.login-form button {
-    padding: 0.75rem;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.login-form button:hover {
-    background-color: #0056b3; /* Tom mais escuro ao passar o mouse */
-}
-.cadastro-container {
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 2rem auto;
-    max-width: 400px; /* Largura máxima do formulário */
-}
-
-.cadastro-container h1 {
-    color: #007bff;
-    margin-bottom: 1.5rem;
-    text-align: center; /* Centraliza o título */
-}
-
-.cadastro-form {
-    display: flex;
-    flex-direction: column; /* Coloca os itens em coluna */
-}
-
-.cadastro-form input {
-    margin-bottom: 1rem; /* Espaçamento entre os campos */
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-.cadastro-form button {
-    padding: 0.75rem;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.cadastro-form button:hover {
-    background-color: #0056b3; /* Tom mais escuro ao passar o mouse */
-}
-.excluir-button {
-    text-decoration: none;
-    background-color: #dc3545; /* Vermelho */
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;    
-
-}
-
-.excluir-button:hover {
-    background-color: #c82333; /* Tom mais escuro ao passar o mouse */
-} 
-
-nav li {
-    padding: 224; /* Remove o padding padrão da lista */
-    list-style-type: none; /* Remove os marcadores da lista */
-    display: flex; /* Alinha os itens em linha */
-    gap: 0.5rem; /* Espaçamento entre os botões */
-} 
-
-.login-container{
-    margin-top: 150px;
-}
+/* Flashes */
 .flashes {
     list-style: none;
     padding: 0;
@@ -217,19 +75,130 @@ nav li {
 }
 
 .flashes li.success {
-    border-color: #28a745; /* Verde */
+    border-color: #28a745;
     background-color: #d4edda;
     color: #155724;
 }
 
 .flashes li.error {
-    border-color: #dc3545; /* Vermelho */
+    border-color: #dc3545;
     background-color: #f8d7da;
     color: #721c24;
 }
 
-.btneditar{
-    padding: 0.50rem;
+/* Formulários */
+.login-container,
+.cadastro-container {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+    max-width: 400px;
+}
+
+.login-container h1,
+.cadastro-container h1 {
+    color: #007bff;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.login-form,
+.cadastro-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form input,
+.cadastro-form input {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.login-form button,
+.cadastro-form button {
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-form button:hover,
+.cadastro-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Usuários */
+.usuarios-container {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 2rem 0;
+}
+
+.usuarios-container h1 {
+    color: #007bff;
+    margin-bottom: 1rem;
+}
+
+.usuarios-list {
+    list-style: none;
+    padding: 0;
+}
+
+.usuario-item {
+    padding: 0.5rem;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.usuario-item:last-child {
+    border-bottom: none;
+}
+
+.editar-link {
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.editar-link:hover {
+    color: #ffcc00;
+}
+
+.excluir-button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.excluir-button:hover {
+    background-color: #c82333;
+}
+
+/* Botões */
+.btneditar {
+    padding: 0.5rem;
     border: none;
     border-radius: 4px;
     background-color: #007bff;
@@ -239,11 +208,8 @@ nav li {
     transition: background-color 0.3s;
     text-decoration: none;
     text-align: center;
-    margin-top: 2px;
-    
-    
 }
 
-.btneditar a:hover {
-    background-color: #0056b3; /* Tom mais escuro ao passar o mouse */
+.btneditar:hover {
+    background-color: #0056b3;
 }
