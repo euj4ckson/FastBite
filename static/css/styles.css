@@ -112,17 +112,129 @@ footer a {
 
 .login-form input,
 .cadastro-form input {
-    margin-bottom: 1rem;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    width: 100%; /* Preenche o container */
+    margin-bottom: 1.5rem; /* Mais espaçamento entre campos */
+    padding: 0.9rem; /* Espaçamento interno maior para conforto */
+    border: 2px solid #ddd; /* Borda mais visível */
+    border-radius: 8px; /* Arredondamento suave */
+    font-size: 1rem; /* Fonte confortável para leitura */
+    background-color: #f8f9fa; /* Fundo claro e limpo */
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+/* Estilo base para o select */
+.login-form select,
+.cadastro-form select {
+    width: 100%; /* Ocupa toda a largura disponível */
+    margin-bottom: 1.5rem; /* Espaçamento entre os campos */
+    padding: 0.9rem; /* Espaço interno confortável */
+    border: 2px solid #ddd; /* Borda sutil */
+    border-radius: 8px; /* Cantos arredondados */
+    font-size: 1rem; /* Tamanho da fonte claro e legível */
+    background-color: #f8f9fa; /* Fundo limpo e claro */
+    color: #333; /* Texto escuro para boa legibilidade */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Suavidade ao interagir */
+    appearance: none; /* Remove o estilo padrão (dependendo do navegador) */
+}
+
+/* Efeito de foco */
+.login-form select:focus,
+.cadastro-form select:focus {
+    border-color: #007bff; /* Destaque com azul */
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.25); /* Efeito de luz */
+    outline: none; /* Remove o contorno padrão */
+    background-color: #fff; /* Fundo branco no foco */
+}
+
+/* Placeholder ou opções desabilitadas */
+.login-form select option:disabled,
+.cadastro-form select option:disabled {
+    color: #999; /* Texto mais claro */
+    font-style: italic; /* Estilo diferenciado */
+}
+
+/* Estilo para selects inválidos */
+.login-form select:invalid,
+.cadastro-form select:invalid {
+    border-color: #dc3545; /* Vermelho para campos inválidos */
+    box-shadow: 0 0 5px rgba(220, 53, 69, 0.5); /* Efeito de erro */
+}
+
+/* Estilo para selects desabilitados */
+.login-form select:disabled,
+.cadastro-form select:disabled {
+    background-color: #e9ecef; /* Fundo cinza claro */
+    border-color: #ddd;
+    cursor: not-allowed; /* Indica que está desabilitado */
+    color: #6c757d; /* Texto apagado */
+}
+/* Container para alinhar o formulário e o resumo lado a lado */
+.formulario-resumo-container {
+    display: flex;  /* Flexbox para dispor os itens lado a lado */
+    justify-content: space-between;  /* Espaço entre o formulário e o resumo */
+    gap: 2rem;  /* Espaço entre os itens */
+    max-width: 1200px;  /* Limite máximo da largura */
+    margin: 0 auto;  /* Centraliza o conteúdo na página */
+    align-items: flex-start;  /* Garante que ambos os elementos sejam alinhados ao topo */
+    height: auto;  /* Ajuste automático de altura */
+}
+
+.form-container {
+    flex: 1;  /* Flex para o formulário ocupar o restante do espaço */
+    min-width: 300px;  /* Define um tamanho mínimo */
+}
+
+.resumo-container {
+    flex: 1;  /* Flex para o resumo ocupar o restante do espaço */
+    min-width: 300px;  /* Define um tamanho mínimo */
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;  /* Inclui o padding no cálculo da altura */
+    height: auto;  /* Ajuste automático de altura */
+    max-height: 100%;  /* Garantir que a altura não ultrapasse a altura da tela */
+}
+
+.resumo-container h2 {
+    color: #007bff;  /* Azul do tema */
+    font-size: 1.5rem;
+    margin-bottom: 1rem;  /* Espaço abaixo do título */
+    text-align: center;  /* Centraliza o texto */
+}
+
+.resumo-container ul {
+    list-style: none;  /* Remove os marcadores da lista */
+    padding: 0;
+    margin-bottom: 1rem;  /* Espaço abaixo dos itens */
+}
+
+.resumo-container ul li {
+    padding: 0.5rem;
+    border-bottom: 1px solid #e0e0e0;  /* Linha divisória */
     font-size: 1rem;
 }
+
+.resumo-container ul li:last-child {
+    border-bottom: none;  /* Remove a linha do último item */
+}
+
+.resumo-container p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: right;  /* Alinha o texto à direita */
+    color: #333;  /* Texto escuro */
+}
+
+.resumo-container span#total-valor {
+    color: #007bff;  /* Azul do tema */
+}
+
 
 .login-form button,
 .cadastro-form button {
     padding: 0.75rem;
     border: none;
+    margin-bottom: 10px;
     border-radius: 4px;
     background-color: #007bff;
     color: #fff;
@@ -130,6 +242,8 @@ footer a {
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
+
 
 .login-form button:hover,
 .cadastro-form button:hover {
