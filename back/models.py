@@ -1,4 +1,4 @@
-from database import db
+from back.database import db
 from sqlalchemy.orm import relationship
 
 class Usuario(db.Model):
@@ -68,4 +68,3 @@ class pedido_itens(db.Model):
 
     # Relacionamento com Produto
     produto = db.relationship('Produto', backref='pedido_itens', lazy=True)
-

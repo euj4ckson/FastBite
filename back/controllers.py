@@ -1,9 +1,9 @@
 from werkzeug.security import check_password_hash
 from flask import Flask, request, redirect, url_for, flash, render_template,session
-from models import Usuario,Produto,pedido_itens,Pedidos
-from database import db
+from back.models import Usuario,Produto,pedido_itens,Pedidos
+from back.database import db
 from werkzeug.security import generate_password_hash
-from views import render_login, render_cadastro, render_usuarios,render_pedidos, render_editar,render_editar_pedido
+from back.views import render_login, render_cadastro, render_usuarios,render_pedidos, render_editar,render_editar_pedido
 import re
 
 app = Flask(__name__)
