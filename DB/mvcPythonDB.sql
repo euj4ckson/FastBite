@@ -37,6 +37,59 @@ INSERT INTO `eventos` (`id`, `titulo`, `descricao`, `usuario_id`, `criado_em`, `
 	(1, 'Evento teste', 'Descrição alterada', 1, '2024-09-30 12:55:18', '2024-09-30 15:51:29'),
 	(4, 'evento de usuario 2', 'evento usuario 2 teste', 7, '2024-09-30 17:01:31', '2024-09-30 17:01:31');
 
+-- Copiando estrutura para tabela minha_aplicacao.pedidos
+CREATE TABLE IF NOT EXISTS `pedidos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cliente_nome` varchar(100) NOT NULL,
+  `criado_em` datetime DEFAULT current_timestamp(),
+  `valor_total` decimal(10,2) NOT NULL DEFAULT 0.00,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
+-- Copiando dados para a tabela minha_aplicacao.pedidos: ~0 rows (aproximadamente)
+INSERT INTO `pedidos` (`id`, `cliente_nome`, `criado_em`, `valor_total`) VALUES
+	(16, 'teste 66666666', '2024-12-10 15:43:39', 13.00);
+
+-- Copiando estrutura para tabela minha_aplicacao.pedido_itens
+CREATE TABLE IF NOT EXISTS `pedido_itens` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pedido_id` int(11) DEFAULT NULL,
+  `produto_id` int(11) DEFAULT NULL,
+  `quantidade` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pedido_id` (`pedido_id`),
+  KEY `produto_id` (`produto_id`),
+  CONSTRAINT `pedido_itens_ibfk_1` FOREIGN KEY (`pedido_id`) REFERENCES `pedidos` (`id`),
+  CONSTRAINT `pedido_itens_ibfk_2` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
+-- Copiando dados para a tabela minha_aplicacao.pedido_itens: ~2 rows (aproximadamente)
+INSERT INTO `pedido_itens` (`id`, `pedido_id`, `produto_id`, `quantidade`) VALUES
+	(13, 16, 1, 1),
+	(14, 16, 9, 1);
+
+-- Copiando estrutura para tabela minha_aplicacao.produtos
+CREATE TABLE IF NOT EXISTS `produtos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(200) NOT NULL,
+  `valor` float NOT NULL,
+  `criado_em` datetime DEFAULT current_timestamp(),
+  `atualizado_em` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
+-- Copiando dados para a tabela minha_aplicacao.produtos: ~9 rows (aproximadamente)
+INSERT INTO `produtos` (`id`, `nome`, `valor`, `criado_em`, `atualizado_em`) VALUES
+	(1, 'Hambúrguer Simples', 10, '2024-12-09 16:14:21', '2024-12-09 16:14:21'),
+	(2, 'Cheeseburger', 12.5, '2024-12-09 16:14:21', '2024-12-09 16:14:21'),
+	(3, 'X-Bacon', 15, '2024-12-09 16:14:21', '2024-12-09 16:14:21'),
+	(4, 'X-Egg', 14, '2024-12-09 16:14:21', '2024-12-09 16:14:21'),
+	(5, 'X-Tudo', 20, '2024-12-09 16:14:21', '2024-12-09 16:14:21'),
+	(6, 'Porção de Batata Frita', 8, '2024-12-09 16:14:21', '2024-12-09 16:14:21'),
+	(7, 'Refrigerante Lata', 5, '2024-12-09 16:14:21', '2024-12-09 16:14:21'),
+	(8, 'Refrigerante 600ml', 7.5, '2024-12-09 16:14:21', '2024-12-09 16:14:21'),
+	(9, 'Água Mineral', 3, '2024-12-09 16:14:21', '2024-12-09 16:14:21');
+
 -- Copiando estrutura para tabela minha_aplicacao.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -49,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
--- Copiando dados para a tabela minha_aplicacao.usuarios: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela minha_aplicacao.usuarios: ~1 rows (aproximadamente)
 INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `criado_em`, `atualizado_em`) VALUES
 	(1, 'jack', 'jacksonduardo6@gmail.com', 'scrypt:32768:8:1$7Mly5KOVK1srgmgr$9052e20976c6c1645c985565f9fd8cd3138d80891c89d559bb88c32de9844b69d3fc24454b78b13a9382dc58ac7f9a6ffad170718430735c616eacf62f885446', '2024-09-26 13:48:34', '2024-09-27 19:17:05'),
 	(7, 'teste evento', 'suporte@sssolucoes.net', 'scrypt:32768:8:1$DRzITEIeqGwsB8vu$cf7d173fe033441b83098ed95e4624aaeedca2e5a0778065ac05e5cd5ef707373fddb502460eed33014089297c2e9fd51a1d8fa26fb3e03f509b919110cd3602', '2024-09-30 20:00:41', '2024-09-30 20:00:41');
