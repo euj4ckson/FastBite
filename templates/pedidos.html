@@ -4,36 +4,35 @@
 
 {% block content %}
 <div class="usuarios-container">
-    <h1>Eventos</h1>
+    <h1>pedidos</h1>
     <ul class="usuarios-list">
-        {% for evento in eventos %}
+        {% for pedido in pedidos %}
             <li class="usuario-item">
-                <span class="itemlist">{{ evento.titulo }} </span>
-                <span class="itemlist">{{ evento.descricao }} </span>
+                <span class="itemlist">{{ pedido.cliente_nome }} </span>
+                <span class="itemlist">{{ pedido.valor_total }} </span>
                 
-                <!-- Checkbox para controlar a exibição do modal -->
-                <input type="checkbox" id="expandir-{{ evento.id }}" class="expandir-checkbox">
+                <!-- Checkbox com ID único para cada pedido -->
+                <input type="checkbox" id="expandir-{{ pedido.id }}" class="expandir-checkbox">
                 
                 <!-- Botão de detalhes que controla o checkbox -->
-                <label for="expandir-{{ evento.id }}" class="detalhes-button">Detalhes</label>
+                <label for="expandir-{{ pedido.id }}" class="detalhes-button">Detalhes</label>
                 
                 <div class="modal-expandido">
-                    <label for="expandir-{{ evento.id }}" class="fechar-modal">&times;</label>
-                    <h2>{{ evento.titulo }}</h2>
-                    <p>{{ evento.descricao }}</p>
-                    <p><strong>Data de criação:</strong> {{ evento.criado_em }}</p>
-                    <p><strong>criado por:</strong> {{ evento.usuario.nome }}</p>
-                    <p><strong>Data do evento:</strong> {{ evento.local }}</p>
+                    <label for="expandir-{{ pedido.id }}" class="fechar-modal">&times;</label>
+                    <h4>Cliente: {{ pedido.cliente_nome }}</h4>
+                    <p> Valor do pedido: {{ pedido.valor_total }}</p>
+                    <p><strong>Data de criação:</strong> {{ pedido.criado_em }}</p>
                 </div>
 
                 <div style="display: inline-flex; gap: 350px;">
-                    <a href="{{ url_for('editar_evento', id=evento.id) }}" class="editar-link">Editar</a>
+                    <a href="{{ url_for('editar_pedido', id=pedido.id) }}" class="editar-link">Editar</a>
                 </div>
                 <div style="display: inline-flex; gap: 350px;">
-                    <a href="{{ url_for('deletar_evento', id=evento.id) }}" class="excluir-button">Excluir</a>
+                    <a href="{{ url_for('deletar_pedido', id=pedido.id) }}" class="excluir-button">Excluir</a>
                 </div>
             </li>
         {% endfor %}
+
     </ul>
 </div>
 

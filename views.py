@@ -5,17 +5,17 @@ def render_login():
 
 def render_cadastro():
     return render_template('cadastro.html')  # Template de cadastro
-def render_cadastro_evento():
-    return render_template('cadastro_evento.html')  # Template de cadastro eventos
+def render_cadastro_pedido():
+    return render_template('cadastro_pedido.html')  # Template de cadastro pedidos
 
 def render_usuarios(usuarios):
     return render_template('usuarios.html', usuarios=usuarios)  # Template para listar usuários
-def render_eventos(eventos):
-    return render_template('eventos.html', eventos=eventos)  # Template para listar eventos
+def render_pedidos(pedidos):
+    return render_template('pedidos.html', pedidos=pedidos)  # Template para listar pedidos
 
 def render_editar(usuario):
     return render_template('editar.html', usuario=usuario)  # Template para editar usuário
 
 
-def render_editar_evento(eventos):
-    return render_template('editar_evento.html', eventos=eventos)  # Template para editar usuário
+def render_editar_pedido(pedidos):
+    return render_template('editar_evento.html', pedidos=pedidos)  # Template para editar usuário
