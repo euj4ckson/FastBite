@@ -1,6 +1,10 @@
 import sys
 import os
 from flask import Flask
+
+# Adiciona o diretório raiz ao sys.path
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+
 from models import db
 
 # Adiciona o diretório 'controllers' ao sys.path
