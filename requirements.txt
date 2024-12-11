@@ -1,5 +1,4 @@
-﻿MarkupSafe==3.0.2
-Werkzeug==3.1.2
+MarkupSafe==3.0.2
 asgiref==3.8.1
 bcrypt==4.2.0
 blinker==1.8.2
@@ -19,11 +18,10 @@ Jinja2==3.1.4
 jsonify==0.5
 MarkupSafe>=2.1.5,<3.1.0
 more-itertools==10.5.0
-msgspec==0.18.6
 PyMySQL==1.1.1
 setuptools==75.1.0
-sqlacodegen==2.3.0.post1
-SQLAlchemy==2.0.35
+sqlacodegen==3.0.0rc1  # Versão mais recente e compatível
+SQLAlchemy>=2.0.16,<3.0.0
 sqlparse==0.5.1
 typeguard==4.3.0
 typing_extensions==4.12.2
