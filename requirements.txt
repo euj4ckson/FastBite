@@ -16,7 +16,6 @@ inflect==7.4.0
 itsdangerous==2.2.0
 Jinja2==3.1.4
 jsonify==0.5
-MarkupSafe>=2.1.5,<3.1.0
 more-itertools==10.5.0
 PyMySQL==1.1.1
 setuptools==75.1.0
