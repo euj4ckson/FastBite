@@ -1,6 +1,8 @@
 import sys
 import os
 from flask import Flask
+from flask_migrate import Migrate
+
 
 # Adiciona o diretório raiz ao sys.path
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
@@ -19,6 +21,7 @@ app = Flask(
     template_folder=os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'front', 'templates'),
     static_folder=os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'front', 'static')
 )
+migrate = Migrate(app, db)
 
 # Envia o app para os controllers
 init(app)

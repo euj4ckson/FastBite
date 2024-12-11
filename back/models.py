@@ -36,7 +36,7 @@ class Pedidos(db.Model):
     cliente_nome = db.Column(db.String(100), nullable=False)
     criado_em = db.Column(db.DateTime, default=db.func.current_timestamp())
     valor_total = db.Column(db.Numeric(10, 2), default=0.00, nullable=False)
-
+    entregue = db.Column(db.Integer, default=0, nullable=False)
     # Relacionamento com os itens do pedido
     itens = db.relationship('pedido_itens', backref='pedido_rel', lazy=True)
 
