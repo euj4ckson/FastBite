@@ -12,7 +12,6 @@ class Usuario(db.Model):
     atualizado_em = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
     # Define o relacionamento com Evento usando back_populates para evitar conflito
-    eventos = db.relationship("Evento", back_populates="usuario", cascade="all, delete-orphan")
 
     def __repr__(self):
         return f'<Usuario {self.nome}>'
