@@ -1,12 +1,15 @@
 from werkzeug.security import check_password_hash
 from flask import Flask, request, redirect, url_for, flash, render_template,session
-from back.models import Usuario,Produto,pedido_itens,Pedidos
-from back.database import db
+from .models import Usuario,Produto,pedido_itens,Pedidos
+from .database import db
 from werkzeug.security import generate_password_hash
-from back.views import render_login, render_cadastro, render_usuarios,render_pedidos, render_editar,render_editar_pedido
+from .views import render_login, render_cadastro, render_usuarios,render_pedidos, render_editar,render_editar_pedido
 import re
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.dirname(__file__) + "/.."),)
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder=os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'front', 'templates'),static_folder=os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'front', 'static'))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@127.0.0.1:3306/minha_aplicacao'
 app.config['SECRET_KEY'] = '1q2w3e4rr4e3w2q1'
 db.init_app(app)
