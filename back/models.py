@@ -1,4 +1,4 @@
-from back.database import db
+from database import db
 from sqlalchemy.orm import relationship
 
 class Usuario(db.Model):
