@@ -11,24 +11,36 @@
 
     </header>
     <main>
-        <input id="tableInput" type="text" placeholder="tables...">  
-        <button id="addTable">+</button>
-        <ul id="tables">
-            <li id="t1">1</li>
-            <li id="t2">2</li>
-            <li id="t3">3</li>
-            <li id="t4">4</li>
-            <li id="t5">5</li>
-            <li id="t5">6</li>
-            <li id="t6">7</li>
-            <li id="t7">8</li>
-        </ul>
-    </main>
-    <footer>
+        <section id="tables">
+            <input id="tableInput" type="text" placeholder="tables...">  
+            <button id="addTable">+</button>
+            <ul id="tablesList">
+                <li class="table" id="t1">1</li>
+                <li class="table" id="t2">2</li>
+                <li class="table" id="t3">3</li>
+                <li class="table" id="t4">4</li>
+                <li class="table" id="t5">5</li>
+                <li class="table" id="t5">6</li>
+                <li class="table" id="t6">7</li>
+                <li class="table" id="t7">8</li>
+            </ul>
+        </section>
+        <section id="menu">
+            <menu>
+                <li>bebida 1</li>
+                <li>bebida 2</li>
+                <li>bebida 3</li>
+                <li>lanche 1</li>
+                <li>lanche 2</li>
+            </menu>
+        </section>
+        <section id="history"></section>
         <nav>
-
+            <button class="navBtn active" value="tables">Orders</button>
+            <button class="navBtn" value="menu">Menu</button>
+            <button class="navBtn" value="history">History</button>
         </nav>
-    </footer>
+    </main>
 </body>
 <script src="script.js"></script>
 </html>
