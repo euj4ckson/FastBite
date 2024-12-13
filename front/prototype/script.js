@@ -1,10 +1,28 @@
 document.getElementById("addTable").addEventListener("click",()=>{
-    // db add table function needed 
+    // db add table function needed
+    //id should be db index or sequential number?
     document.querySelector("ul").innerHTML += `
     <li class="table" id="t${10}">${"new"}</li>
     `;
 });
 
+const dialog = document.querySelector("dialog");
+document.querySelectorAll(".table").forEach((table)=>{
+    table.addEventListener("click",(e)=>{
+        //db select table/order info call
+        dialog.querySelector("span").textContent = e.target.id;
+        dialog.querySelector(".deleteTableBtn").id = `d${e.target.id}`;
+        dialog.show();
+    })
+});
+document.querySelector(".closeDialogBtn").addEventListener("click",(e)=>{
+    dialog.close();
+});
+document.querySelector(".deleteTableBtn").addEventListener("click",(e)=>{
+
+    //db delete table call
+    document.getElementById("tablesList").removeChild(document.getElementById(e.target.id.slice(1)))
+});
 function listSearch(list,input){
     const li = document.getElementById(list).querySelectorAll("li"),
         filter = document.getElementById(input),
@@ -21,6 +39,7 @@ const navBtns = document.querySelectorAll(".navBtn"),
 
 navBtns.forEach((btn)=>{
     btn.addEventListener("click",(e)=>{
+        dialog.close();
         if(e.target.classList.contains('active')){return}
         navBtns.forEach((btnCheck)=>{btnCheck.classList.remove("active")});
         e.target.classList.add("active");
