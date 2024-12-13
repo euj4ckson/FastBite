@@ -1,7 +1,7 @@
 document.getElementById("addTable").addEventListener("click",()=>{
-    // db add table function
+    // db add table function needed 
     document.querySelector("ul").innerHTML += `
-    <li class="table" id="t1">${"new"}</li>
+    <li class="table" id="t${10}">${"new"}</li>
     `;
 });
 
@@ -14,5 +14,17 @@ function listSearch(list,input){
     });
 }
 document.getElementById("tableInput").addEventListener("keyup",()=>{
-    listSearch("tables","tableInput")
+    listSearch("tablesList","tableInput")
+});
+const navBtns = document.querySelectorAll(".navBtn"),
+    sections = document.querySelectorAll("section");
+
+navBtns.forEach((btn)=>{
+    btn.addEventListener("click",(e)=>{
+        if(e.target.classList.contains('active')){return}
+        navBtns.forEach((btnCheck)=>{btnCheck.classList.remove("active")});
+        e.target.classList.add("active");
+        sections.forEach((sec)=>{sec.style.display="none"});
+        document.getElementById(e.target.value).style.display="flex";
+    })
 });
