@@ -9,7 +9,11 @@
     --text-reverse: rgb(61,61,61);
     --table: rgb(183, 64, 0);
     --accent: rgb(133, 208, 235);
-}
+    --primary: #D0D7B5;
+    --secondary: #007526;
+    --accent: #BA4C2E;
+    --highlight: #F97E20;
+} 
 [data-theme="light"]{
     --bg: rgb(225, 225, 225);
     --bg-reverse: rgb(61,61,61);
