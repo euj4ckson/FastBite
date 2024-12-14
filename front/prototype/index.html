@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POS MVP</title>
+    <title>Jakini</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="favicon.ico?v=2" type="image/x-icon">
 </head>
 <body>
     <header>
-
+        <button id="configsBtn" value="configs"></button>
     </header>
     <main>
         <section id="tables">
             <input id="tableInput" type="text" placeholder="tables...">  
             <button id="addTable">+</button>
             <ul id="tablesList">
-                <li class="table" id="t1">1</li>
+                <li class="table" id="t1">
+                    <span class="tableName">1</span>
+                    <div class="tableStatus" value="free"></div>
+                </li>
                 <li class="table" id="t2">2</li>
                 <li class="table" id="t3">3</li>
                 <li class="table" id="t4">4</li>
@@ -36,12 +39,17 @@
             </menu>
         </section>
         <section id="history"></section>
+        <section id="configs">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima doloribus unde molestias veritatis commodi adipisci ipsum nulla id rerum molestiae. Impedit numquam natus architecto molestias voluptatem perferendis illo nam est.
+        </section>
+    </main>
+    <footer>
         <nav>
             <button class="navBtn active" value="tables">Orders</button>
             <button class="navBtn" value="menu">Menu</button>
             <button class="navBtn" value="history">History</button>
         </nav>
-    </main>
+    </footer>
     <dialog>
         <button class="closeDialogBtn">[X]</button>
         <span>noen</span>
