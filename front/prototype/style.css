@@ -21,23 +21,30 @@
 *{
     color: var(--text);
 }
+body,header,footer{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
 body{
     width: 100%;
     height: 100vh;
     background: var(--bg);
     color: var(--text);
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    align-items: center;
     overflow-y: hidden;
     margin: 0;
     padding: 0;
 }
+header{
+    width: 100%;
+    height: 50px;
+    background: rgb(128, 111, 87);
+}
 main{
     position: relative;
     background: gray;
-    width: 375px;
+    width: 100%;
     height: 800px;
 }
 #tableInput{
@@ -98,10 +105,10 @@ nav{
 #tables{
     display: flex;
 }
-#menu,#history{
+#menu,#history,#configs{
     display: none;
 }
-#tables,#menu,#history{
+#tables,#menu,#history,#configs{
     position: relative;
     flex-flow: column;
     justify-content: center;

@@ -2,7 +2,10 @@ document.getElementById("addTable").addEventListener("click",()=>{
     // db add table function needed
     //id should be db index or sequential number?
     document.querySelector("ul").innerHTML += `
-    <li class="table" id="t${10}">${"new"}</li>
+    <li class="table" id="t${10}">
+        <span class="tableName">${"new"}</span>
+        <div class="tableStatus" value >free</div>
+    </li>   
     `;
 });
 
@@ -46,4 +49,9 @@ navBtns.forEach((btn)=>{
         sections.forEach((sec)=>{sec.style.display="none"});
         document.getElementById(e.target.value).style.display="flex";
     })
+});
+document.getElementById("configsBtn").addEventListener("click",(e)=>{
+    navBtns.forEach((btnCheck)=>{btnCheck.classList.remove("active")});
+    sections.forEach((sec)=>{sec.style.display="none"});
+    document.getElementById(e.target.value).style.display="flex";
 });
