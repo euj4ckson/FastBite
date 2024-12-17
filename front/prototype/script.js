@@ -70,9 +70,22 @@ document.getElementById("configsBtn").addEventListener("click",(e)=>{
 });
 
 document.getElementById("createOrder").addEventListener('click',()=>{
-    createOrder("list",document.querySelector('[name="clientName"]').value,document.querySelector('[name="orderDetails"]').value);
+    createOrder("list",document.querySelector('[name="customerName"]').value,document.querySelector('[name="orderDetails"]').value);
     //db insert new order
 })
 function createOrder(products,client,obs){
     console.log(products,client,obs);
 }
+
+async function fetchData() {
+    try {
+        const response = await fetch('db.json');
+        if (!response.ok) {throw new Error('netError');}
+        const data = await response.json();
+        console.log(data);
+        console.log(data.products);
+    } catch (error) {
+        console.error('erro:', error);
+    }
+}
+fetchData();
