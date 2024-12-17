@@ -118,3 +118,18 @@ nav{
     justify-content: center;
     align-items: center;
 }
+dialog{
+    background: rgb(78, 78, 78);
+}
+#newOrder{
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    justify-content: baseline;
+}
+#orderNumber::before{
+    content: '#';
+}
+menu>li>img{
+    width: 20px;
+}

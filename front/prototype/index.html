@@ -50,10 +50,40 @@
             <button class="navBtn" value="history">History</button>
         </nav>
     </footer>
-    <dialog>
+    <dialog id="orderDetails">
         <button class="closeDialogBtn">[X]</button>
         <span>noen</span>
         <button class="deleteTableBtn" id="">[APAGAR MESA]</button>
+    </dialog>
+    <dialog id="newOrder" open>
+        <span id="orderNumber">29376218936</span>
+        <section class="products">
+            <button id="btnMenuBurguers">BURGUERS</button>
+            <button id="btnMenuPizzas">PIZZAS</button>
+            <button id="btnMenuDrinks">DRINKS</button>
+            <menu id="menuBurguers">
+                <li class="product">
+                    <img src="assets/imgs/burguer.png" alt="">
+                    <button class="remove">-</button>
+                    <span class="quantity">0</span>
+                    <button class="add">+</button>
+                </li>
+            </menu>
+            <menu id="menuPizzas">
+                <li></li>
+            </menu>
+            <menu id="menuDrinks">
+                <li></li>
+            </menu>
+        </section>
+        <section>
+            <label for="clientName" data-lang="orderClient">CLIENTE:</label>
+            <input type="text" name="clientName">
+            <br>
+            <label for="orderDetails">OBS:</label>
+            <textarea name="orderDetails" id=""></textarea>
+        </section>
+        <button data-lang="btnCreateOrder">CRIAR PEDIDO</button>
     </dialog>
 </body>
 <script src="script.js"></script>
