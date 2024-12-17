@@ -133,3 +133,12 @@ dialog{
 menu>li>img{
     width: 20px;
 }
+button{
+    cursor: pointer;
+}
+#pizzaMenu,#drinkMenu{
+    display: none;
+}
+.cardPreview{
+    width: 50px;
+}
