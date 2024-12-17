@@ -68,3 +68,11 @@ document.getElementById("configsBtn").addEventListener("click",(e)=>{
     sections.forEach((sec)=>{sec.style.display="none"});
     document.getElementById(e.target.value).style.display="flex";
 });
+
+document.getElementById("createOrder").addEventListener('click',()=>{
+    createOrder("list",document.querySelector('[name="clientName"]').value,document.querySelector('[name="orderDetails"]').value);
+    //db insert new order
+})
+function createOrder(products,client,obs){
+    console.log(products,client,obs);
+}
