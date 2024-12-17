@@ -1,7 +1,7 @@
 import sys
 import os
 from flask import Flask
-from flask_migrate import Migrate
+# from flask_migrate import Migrate
 
 
 # Adiciona o diretório raiz ao sys.path
@@ -13,19 +13,21 @@ from models import db
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'controllers')))
 
 # Agora você pode importar os controllers
-from controllers.usuarios_controllers import initt
-from controllers.pedidos_controllers import init
+from controllers.usuarios_controllers import init_usuarios
+from controllers.pedidos_controllers import init_pedidos
+from controllers.produtos_controllers import init_produtos
 
 app = Flask(
     __name__, 
     template_folder=os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'front', 'templates'),
     static_folder=os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'front', 'static')
 )
-migrate = Migrate(app, db)
+# migrate = migrate(app, db)
 
 # Envia o app para os controllers
-init(app)
-initt(app)
+init_usuarios(app)
+init_pedidos(app)
+init_produtos(app)
 
 # Configurações do banco de dados
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@127.0.0.1:3306/minha_aplicacao'

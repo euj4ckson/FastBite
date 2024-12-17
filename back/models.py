@@ -10,9 +10,17 @@ class Usuario(db.Model):
     senha = db.Column(db.String(255), nullable=False)
     criado_em = db.Column(db.DateTime, default=db.func.current_timestamp())
     atualizado_em = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
-
+    def to_dict(self):
+        return{
+            "id": self.id,
+            "nome": self.nome,
+            "email": self.email,
+            "senha": self.senha,
+            "criado_em": self.criado_em.isoformat() if self.criado_em else None,
+            "atualizado_em": self.atualizado_em.isoformat() if self.atualizado_em else None
+        }
     # Define o relacionamento com Evento usando back_populates para evitar conflito
-
+    
     def __repr__(self):
         return f'<Usuario {self.nome}>'
 
@@ -24,7 +32,15 @@ class Produto(db.Model):
     valor = db.Column(db.Float, nullable=False)
     criado_em = db.Column(db.DateTime, default=db.func.current_timestamp())
     atualizado_em = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
-
+    
+    def to_dict(self):
+        return{
+            "id": self.id,
+            "nome": self.nome,
+            "valor": self.valor,
+            "criado_em": self.criado_em.isoformat() if self.criado_em else None,
+            "atualizado_em": self.atualizado_em.isoformat() if self.atualizado_em else None
+        }
     def __repr__(self):
         return f'<Produto {self.nome} - R$ {self.valor}>'
     
@@ -38,7 +54,14 @@ class Pedidos(db.Model):
     entregue = db.Column(db.Integer, default=0, nullable=False)
     # Relacionamento com os itens do pedido
     itens = db.relationship('pedido_itens', backref='pedido_rel', lazy=True)
-
+    def to_dict(self):
+        return{
+            "id": self.id,
+            "cliente_nome": self.cliente_nome,
+            "valor_total": self.valor_total,
+            "criado_em": self.criado_em.isoformat() if self.criado_em else None,
+            "itens": [item.to_dict() for item in self.itens]
+        }
 
 class pedido_itens(db.Model):
     __tablename__ = 'pedido_itens'
@@ -50,3 +73,10 @@ class pedido_itens(db.Model):
 
     # Relacionamento com Produto
     produto = db.relationship('Produto', backref='pedido_itens', lazy=True)
+    def to_dict(self):
+        return{
+            "id": self.id,
+            "pedido_id": self.pedido_id,
+            "produto_id": self.produto_id,
+            "quantidade": self.quantidade
+        }
