@@ -18,6 +18,19 @@ document.querySelectorAll(".table").forEach((table)=>{
         dialog.show();
     })
 });
+document.querySelectorAll(".add,.remove").forEach((btn)=>{
+    btn.addEventListener('click',(e)=>{
+        const span = e.target.parentNode.querySelector('span');
+        if(e.target.className==='add'){
+            span.textContent = parseInt(span.textContent)+1;
+            return
+        }
+        if(span.textContent!=0){
+            span.textContent = parseInt(span.textContent)-1;
+        }
+
+    })
+})
 document.querySelector(".closeDialogBtn").addEventListener("click",(e)=>{
     dialog.close();
 });
