@@ -136,3 +136,9 @@ menu>li>img{
 button{
     cursor: pointer;
 }
+#pizzaMenu,#drinkMenu{
+    display: none;
+}
+.cardPreview{
+    width: 50px;
+}
