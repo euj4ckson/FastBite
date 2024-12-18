@@ -1,0 +1,80 @@
+{
+    "products": [
+      {
+        "id": 1,
+        "name": "hamburhuer de siri",
+        "description": "buruguirr",
+        "category": "BURGUER",
+        "price": 11.20
+      },
+      {
+        "id": 2,
+        "name": "pizza",
+        "description": "calabresa",
+        "category": "PIZZA",
+        "price": 2.99
+      },
+      {
+        "id": 3,
+        "name": "REFRI",
+        "description": "coquinha gelada",
+        "category": "DRINK",
+        "price": 5.00
+      }
+    ],
+    "orders": [
+      {
+        "orderId": 1001,
+        "customer": "dEBY",
+        "status": "PRONTO",
+        "products": [
+          {
+            "productId": 1,
+            "quantity": 2
+          },
+          {
+            "productId": 2,
+            "quantity": 1
+          }
+        ],
+        "total": 14.97,
+        "pgto": "PENDENTE",
+        "datetime": "2024-12-15T14:30:00Z"
+      },
+      {
+        "orderId": 1203,
+        "customer": "loYde",
+        "status": "PREPARANDO",
+        "products": [
+          {
+            "productId": 2,
+            "quantity": 4
+          },
+          {
+            "productId": 3,
+            "quantity": 10
+          }
+        ],
+        "total": 150.21,
+        "pgto": "PAGO",
+        "datetime": "2024-12-12T18:12:00Z"
+      }
+    ],
+    "toppings": [
+      {
+        "id": 1,
+        "name": "queijo",
+        "description": "leite endurecido e amarelado",
+        "price": 2.00,
+        "category": "ADICIONAL"
+      },
+      {
+        "id": 2,
+        "name": "Bacon",
+        "description": "OINC",
+        "price": 3.00,
+        "category": "ADICIONAL"
+      }
+    ]
+  }
+  
