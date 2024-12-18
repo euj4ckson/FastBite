@@ -4,12 +4,9 @@ async function fetchData() {
         const response = await fetch('db.json');
         if (!response.ok) {throw new Error('netError');}
         const data = await response.json();
-        console.log(data);
-        console.log(data.products);
         data.products.forEach((product)=>{
-            const li = document.createElement('li');
-            
-            const img = document.createElement('img');
+            const li = document.createElement('li'),
+                img = document.createElement('img');
             img.classList.add('cardPreview');
             img.src = `assets/imgs/${product.category}.png`;
             
@@ -29,13 +26,15 @@ async function fetchData() {
             quantitySpan.classList.add('quantity');
             quantitySpan.textContent = "0";
 
-            const addButton = document.createElement('button');
+            const addButton = document.createElement('button'),
+                menuTab = document.getElementById("menu").querySelector("menu")
             addButton.classList.add('add');
             addButton.textContent = "+";
 
             li.appendChild(img);
             li.appendChild(productName);
             li.appendChild(productPrice);
+            menuTab.appendChild(li.cloneNode(true));
             li.appendChild(removeButton);
             li.appendChild(quantitySpan);
             li.appendChild(addButton);
@@ -43,7 +42,6 @@ async function fetchData() {
         })
         document.querySelectorAll(".add,.remove").forEach((btn)=>{
             btn.addEventListener('click',(e)=>{
-                console.log('click');
                 const span = e.target.parentNode.querySelector('.quantity');
                 if(e.target.className==='add'){
                     span.textContent = parseInt(span.textContent)+1;
@@ -61,7 +59,7 @@ async function fetchData() {
 }
 fetchData();
 
-document.getElementById("addTable").addEventListener("click",()=>{
+document.getElementById("makeOrder").addEventListener("click",()=>{
     // db add table function needed
     //id should be db index or sequential number?
     document.querySelector("ul").innerHTML += `
@@ -102,8 +100,8 @@ document.getElementById("tableInput").addEventListener("keyup",()=>{
     listSearch("tablesList","tableInput")
 });
 const navBtns = document.querySelectorAll(".navBtn"),
-    sections = document.querySelectorAll("section");
-
+    sections = document.querySelectorAll("section"),
+    config = document.getElementById("configsBtn");
 navBtns.forEach((btn)=>{
     btn.addEventListener("click",(e)=>{
         dialog.close();
@@ -114,10 +112,10 @@ navBtns.forEach((btn)=>{
         document.getElementById(e.target.value).style.display="flex";
     })
 });
-document.getElementById("configsBtn").addEventListener("click",(e)=>{
+config.addEventListener("click",()=>{
     navBtns.forEach((btnCheck)=>{btnCheck.classList.remove("active")});
     sections.forEach((sec)=>{sec.style.display="none"});
-    document.getElementById(e.target.value).style.display="flex";
+    document.getElementById(config.value).style.display="flex";
 });
 
 document.getElementById("createOrder").addEventListener('click',()=>{
@@ -138,3 +136,9 @@ const btnsss = orderList.querySelectorAll("button").forEach((categoryBtn)=>{
         // console.log(e.target.textContent);
     })
 })
+document.getElementById("btnTest").addEventListener('click',(e)=>{
+    var x = document.getElementById("toast");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+})
+

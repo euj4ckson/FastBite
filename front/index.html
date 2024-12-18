@@ -9,12 +9,12 @@
 </head>
 <body>
     <header>
-        <button id="configsBtn" value="configs"></button>
+        <img src="assets/imgs/meirelles.png" alt="">
+        <button id="configsBtn" value="configs"><img src="assets/icons/config.svg" alt=""></button>
     </header>
     <main>
         <section id="tables">
             <input id="tableInput" type="text" placeholder="tables...">  
-            <button id="addTable">+</button>
             <ul id="tablesList">
                 <li class="table" id="t1">
                     <span class="tableName">1</span>
@@ -31,17 +31,13 @@
         </section>
         <section id="menu">
             <menu>
-                <li>bebida 1</li>
-                <li>bebida 2</li>
-                <li>bebida 3</li>
-                <li>lanche 1</li>
-                <li>lanche 2</li>
             </menu>
         </section>
         <section id="history"></section>
         <section id="configs">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima doloribus unde molestias veritatis commodi adipisci ipsum nulla id rerum molestiae. Impedit numquam natus architecto molestias voluptatem perferendis illo nam est.
         </section>
+        <button id="makeOrder">+</button>
     </main>
     <footer>
         <nav>
@@ -58,15 +54,15 @@
     <dialog id="newOrder" open>
         <span id="orderNumber">29376218936</span>
         <section id="orderProductsList">
-            <button id="btnMenuBurguers" value="burguerMenu">BURGUERS</button>
-            <button id="btnMenuPizzas" value="pizzaMenu">PIZZAS</button>
-            <button id="btnMenuDrinks" value="drinkMenu">DRINKS</button>
             <menu id="burguerMenu">
             </menu>
             <menu id="pizzaMenu">
             </menu>
             <menu id="drinkMenu">
             </menu>
+            <button id="btnMenuBurguers" value="burguerMenu">BURGUERS</button>
+            <button id="btnMenuPizzas" value="pizzaMenu">PIZZAS</button>
+            <button id="btnMenuDrinks" value="drinkMenu">DRINKS</button>
         </section>
         <section>
             <label for="customerName" data-lang="orderClient">CLIENTE:</label>
@@ -77,6 +73,8 @@
         </section>
         <button data-lang="btnCreateOrder" id="createOrder">CRIAR PEDIDO</button>
     </dialog>
+    <button id="btnTest">TOAST</button>
+    <dialog id="toast">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat similique reprehenderit culpa autem unde quis possimus vitae ut, doloribus veritatis pariatur labore doloremque facilis blanditiis excepturi voluptas! Dolorem, deleniti debitis.</dialog>
 </body>
 <script src="script.js"></script>
 </html>
