@@ -63,17 +63,43 @@
     "toppings": [
       {
         "id": 1,
-        "name": "queijo",
-        "description": "leite endurecido e amarelado",
-        "price": 2.00,
-        "category": "ADICIONAL"
+        "name": "bacon",
+        "price": 4.50
       },
       {
         "id": 2,
-        "name": "Bacon",
-        "description": "OINC",
-        "price": 3.00,
-        "category": "ADICIONAL"
+        "name": "bife",
+        "price": 3.50
+      },
+      {
+        "id": 3,
+        "name": "calabresa",
+        "price": 4.50
+      },
+      {
+        "id": 4,
+        "name": "catupiry",
+        "price": 4.00
+      },
+      {
+        "id": 5,
+        "name": "cebola",
+        "price": 1.00
+      },
+      {
+        "id": 6,
+        "name": "cheddar",
+        "price": 4.00
+      },
+      {
+        "id": 7,
+        "name": "frango",
+        "price": 4.50
+      },
+      {
+        "id": 8,
+        "name": "ovo",
+        "price": 2.50
       }
     ]
   }
