@@ -1,4 +1,3 @@
-
 async function fetchData() {
     try {
         const response = await fetch('db.json');
@@ -8,7 +7,7 @@ async function fetchData() {
             const li = document.createElement('li'),
                 img = document.createElement('img');
             img.classList.add('cardPreview');
-            img.src = `assets/imgs/${product.category}.png`;
+            img.src = `assets/icons/${product.category}.svg`;
             
             const productName = document.createElement('span');
             productName.classList.add('productName');
@@ -136,9 +135,22 @@ const btnsss = orderList.querySelectorAll("button").forEach((categoryBtn)=>{
         // console.log(e.target.textContent);
     })
 })
-document.getElementById("btnTest").addEventListener('click',(e)=>{
-    var x = document.getElementById("toast");
-    x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-})
+function save(content){
+    toast('save',content);
+}
+function toast(type,msg){
+    const toast = document.getElementById("toast"),
+        types={
+        save:{color:'#85dc84'},
+        warning:{color:'yellow'},
+        info:{color:'blue'}
+    };
+    toast.className = "show";
+    toast.style.background = types[type].color;
+    toast.textContent=msg;
+    const icon = document.createElement('img');
+    icon.src = `assets/icons/${type}.svg`
+    toast.appendChild(icon);
+    setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+}
 
