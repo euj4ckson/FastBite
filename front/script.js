@@ -1,6 +1,6 @@
-
 async function fetchData() {
     try {
+        // const response = await fetch('128.0.0.1:3306/produtos');
         const response = await fetch('db.json');
         if (!response.ok) {throw new Error('netError');}
         const data = await response.json();
@@ -8,7 +8,7 @@ async function fetchData() {
             const li = document.createElement('li'),
                 img = document.createElement('img');
             img.classList.add('cardPreview');
-            img.src = `assets/imgs/${product.category}.png`;
+            img.src = `assets/icons/${product.category}.svg`;
             
             const productName = document.createElement('span');
             productName.classList.add('productName');
@@ -121,13 +121,14 @@ config.addEventListener("click",()=>{
 document.getElementById("createOrder").addEventListener('click',()=>{
     createOrder("list",document.querySelector('[name="customerName"]').value,document.querySelector('[name="orderDetails"]').value);
     //db insert new order
+    toast('save','#idPedido');
 })
 function createOrder(products,client,obs){
     console.log(products,client,obs);
 }
 
 const orderList = document.getElementById("orderProductsList");
-const btnsss = orderList.querySelectorAll("button").forEach((categoryBtn)=>{
+orderList.querySelectorAll("button").forEach((categoryBtn)=>{
     categoryBtn.addEventListener('click',(e)=>{
         orderList.querySelectorAll('menu').forEach((menu)=>{
             menu.style.display="none";
@@ -136,9 +137,19 @@ const btnsss = orderList.querySelectorAll("button").forEach((categoryBtn)=>{
         // console.log(e.target.textContent);
     })
 })
-document.getElementById("btnTest").addEventListener('click',(e)=>{
-    var x = document.getElementById("toast");
-    x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-})
+function toast(type,msg){
+    const toast = document.getElementById("toast"),
+        types={
+        save:{color:'#85dc84'},
+        warning:{color:'yellow'},
+        info:{color:'blue'}
+    };
+    toast.className = "show";
+    toast.textContent=msg;
+    toast.style.background = types[type].color;
+    const icon = document.createElement('img');
+    icon.src = `assets/icons/${type}.svg`
+    toast.appendChild(icon);
+    setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+}
 
