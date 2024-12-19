@@ -1,5 +1,6 @@
 async function fetchData() {
     try {
+        // const response = await fetch('128.0.0.1:3306/produtos');
         const response = await fetch('db.json');
         if (!response.ok) {throw new Error('netError');}
         const data = await response.json();
@@ -120,13 +121,14 @@ config.addEventListener("click",()=>{
 document.getElementById("createOrder").addEventListener('click',()=>{
     createOrder("list",document.querySelector('[name="customerName"]').value,document.querySelector('[name="orderDetails"]').value);
     //db insert new order
+    toast('save','#idPedido');
 })
 function createOrder(products,client,obs){
     console.log(products,client,obs);
 }
 
 const orderList = document.getElementById("orderProductsList");
-const btnsss = orderList.querySelectorAll("button").forEach((categoryBtn)=>{
+orderList.querySelectorAll("button").forEach((categoryBtn)=>{
     categoryBtn.addEventListener('click',(e)=>{
         orderList.querySelectorAll('menu').forEach((menu)=>{
             menu.style.display="none";
@@ -135,9 +137,6 @@ const btnsss = orderList.querySelectorAll("button").forEach((categoryBtn)=>{
         // console.log(e.target.textContent);
     })
 })
-function save(content){
-    toast('save',content);
-}
 function toast(type,msg){
     const toast = document.getElementById("toast"),
         types={
@@ -146,8 +145,8 @@ function toast(type,msg){
         info:{color:'blue'}
     };
     toast.className = "show";
-    toast.style.background = types[type].color;
     toast.textContent=msg;
+    toast.style.background = types[type].color;
     const icon = document.createElement('img');
     icon.src = `assets/icons/${type}.svg`
     toast.appendChild(icon);
