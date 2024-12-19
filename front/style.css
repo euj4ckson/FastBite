@@ -203,3 +203,13 @@ button{
     from {top: 30px; opacity: 1;}
     to {top: 0; opacity: 0;}
   }
+
+.pulse {
+    animation: color-pulse 3s ease-in-out alternate-reverse;
+}
+@keyframes color-pulse {
+    0% {background-color: gray;}
+    33% {background-color: #42A21C;}
+    66% {background-color: #42A21C;}
+    100%{background-color: gray;}
+}
