@@ -1,45 +1,47 @@
 async function fetchData() {
     try {
-        // const response = await fetch('128.0.0.1:3306/produtos');
-        const response = await fetch('db.json');
+        const response = await fetch('http://192.168.1.6:8000/produtos');
+        // const response = await fetch('db.json');
         if (!response.ok) {throw new Error('netError');}
         const data = await response.json();
-        data.products.forEach((product)=>{
-            const li = document.createElement('li'),
-                img = document.createElement('img');
-            img.classList.add('cardPreview');
-            img.src = `assets/icons/${product.category}.svg`;
+        console.log(data);
+        
+        // data.products.forEach((product)=>{
+        //     const li = document.createElement('li'),
+        //         img = document.createElement('img');
+        //     img.classList.add('cardPreview');
+        //     img.src = `assets/icons/${product.category}.svg`;
             
-            const productName = document.createElement('span');
-            productName.classList.add('productName');
-            productName.textContent = product.name;
+        //     const productName = document.createElement('span');
+        //     productName.classList.add('productName');
+        //     productName.textContent = product.name;
 
-            const productPrice = document.createElement('span');
-            productPrice.classList.add('productPrice');
-            productPrice.textContent = product.price;
+        //     const productPrice = document.createElement('span');
+        //     productPrice.classList.add('productPrice');
+        //     productPrice.textContent = product.price;
 
-            const removeButton = document.createElement('button');
-            removeButton.classList.add('remove');
-            removeButton.textContent = "-";
+        //     const removeButton = document.createElement('button');
+        //     removeButton.classList.add('remove');
+        //     removeButton.textContent = "-";
             
-            const quantitySpan = document.createElement('span');
-            quantitySpan.classList.add('quantity');
-            quantitySpan.textContent = "0";
+        //     const quantitySpan = document.createElement('span');
+        //     quantitySpan.classList.add('quantity');
+        //     quantitySpan.textContent = "0";
 
-            const addButton = document.createElement('button'),
-                menuTab = document.getElementById("menu").querySelector("menu")
-            addButton.classList.add('add');
-            addButton.textContent = "+";
+        //     const addButton = document.createElement('button'),
+        //         menuTab = document.getElementById("menu").querySelector("menu")
+        //     addButton.classList.add('add');
+        //     addButton.textContent = "+";
 
-            li.appendChild(img);
-            li.appendChild(productName);
-            li.appendChild(productPrice);
-            menuTab.appendChild(li.cloneNode(true));
-            li.appendChild(removeButton);
-            li.appendChild(quantitySpan);
-            li.appendChild(addButton);
-            document.getElementById((product.category).toLowerCase()+"Menu").appendChild(li);
-        })
+        //     li.appendChild(img);
+        //     li.appendChild(productName);
+        //     li.appendChild(productPrice);
+        //     menuTab.appendChild(li.cloneNode(true));
+        //     li.appendChild(removeButton);
+        //     li.appendChild(quantitySpan);
+        //     li.appendChild(addButton);
+        //     document.getElementById((product.category).toLowerCase()+"Menu").appendChild(li);
+        // })
         document.querySelectorAll(".add,.remove").forEach((btn)=>{
             btn.addEventListener('click',(e)=>{
                 const span = e.target.parentNode.querySelector('.quantity');
