@@ -1,13 +1,18 @@
-const menuIcon = document.getElementById('burgerMenu'),
-    menu = menuIcon.querySelector('nav'),
-    searchBar = document.getElementById('searchBar'),
-    searchIcon = searchBar.querySelector('search')
-
-menuIcon.addEventListener('click',()=>{
-    menu.style.width='200px'
-    menu.style.height='200px'
-    console.log()
-})
-searchBar.addEventListener('click',()=>{
-    searchIcon.style.width='100px'
-})
+const $=(element)=>document.querySelector(element),
+    attr=(element,attribute)=>element.getAttribute(attribute),
+    _ = null,
+    menu = $('nav'),
+    search = $('search')
+function resize(element,width,height=null){
+    element.style.width=`${width}px`
+    if(height)element.style.height=`${height}px`
+}
+function toggleSize(element){
+    if(attr(menu,'data-size')==='opened'){console.log('is open')}
+    else console.log(('closed'));
+    //not passing e.target properly
+}
+console.log(menu, menu.getAttribute('data-size'));
+menu.setAttribute('data-size','closed');
+menu.addEventListener('click',(e)=>toggleSize(e.target))
+search.addEventListener('click',()=>resize(search,100))
