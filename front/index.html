@@ -9,15 +9,36 @@
 </head>
 <body>
     <header id="burgerMenu">
-        <nav data-size="opened"><img src="assets/icons/burger.svg" alt="Burger Menu Icon"></nav>
+        <nav data-size="opened"><img src="assets/icons/burger.svg" alt="Burger Menu Icon">
+        </nav>
     </header>
     <main>
-        <button id="ordersBtn"><img src="assets/icons/order.svg" alt=""></button>
+        <menu>
+            <li class="productCard">
+                <span class="menuItemTitle">
+                    pizza
+                </span>
+                <img class="productImage" src="assets/imgs/meirelles.png" alt="Product Picture">
+                <button class="add2OrderBtn">+</button>
+            </li>
+            <li class="productCard">
+                <span class="menuItemTitle">
+                    caf
+                </span>
+                <img class="productImage" src="assets/imgs/meirelles.png" alt="Product Picture">
+            </li>
+        </menu>
+        <button id="ordersBtn">
+            <img src="assets/icons/order.svg" alt="">
+            <sub>1</sub>
+        </button>
     </main>
     <footer id="searchBar">
         <div class="roundedCorner" style="transform: rotate(90deg);"></div>
         <search>
-            <img src="assets/icons/search.svg" alt="Search Icon">
+            <img id="searchIcon" src="assets/icons/search.svg" alt="Search Icon">
+            <input type="text" id="searchValue">
+            <img id="clearFilter" src="assets/icons/delete.svg" alt="Clear text filter icon">
         </search>
         <div class="roundedCorner" style="transform: rotate(90deg);" ></div>
     </footer>
