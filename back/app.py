@@ -1,6 +1,7 @@
 import sys
 import os
 from flask import Flask
+from flask_cors import CORS
 # from flask_migrate import Migrate
 
 
@@ -22,6 +23,7 @@ app = Flask(
     template_folder=os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'front', 'templates'),
     static_folder=os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'front', 'static')
 )
+CORS(app)
 # migrate = migrate(app, db)
 
 # Envia o app para os controllers
@@ -42,3 +44,4 @@ if __name__ == '__main__':
     print(f"A aplicação Flask está rodando em http://{host}:{port}")
     # Iniciar o servidor
     app.run(debug=True, host=host, port=port)
+

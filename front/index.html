@@ -8,66 +8,40 @@
     <link rel="shortcut icon" href="favicon.ico?v=2" type="image/x-icon">
 </head>
 <body>
-    <header>
-        <img src="assets/imgs/meirelles.png" alt="">
-        <button id="configsBtn" value="configs"><img src="assets/icons/config.svg" alt=""></button>
+    <header id="burgerMenu">
+        <nav data-size="opened"><img src="assets/icons/burger.svg" alt="Burger Menu Icon">
+        </nav>
     </header>
     <main>
-        <section id="tables">
-            <input id="tableInput" type="text" placeholder="tables...">  
-            <ul id="tablesList">
-                <li class="table" id="t1">
-                    <span class="tableName">1</span>
-                    <div class="tableStatus" value="free"></div>
-                </li>
-                <li class="table" id="t2">2</li>
-            </ul>
-        </section>
-        <section id="menu">
-            <menu>
-            </menu>
-        </section>
-        <section id="history"></section>
-        <section id="configs">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima doloribus unde molestias veritatis commodi adipisci ipsum nulla id rerum molestiae. Impedit numquam natus architecto molestias voluptatem perferendis illo nam est.
-        </section>
-        <button id="makeOrder">+</button>
+        <menu>
+            <li class="productCard">
+                <span class="menuItemTitle">
+                    pizza
+                </span>
+                <img class="productImage" src="assets/imgs/meirelles.png" alt="Product Picture">
+                <button class="add2OrderBtn">+</button>
+            </li>
+            <li class="productCard">
+                <span class="menuItemTitle">
+                    caf
+                </span>
+                <img class="productImage" src="assets/imgs/meirelles.png" alt="Product Picture">
+            </li>
+        </menu>
+        <button id="ordersBtn">
+            <img src="assets/icons/order.svg" alt="">
+            <sub>1</sub>
+        </button>
     </main>
-    <footer>
-        <nav>
-            <button class="navBtn active" value="tables">Orders</button>
-            <button class="navBtn" value="menu">Menu</button>
-            <button class="navBtn" value="history">History</button>
-        </nav>
+    <footer id="searchBar">
+        <div class="roundedCorner" style="transform: rotate(90deg);"></div>
+        <search>
+            <img id="searchIcon" src="assets/icons/search.svg" alt="Search Icon">
+            <input type="text" id="searchValue">
+            <img id="clearFilter" src="assets/icons/delete.svg" alt="Clear text filter icon">
+        </search>
+        <div class="roundedCorner" style="transform: rotate(90deg);" ></div>
     </footer>
-    <dialog id="orderDetails">
-        <button class="closeDialogBtn">[X]</button>
-        <span>noen</span>
-        <button class="deleteTableBtn" id="">[APAGAR MESA]</button>
-    </dialog>
-    <dialog id="newOrder" open>
-        <span id="orderNumber">29376218936</span>
-        <section id="orderProductsList">
-            <menu id="burguerMenu">
-            </menu>
-            <menu id="pizzaMenu">
-            </menu>
-            <menu id="drinkMenu">
-            </menu>
-            <button id="btnMenuBurguers" value="burguerMenu">BURGUERS</button>
-            <button id="btnMenuPizzas" value="pizzaMenu">PIZZAS</button>
-            <button id="btnMenuDrinks" value="drinkMenu">DRINKS</button>
-        </section>
-        <section>
-            <label for="customerName" data-lang="orderClient">CLIENTE:</label>
-            <input type="text" name="customerName" value="fulano">
-            <br>
-            <label for="orderDetails">OBS:</label>
-            <textarea name="orderDetails" id=""></textarea>
-        </section>
-        <button id="createOrder">[save]</button>
-    </dialog>
-    <dialog id="toast"></dialog>
 </body>
 <script src="script.js"></script>
 </html>
