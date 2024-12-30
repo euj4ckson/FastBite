@@ -1,15 +1,16 @@
 
 *{
     user-select: none;
+    font-family: monospace;
 }
 :root{
-    --info:#76daff;
+    --info:#d4f4ff;
     --info-border:#00bbff;
-    --success:#76ff8f;
-    --success-border:#00ff2f;
-    --warning:#ffef76;
+    --success:#ccffd5;
+    --success-border:#007526;
+    --warning:#fff6b6;
     --warning-border:#ffe100;
-    --error:#ff7b76;
+    --error:#ffc3c1;
     --error-border:#ff0800;
 }
 [data-theme="dark"]{
@@ -33,23 +34,33 @@ body{
     justify-content: center;
     align-items: center;
 }
-#ordersBtn,#searchIcon,#clearFilter{
+#ordersBtn,#searchIcon,#clearFilter,#quickFilters>button{
     cursor: pointer;
 }
 #toast{
-    display: none;
     position: absolute;
+    padding: 0;
     right: calc(-100% + 120px);
     transform: translateX(-50%);
     top: 60px;
-    height: fit-content;
-    border: none;
-    border-right: 2px solid green;
+    text-align: center;
+    height: 46px;
+    border: 2px solid;
+    border-radius: 5px 0 0 5px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* display: none; */
+    background-color: #f0f8ff;
+    border-color: var(--info-border);
+    z-index: 0;
 }
+#toast>*{margin: 5px;}
 nav,search{
     position: absolute;
     right: 0;
-    width: 50px;
+    width: 55px;
     height: 50px;
     border-radius: 5px 0 0 5px ;
     display: flex;
@@ -127,10 +138,35 @@ menu{
     border-radius: 50%;
     line-height: 20px;
 }
+#quickFilters{
+    position: absolute;
+    bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-flow: row;
+    background: var(--primary);
+}
+#quickFilters>button{
+    border: none;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    background: var(--bg-reverse);
+    margin: 5px;
+    padding: 5px;
+    width: 70px;
+    color: aliceblue;
+    border-radius: 5px;
+}
+#quickFilters img{
+    width: 30px;
+    filter: invert();
+}
 search{
     bottom: 60px;
     border: none;
-    width: 300px;
+    min-width: 55px;
+    width: fit-content;
     justify-content: space-between;
     align-items: center;
 }
