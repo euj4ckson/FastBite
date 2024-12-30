@@ -23,7 +23,7 @@ function toggleSize(element){
         }
     }
     let el = 'menu';
-    console.log(sizes[el].);
+    console.log(sizes[el].maxHeight);
     // let a = parseFloat(window.getComputedStyle(menu).width);
     // console.log(sizes[el].minHeight);
     console.log(parseFloat(window.getComputedStyle(menu).width));
