@@ -70,7 +70,7 @@ function showToast(msg,type=null){
         warning: 'yellow',
         error: 'red',
     }
-    toast.setAttribute('open',true);
+    toast.style.display='flex';
     toast.style.background=!type?state.info:state[type];
     toast.textContent=msg
 }

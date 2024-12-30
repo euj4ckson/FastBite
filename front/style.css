@@ -2,6 +2,16 @@
 *{
     user-select: none;
 }
+:root{
+    --info:#76daff;
+    --info-border:#00bbff;
+    --success:#76ff8f;
+    --success-border:#00ff2f;
+    --warning:#ffef76;
+    --warning-border:#ffe100;
+    --error:#ff7b76;
+    --error-border:#ff0800;
+}
 [data-theme="dark"]{
     --bg: #17181d;
     --bg-2:#20202a;
@@ -25,6 +35,16 @@ body{
 }
 #ordersBtn,#searchIcon,#clearFilter{
     cursor: pointer;
+}
+#toast{
+    display: none;
+    position: absolute;
+    right: calc(-100% + 120px);
+    transform: translateX(-50%);
+    top: 60px;
+    height: fit-content;
+    border: none;
+    border-right: 2px solid green;
 }
 nav,search{
     position: absolute;
