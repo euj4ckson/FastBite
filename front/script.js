@@ -7,6 +7,7 @@ const $=(element)=>document.querySelector(element),
     btnAdd=$('.add2OrderBtn'),
     orders=getId('ordersBtn'),
     toast=getId('toast'),
+    closeToast=getId('closeToast'),
     filters=getId('quickFilters').querySelectorAll('#pizzas,#burgers,#beverages')
 function resizeElement(element,width,height=null){
     element.style.width=`${width}px`
@@ -23,14 +24,7 @@ function setUIcolor(state='standard'){
     // document.body.style.background
 }
 function toggleVisibility(element){
-    // console.log(
-        // document.querySelectorAll('menu,search')
-    // );
-    // let elementIsVisible =
-    // element.style.display = 
-    // console.log(window.getComputedStyle(menu).display)
-    // attr(menu,'display')
-    // element.style.display='flex'
+    element.style.display=element.style.display==='flex'?'none':'flex'
 }
 function changeSize(element){
     const sizes = {
@@ -58,14 +52,12 @@ function changeSize(element){
 }
 function createOrder(){
     console.log('create')
-    showToast('saved','info')
 }
 function editOrder(){
     // console.warn('edit');
     // console.error('edit');
     // console.info('edit');
 }
-editOrder();
 function deleteOrder(orderId){
     console.log('delete');
 }
@@ -75,7 +67,8 @@ function getOrdersList(){
 function getOrderDetails(){
     console.log('1 order details');
 }
-function showToast(msg,type=info){
+function changeToastState(msg,type=null){
+    if(!type){toast.style.display='none';return}
     const states = {
         info:'#d4f4ff',
         infoBorder:'#00bbff',
@@ -86,12 +79,10 @@ function showToast(msg,type=info){
         error:'#ff7b76',
         errorBorder:'#ff0800',
     }
-    resizeElement(toast,200);
-    // Standard: Blue - INFO
-    toast.style.display='flex';
-    toast.style.background=states[type];
-    toast.style.borderColor=states[`${type}Border`];
-    toast.textContent=msg
+    toast.style.display='flex'
+    toast.style.background=states[type]
+    toast.style.borderColor=states[`${type}Border`]
+    toast.querySelector('span').textContent=msg
 }
 // console.log(menu, menu.getAttribute('data-size'));
 // menu.setAttribute('data-size','closed');
@@ -99,4 +90,5 @@ menu.addEventListener('click',(e)=>changeSize(menu))
 // search.addEventListener('click',()=>resizeElement(search,100))
 orders.addEventListener('click',()=>console.log(createOrder()))
 btnAdd.addEventListener('click',()=>console.log(btnAdd))
+closeToast.addEventListener('click',()=>console.log(btnAdd))
 filters.forEach((filter)=>{filter.addEventListener('click',(e)=>{setUIcolor()})})
