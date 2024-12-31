@@ -34,7 +34,7 @@ body{
     justify-content: center;
     align-items: center;
 }
-#ordersBtn,#searchIcon,#clearFilter,#quickFilters>button{
+#ordersBtn,#searchIcon,#clearFilterBtn,#quickFilters>button{
     cursor: pointer;
 }
 #toast{
@@ -196,6 +196,6 @@ search>input{
     height: 30px;
     margin: 0 10px;
 }
-#clearFilter{
+#clearFilterBtn{
     margin: 0 10px;
 }

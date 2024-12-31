@@ -7,6 +7,7 @@ const $=(element)=>document.querySelector(element),
     btnAdd=$('.add2OrderBtn'),
     search=$('search'),
     searchInput=getId('searchValue'),
+    clearFilterBtn=getId('clearFilterBtn'),
     orders=getId('ordersBtn'),
     toast=getId('toast'),
     closeToast=getId('closeToast'),
@@ -88,7 +89,14 @@ function changeToastState(msg,type=null){
 function filterList(list,input){
     list.forEach((_,index)=>list[index].style.display=list[index].textContent.toUpperCase().indexOf(input.value.toUpperCase())>-1?"flex":"none");
 }
+function clearFilter(input){
+    input.value='';
+}
 searchInput.addEventListener("keyup",()=>filterList(products,searchInput))
+clearFilterBtn.addEventListener('click',()=>{
+    clearFilter(searchInput);
+    filterList(products,searchInput)
+})
 menu.addEventListener('click',(e)=>changeSize(menu))
 // search.addEventListener('click',()=>resizeElement(search,100))
 orders.addEventListener('click',()=>console.log(createOrder()))
