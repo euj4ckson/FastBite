@@ -3,8 +3,10 @@ const $=(element)=>document.querySelector(element),
     attr=(element,attribute)=>element.getAttribute(attribute),
     _=null,
     menu=getId('burgerIcon'),
-    search=$('search'),
+    products=$('menu').querySelectorAll('li'),
     btnAdd=$('.add2OrderBtn'),
+    search=$('search'),
+    searchInput=getId('searchValue'),
     orders=getId('ordersBtn'),
     toast=getId('toast'),
     closeToast=getId('closeToast'),
@@ -23,7 +25,7 @@ function setUIstate(state='standard'){
     document.querySelectorAll('body',menu,search).forEach((el)=>el.style.background=colors[state])
 }
 function toggleVisibility(element){
-    element.style.display=element.style.display==='flex'?'none':'flex'
+    element.style.display=element.style.display==='none'?'flex':'none'
 }
 function changeSize(element){
     const sizes = {
@@ -52,16 +54,19 @@ function createOrder(){
     console.info('create')
 }
 function editOrder(){
-    console.info('edit');
+    console.info('edit')
 }
 function deleteOrder(orderId){
-    console.info('delete');
+    console.info('delete')
 }
 function getOrdersList(){
-    console.info('full json orders list');
+    console.info('full json orders list')
 }
 function getOrderDetails(){
-    console.info('1 order details');
+    console.info('1 order details')
+}
+function getProducts(){
+    console.info('json get from backend')
 }
 function changeToastState(msg,type=null){
     if(!type){toast.style.display='none';return}
@@ -80,9 +85,13 @@ function changeToastState(msg,type=null){
     toast.style.borderColor=states[`${type}Border`]
     toast.querySelector('span').textContent=msg
 }
+function filterList(list,input){
+    list.forEach((_,index)=>list[index].style.display=list[index].textContent.toUpperCase().indexOf(input.value.toUpperCase())>-1?"flex":"none");
+}
+searchInput.addEventListener("keyup",()=>filterList(products,searchInput))
 menu.addEventListener('click',(e)=>changeSize(menu))
-search.addEventListener('click',()=>resizeElement(search,100))
+// search.addEventListener('click',()=>resizeElement(search,100))
 orders.addEventListener('click',()=>console.log(createOrder()))
 btnAdd.addEventListener('click',()=>console.log(btnAdd))
-closeToast.addEventListener('click',()=>console.log(btnAdd))
-filters.forEach((filter)=>{filter.addEventListener('click',(e)=>{setUIstate()})})
+closeToast.addEventListener('click',()=>toggleVisibility(toast))
+filters.forEach((filter)=>{filter.addEventListener('click',(e)=>{filterList(e.target);setUIstate()})})
