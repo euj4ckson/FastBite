@@ -12,7 +12,7 @@
         <dialog id="toast" open>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00bbff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
             <span>teste saved!</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke="#00bbff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            <svg id="closeToast" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke="#00bbff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </dialog>
         <nav id="burgerIcon"><img src="assets/icons/burger.svg" alt="Burger Menu Icon">
         </nav>
@@ -21,18 +21,26 @@
         <menu>
             <li class="productCard">
                 <span class="menuItemTitle">
-                    p
+                    paa
                 </span>
-                <!-- <img class="productImage" src="assets/imgs/meirelles.png" alt="Product Picture"> -->
+                <span class="productPrice">10.00</span>
+                <img class="productImage" src="assets/imgs/meirelles.png" alt="Product Picture">
                 <button class="add2OrderBtn">+</button>
             </li>
             <li class="productCard">
                 <span class="menuItemTitle">
                     c
                 </span>
-                <!-- <img class="productImage" src="assets/imgs/meirelles.png" alt="Product Picture"> -->
+                <img class="productImage" src="assets/imgs/meirelles.png" alt="Product Picture">
+                 aaa
             </li>
         </menu>
+        <aside>
+            <span>A</span>
+            <span>B</span>
+            <span>C</span>
+            <span>D</span>
+        </aside>
         <button id="ordersBtn">
             <img src="assets/icons/order.svg" alt="">
             <sub>1</sub>
@@ -52,12 +60,14 @@
             <span class="filterTitle">BEVERAGE</span>
         </button>
     </section>
+    <ul id="log">
+    </ul>
     <footer id="searchBar">
         <div class="roundedCorner" style="transform: rotate(90deg);"></div>
         <search>
             <img id="searchIcon" src="assets/icons/search.svg" alt="Search Icon">
-            <!-- <input type="text" id="searchValue"> -->
-            <!-- <img id="clearFilter" src="assets/icons/delete.svg" alt="Clear text filter icon"> -->
+            <input id="searchValue" type="text">
+            <img id="clearFilterBtn" src="assets/icons/delete.svg" alt="Clear text filter icon">
         </search>
         <div class="roundedCorner" style="transform: rotate(90deg);" ></div>
     </footer>

@@ -34,7 +34,7 @@ body{
     justify-content: center;
     align-items: center;
 }
-#ordersBtn,#searchIcon,#clearFilter,#quickFilters>button{
+#closeToast,#burgerIcon>img,#ordersBtn,#searchIcon,#clearFilterBtn,#quickFilters>button{
     cursor: pointer;
 }
 #toast{
@@ -112,6 +112,20 @@ menu{
     background: var(--highlight);
     color: var(--primary);
 }
+aside{
+    position: absolute;
+    right: 10px;
+    width: 20px;
+    height: fit-content;
+    color: aliceblue;
+    background: rgba(47, 47, 47, 0.468);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
 #ordersBtn{
     position: absolute;
     right: 15px;
@@ -162,6 +176,7 @@ menu{
     width: 30px;
     filter: invert();
 }
+#log{display: none;}
 search{
     bottom: 60px;
     border: none;
@@ -182,6 +197,6 @@ search>input{
     height: 30px;
     margin: 0 10px;
 }
-#clearFilter{
+#clearFilterBtn{
     margin: 0 10px;
 }
