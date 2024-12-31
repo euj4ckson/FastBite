@@ -13,7 +13,7 @@ function resizeElement(element,width,height=null){
     element.style.width=`${width}px`
     if(height)element.style.height=`${height}px`
 }
-function setUIcolor(state='standard'){
+function setUIstate(state='standard'){
     const colors={
         standard:'white',
         filter:'yellow',
@@ -21,7 +21,6 @@ function setUIcolor(state='standard'){
         error:'red'
     }
     document.querySelectorAll('body',menu,search).forEach((el)=>el.style.background=colors[state])
-    // document.body.style.background
 }
 function toggleVisibility(element){
     element.style.display=element.style.display==='flex'?'none':'flex'
@@ -41,7 +40,6 @@ function changeSize(element){
             maxHeight: 300,
         }
     }
-    // let el = 'menu';
     // console.log(sizes[el].maxHeight);
     // let a = parseFloat(window.getComputedStyle(menu).width);
     // console.log(sizes[el].minHeight);
@@ -51,21 +49,19 @@ function changeSize(element){
     // else console.log(('closed'));
 }
 function createOrder(){
-    console.log('create')
+    console.info('create')
 }
 function editOrder(){
-    // console.warn('edit');
-    // console.error('edit');
-    // console.info('edit');
+    console.info('edit');
 }
 function deleteOrder(orderId){
-    console.log('delete');
+    console.info('delete');
 }
 function getOrdersList(){
-    console.log('full json orders list');
+    console.info('full json orders list');
 }
 function getOrderDetails(){
-    console.log('1 order details');
+    console.info('1 order details');
 }
 function changeToastState(msg,type=null){
     if(!type){toast.style.display='none';return}
@@ -84,11 +80,9 @@ function changeToastState(msg,type=null){
     toast.style.borderColor=states[`${type}Border`]
     toast.querySelector('span').textContent=msg
 }
-// console.log(menu, menu.getAttribute('data-size'));
-// menu.setAttribute('data-size','closed');
 menu.addEventListener('click',(e)=>changeSize(menu))
-// search.addEventListener('click',()=>resizeElement(search,100))
+search.addEventListener('click',()=>resizeElement(search,100))
 orders.addEventListener('click',()=>console.log(createOrder()))
 btnAdd.addEventListener('click',()=>console.log(btnAdd))
 closeToast.addEventListener('click',()=>console.log(btnAdd))
-filters.forEach((filter)=>{filter.addEventListener('click',(e)=>{setUIcolor()})})
+filters.forEach((filter)=>{filter.addEventListener('click',(e)=>{setUIstate()})})
