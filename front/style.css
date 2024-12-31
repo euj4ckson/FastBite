@@ -34,7 +34,7 @@ body{
     justify-content: center;
     align-items: center;
 }
-#ordersBtn,#searchIcon,#clearFilterBtn,#quickFilters>button{
+#closeToast,#burgerIcon>img,#ordersBtn,#searchIcon,#clearFilterBtn,#quickFilters>button{
     cursor: pointer;
 }
 #toast{
@@ -176,6 +176,7 @@ aside{
     width: 30px;
     filter: invert();
 }
+#log{display: none;}
 search{
     bottom: 60px;
     border: none;

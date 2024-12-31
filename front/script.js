@@ -11,7 +11,17 @@ const $=(element)=>document.querySelector(element),
     orders=getId('ordersBtn'),
     toast=getId('toast'),
     closeToast=getId('closeToast'),
-    filters=getId('quickFilters').querySelectorAll('#pizzas,#burgers,#beverages')
+    filters=getId('quickFilters').querySelectorAll('#pizzas,#burgers,#beverages'),
+    log=getId('log')
+
+function addLog(action,item){
+    let user = 'fulano',
+        dt = new Date()
+    const li = document.createElement('li')
+    li.textContent=`${user} ${action} ${item} ${dt.getUTCHours()}:${dt.getUTCMinutes()} ${dt.getDate().toString().padStart(2,'0')}/${(dt.getMonth()+1).toString().padStart(2,'0')}/${dt.getFullYear()}`
+    log.appendChild(li);
+}
+addLog('save','#123')
 function resizeElement(element,width,height=null){
     element.style.width=`${width}px`
     if(height)element.style.height=`${height}px`
@@ -94,7 +104,7 @@ function clearFilter(input){
 }
 searchInput.addEventListener("keyup",()=>filterList(products,searchInput))
 clearFilterBtn.addEventListener('click',()=>{
-    clearFilter(searchInput);
+    clearFilter(searchInput)
     filterList(products,searchInput)
 })
 menu.addEventListener('click',(e)=>changeSize(menu))
