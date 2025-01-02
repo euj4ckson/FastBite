@@ -4,13 +4,18 @@ from database import db
 from usuarios_controllers import init_usuarios
 import re
 
-def init_pedidos(app): 
-    @app.route('/pedidos', methods=['GET'])     
-    # LISTAR PEDIDOS
-    def listar_pedidos(): 
-        pedidos = Pedidos.query.all()
-        lista_pedidos = [produto.to_dict() for produto in pedidos]  # Corrigido uso de "produto" (minúsculo)
-        return jsonify(lista_pedidos), 200
+def init_pedidos(app):
+    @app.route('/pedidos', methods=['GET'])
+    def listar_pedidos():
+        try:
+            pedidos = Pedidos.query.all()
+            if not pedidos:
+                return jsonify({"message": "Nenhum pedido encontrado"}), 404
+            lista_pedidos = [pedido.to_dict() for pedido in pedidos]
+            return jsonify(lista_pedidos), 200
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+
     # @app.route('/cadastro_pedido', methods=['GET', 'POST'])
     # def cadastro_pedido():
     #     if request.method == 'POST':
