@@ -57,9 +57,31 @@ body{
 #toast>*{margin: 5px;}
 #orderDetails{
     border: none;
-
-    top: 50%;
-    transform: translateY(-50%);
+    width: 70%;
+    height: 300px;
+    border-radius: 5px;
+    /* top: 50%;
+    transform: translateY(-50%); */
+}
+#orderId::before{
+    content:'#';
+}
+#orderId{
+    width: 200px;
+    background: gainsboro;
+    text-align: center;
+}
+.orderProductsList{
+    height: 100px;
+    overflow-y: scroll;
+}
+#orderDetails>hr{
+    border: none;
+    border-top: 1px dashed var(--bg);
+    margin: 20px 0;
+}
+.orderStats{
+    height: 100px;
 }
 nav,search{
     position: absolute;
