@@ -10,10 +10,10 @@ const $=(element)=>document.querySelector(element),
     clearFilterBtn=getId('clearFilterBtn'),
     orders=getId('ordersBtn'),
     toast=getId('toast'),
+    order=getId('orderDetails'),
     closeToast=getId('closeToast'),
     filters=getId('quickFilters').querySelectorAll('#pizzas,#burgers,#beverages'),
     log=getId('log')
-
 function addLog(action,item){
     let user = 'fulano',
         dt = new Date()
@@ -91,7 +91,7 @@ function changeToastState(msg,type=null){
         error:'#ff7b76',
         errorBorder:'#ff0800',
     }
-    toast.style.display='flex'
+    toast.showModal()
     toast.style.background=states[type]
     toast.style.borderColor=states[`${type}Border`]
     toast.querySelector('span').textContent=msg
@@ -109,7 +109,9 @@ clearFilterBtn.addEventListener('click',()=>{
 })
 menu.addEventListener('click',(e)=>changeSize(menu))
 // search.addEventListener('click',()=>resizeElement(search,100))
-orders.addEventListener('click',()=>console.log(createOrder()))
+orders.addEventListener('click',()=>toast.showModal())
+// orders.addEventListener('click',()=>console.log(createOrder()))
 btnAdd.addEventListener('click',()=>console.log(btnAdd))
-closeToast.addEventListener('click',()=>toggleVisibility(toast))
+closeToast.addEventListener('click',()=>toast.close())
+order.addEventListener('click',()=>order.close())
 filters.forEach((filter)=>{filter.addEventListener('click',(e)=>{filterList(e.target);setUIstate()})})
