@@ -38,25 +38,51 @@ body{
     cursor: pointer;
 }
 #toast{
-    position: absolute;
-    padding: 0;
+    /* position: absolute; */
     right: calc(-100% + 120px);
-    transform: translateX(-50%);
-    top: 60px;
+    top: calc(-100% + 120px);
+    transform: translateX(-50%) translateY(+50%);
+    padding: 0;
     text-align: center;
     height: 46px;
     border: 2px solid;
     border-radius: 5px 0 0 5px;
     width: fit-content;
-    display: flex;
     align-items: center;
     justify-content: space-between;
-    /* display: none; */
     background-color: #f0f8ff;
     border-color: var(--info-border);
     z-index: 0;
 }
 #toast>*{margin: 5px;}
+#orderDetails{
+    border: none;
+    width: 70%;
+    height: 300px;
+    border-radius: 5px;
+    /* top: 50%;
+    transform: translateY(-50%); */
+}
+#orderId::before{
+    content:'#';
+}
+#orderId{
+    width: 200px;
+    background: gainsboro;
+    text-align: center;
+}
+.orderProductsList{
+    height: 100px;
+    overflow-y: scroll;
+}
+#orderDetails>hr{
+    border: none;
+    border-top: 1px dashed var(--bg);
+    margin: 20px 0;
+}
+.orderStats{
+    height: 100px;
+}
 nav,search{
     position: absolute;
     right: 0;
