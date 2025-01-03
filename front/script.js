@@ -1,29 +1,33 @@
 const $=(element)=>document.querySelector(element),
+    log=(msg)=>console.log(msg),
+    getClass=(element)=>document.querySelector(`.${element}`),
     getId=(element)=>document.getElementById(element),
     attr=(element,attribute)=>element.getAttribute(attribute),
     _=null,
     menu=getId('burgerIcon'),
     products=$('menu').querySelectorAll('li'),
-    cardBtnAdd=$('.add2OrderBtn'),
+    cardBtnAdd=getClass('add2OrderBtn'),
     search=$('search'),
     searchInput=getId('searchValue'),
     clearFilterBtn=getId('clearFilterBtn'),
     orders=getId('ordersBtn'),
     toast=getId('toast'),
     order=getId('orderDetails'),
-    orderBtnRemove=$('btnRemoveUnit'),
-    orderBtnAdd=$('btnAddUnit'),
+    orderBtnRemove=getClass('btnRemoveUnit'),
+    orderBtnAdd=getClass('btnAddUnit'),
+    orderBtnDelete=getClass('btnDeleteItem'),
+    opc=getClass('orderProductCount'),
+    orderBtnClose=getClass('orderBtnClose'),
     closeToast=getId('closeToast'),
     filters=getId('quickFilters').querySelectorAll('#pizzas,#burgers,#beverages'),
-    log=getId('log')
+    logs=getId('logs')
 function addLog(action,item){
     let user = 'fulano',
         dt = new Date()
     const li = document.createElement('li')
     li.textContent=`${user} ${action} ${item} ${dt.getUTCHours()}:${dt.getUTCMinutes()} ${dt.getDate().toString().padStart(2,'0')}/${(dt.getMonth()+1).toString().padStart(2,'0')}/${dt.getFullYear()}`
-    log.appendChild(li);
+    logs.appendChild(li);
 }
-addLog('save','#123')
 function resizeElement(element,width,height=null){
     element.style.width=`${width}px`
     if(height)element.style.height=`${height}px`
@@ -63,24 +67,6 @@ function changeSize(element){
     // if(attr(menu,'width')==='opened'){console.log('is open')}
     // else console.log(('closed'));
 }
-function createOrder(){
-    console.info('create')
-}
-function editOrder(){
-    console.info('edit')
-}
-function deleteOrder(orderId){
-    console.info('delete')
-}
-function getOrdersList(){
-    console.info('full json orders list')
-}
-function getOrderDetails(){
-    console.info('1 order details')
-}
-function getProducts(){
-    console.info('json get from backend')
-}
 function changeToastState(msg,type=null){
     if(!type){toast.style.display='none';return}
     const states = {
@@ -111,9 +97,29 @@ clearFilterBtn.addEventListener('click',()=>{
 })
 menu.addEventListener('click',(e)=>changeSize(menu))
 // search.addEventListener('click',()=>resizeElement(search,100))
-orders.addEventListener('click',()=>toast.showModal())
-// orders.addEventListener('click',()=>console.log(createOrder()))
+orderBtnRemove.addEventListener('click',(e)=>{
+    let actualValue = parseInt(opc.textContent)
+    if(actualValue===0){
+        deleteOrderItem(e.target.parentNode.parentNode.id)
+        return
+    }
+    opc.textContent =parseInt(opc.textContent)-1
+})
+function deleteOrderItem(itemId){
+    //call view function update order items
+    getId(itemId).remove();
+}
+orderBtnAdd.addEventListener('click',()=>{
+    opc.textContent =parseInt(opc.textContent)+1
+})
+orderBtnDelete.addEventListener('click',(e)=>{
+    deleteOrderItem(e.target.parentNode.parentNode.id)
+})
+orderBtnDelete.querySelector('img').addEventListener('click',(e)=>{
+    deleteOrderItem(e.target.parentNode.parentNode.parentNode.id)
+})
+orders.addEventListener('click',()=>{order.showModal();})
 cardBtnAdd.addEventListener('click',()=>console.log(cardBtnAdd))
+orderBtnClose.addEventListener('click',()=>{order.close()})
 closeToast.addEventListener('click',()=>toast.close())
-order.addEventListener('click',()=>order.close())
 filters.forEach((filter)=>{filter.addEventListener('click',(e)=>{filterList(e.target);setUIstate()})})

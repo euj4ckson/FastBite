@@ -34,7 +34,8 @@ body{
     justify-content: center;
     align-items: center;
 }
-#closeToast,#burgerIcon>img,#ordersBtn,#searchIcon,#clearFilterBtn,#quickFilters>button,.btnEditOrder,.btnSaveOrder,.btnRemoveUnit,.btnAddUnit,.btnRemoveItem{
+#closeToast,#burgerIcon>img,#ordersBtn,#searchIcon,#clearFilterBtn,#quickFilters>button,.btnEditOrder,.btnSaveOrder,.btnRemoveUnit,.btnAddUnit,.btnDeleteItem,
+aside>span,#orderDetails>img{
     cursor: pointer;
 }
 #toast{
@@ -58,20 +59,45 @@ body{
 #orderDetails{
     border: none;
     width: 70%;
-    height: 300px;
     border-radius: 5px;
+    background: transparent;
+    border-block-end: #00bbff;
+
+}
+.orderTop{
+    background: var(--info);
     display: flex;
     flex-flow: column;
+    height: 300px;
+    clip-path: polygon(20px 100%, 0 calc(100% - 20px), 0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%);
+    border-bottom: 2px dashed black;
+    padding-bottom: 20px;
+    margin-bottom: -1px;
+    /* clip-path: polygon(13% 100%, 0 88%, 0 0, 100% 0, 100% 86%, 87% 100%); */
+
+
+}
+.orderTop>img{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 30px;
 }
 #orderId::before{
     content:'#';
 }
 #orderId{
-    width: 100%;
+    width: 50%;
+    align-self: center;
     background: gainsboro;
     text-align: center;
 }
+#orderDetails>hr{
+    /* background: var(--info); */
+    background: green;
+}
 .orderProductsList{
+    margin-top: 20px;
     height: 100%;
     overflow-y: scroll;
 }
@@ -96,7 +122,15 @@ body{
     display: flex;
     align-items: center;
 }
-.btnRemoveUnit,.btnAddUnit,.btnRemoveItem{
+.orderStats{
+    background: var(--info);
+    border-radius: 0 0 5px 5px;
+    height: 100px;
+    clip-path: polygon(0 100%, 0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% 100%);
+
+
+}
+.btnRemoveUnit,.btnAddUnit,.btnDeleteItem{
     border: none;
     border-radius: 5px;
     width: 24px;
@@ -114,12 +148,13 @@ body{
 .btnRemoveItem{color: transparent;}
 .btnRemoveItem>img{
     width: 16px;
+    user-select: none;
 }
 .orderStats{
     margin-top: auto;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 #orderDetails>hr{
     border: none;
@@ -245,7 +280,7 @@ aside{
     width: 30px;
     filter: invert();
 }
-#log{display: none;}
+#logs{display: none;}
 search{
     bottom: 60px;
     border: none;
