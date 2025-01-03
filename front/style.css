@@ -70,12 +70,8 @@ aside>span,#orderDetails>img{
     flex-flow: column;
     height: 300px;
     clip-path: polygon(20px 100%, 0 calc(100% - 20px), 0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%);
-    border-bottom: 2px dashed black;
     padding-bottom: 20px;
     margin-bottom: -1px;
-    /* clip-path: polygon(13% 100%, 0 88%, 0 0, 100% 0, 100% 86%, 87% 100%); */
-
-
 }
 .orderTop>img{
     position: absolute;
@@ -91,10 +87,6 @@ aside>span,#orderDetails>img{
     align-self: center;
     background: gainsboro;
     text-align: center;
-}
-#orderDetails>hr{
-    /* background: var(--info); */
-    background: green;
 }
 .orderProductsList{
     margin-top: 20px;
@@ -122,14 +114,6 @@ aside>span,#orderDetails>img{
     display: flex;
     align-items: center;
 }
-.orderStats{
-    background: var(--info);
-    border-radius: 0 0 5px 5px;
-    height: 100px;
-    clip-path: polygon(0 100%, 0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% 100%);
-
-
-}
 .btnRemoveUnit,.btnAddUnit,.btnDeleteItem{
     border: none;
     border-radius: 5px;
@@ -151,10 +135,24 @@ aside>span,#orderDetails>img{
     user-select: none;
 }
 .orderStats{
-    margin-top: auto;
-    display: flex;
-    flex-flow: row wrap;
-    /* justify-content: space-between; */
+    background: var(--info);
+    border-radius: 0 0 5px 5px;
+    height: 100px;
+    clip-path: polygon(0 100%, 0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% 100%);
+}
+.orderStats>button{
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: var(--accent);
+}
+.orderStats::before{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    content: '';
+    width: 75%;
+    border-bottom: 1px dashed black;
 }
 #orderDetails>hr{
     border: none;
