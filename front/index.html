@@ -55,7 +55,7 @@
             <span class="filterTitle">BEVERAGE</span>
         </button>
     </section>
-    <ul id="log">
+    <ul id="logs">
     </ul>
     <footer id="searchBar">
         <div class="roundedCorner" style="transform: rotate(90deg);"></div>
@@ -72,45 +72,46 @@
         <span>teste saved!</span>
         <svg id="closeToast" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke="#00bbff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </dialog>
-    <dialog id="orderDetails" open>
-        <span id="orderId">92381923</span>
-        <div class="orderProductsList">
-            <ul class="orderProducts">
-                <li>
-                    <span class="productName">pizza calabresa</span>
-                    <div>
-                        <button class="btnRemoveUnit">-</button>
-                        <span class="orderProductCount">2</span>
-                        <button class="btnAddUnit">+</button>
-                        <span class="orderProductPrice">10.00</span>
-                        <button class="btnRemoveItem">
-                            <img src="assets/icons/trash.svg" alt="">
-                        </button>
-                    </div>
-                </li>
-                <li>pz</li>
-                <li>pz</li>
-                <li>pz</li>
-                <li>pz</li>
-                <li>pz</li>
-                <li>pz</li>
-                <li>pz</li>
-                <li>pz</li>
-                <li>pz</li>
-                <li>pz</li>
-                <li>pz</li>
-                <li>pz</li>
-                <li>pz</li>
-                <li>pz</li>
-            </ul>
+    <dialog id="orderDetails">
+        <div class="orderTop">
+            <span id="orderId">92381923</span>
+            <img class="orderBtnClose" src="assets/icons/close.svg" alt="close order button">
+            <div class="orderProductsList">
+                <ul class="orderProducts">
+                    <li class="orderItem" id="123256238">
+                        <button><img src="assets/icons/note.svg" alt=""></button>
+                        <span class="productName">pizza calabresa</span>
+                        <div>
+                            <button class="btnRemoveUnit">-</button>
+                            <span class="orderProductCount">1</span>
+                            <button class="btnAddUnit">+</button>
+                            <span class="orderProductPrice">10.00</span>
+                            <button class="btnDeleteItem">
+                                <img src="assets/icons/trash.svg" alt="">
+                            </button>
+                        </div>
+                    </li>
+                    <li>pz</li>
+                    <li>pz</li>
+                    <li>pz</li>
+                    <li>pz</li>
+                    <li>pz</li>
+                    <li>pz</li>
+                    <li>pz</li>
+                    <li>pz</li>
+                    <li>pz</li>
+                    <li>pz</li>
+                </ul>
+            </div>
         </div>
-        <hr>
         <div class="orderStats">
             <span id="orderTotal">10.00</span>
+            <button class="btnPrintOrder"><img src="assets/icons/print.svg" alt=""></button>
             <button class="btnEditOrder"><img src="assets/icons/edit.svg" alt=""></button>
             <button class="btnSaveOrder"><img src="assets/icons/save.svg" alt=""></button>
         </div>
     </dialog>
 </body>
 <script src="script.js"></script>
+<script src="view.js"></script>
 </html>

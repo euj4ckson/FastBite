@@ -34,7 +34,8 @@ body{
     justify-content: center;
     align-items: center;
 }
-#closeToast,#burgerIcon>img,#ordersBtn,#searchIcon,#clearFilterBtn,#quickFilters>button,.btnEditOrder,.btnSaveOrder,.btnRemoveUnit,.btnAddUnit,.btnRemoveItem{
+#closeToast,#burgerIcon>img,#ordersBtn,#searchIcon,#clearFilterBtn,#quickFilters>button,.btnEditOrder,.btnSaveOrder,.btnRemoveUnit,.btnAddUnit,.btnDeleteItem,
+aside>span,#orderDetails>img{
     cursor: pointer;
 }
 #toast{
@@ -58,20 +59,37 @@ body{
 #orderDetails{
     border: none;
     width: 70%;
-    height: 300px;
     border-radius: 5px;
+    background: transparent;
+    border-block-end: #00bbff;
+
+}
+.orderTop{
+    background: var(--info);
     display: flex;
     flex-flow: column;
+    height: 300px;
+    clip-path: polygon(20px 100%, 0 calc(100% - 20px), 0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%);
+    padding-bottom: 20px;
+    margin-bottom: -1px;
+}
+.orderTop>img{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 30px;
 }
 #orderId::before{
     content:'#';
 }
 #orderId{
-    width: 100%;
+    width: 50%;
+    align-self: center;
     background: gainsboro;
     text-align: center;
 }
 .orderProductsList{
+    margin-top: 20px;
     height: 100%;
     overflow-y: scroll;
 }
@@ -96,7 +114,7 @@ body{
     display: flex;
     align-items: center;
 }
-.btnRemoveUnit,.btnAddUnit,.btnRemoveItem{
+.btnRemoveUnit,.btnAddUnit,.btnDeleteItem{
     border: none;
     border-radius: 5px;
     width: 24px;
@@ -114,12 +132,32 @@ body{
 .btnRemoveItem{color: transparent;}
 .btnRemoveItem>img{
     width: 16px;
+    user-select: none;
 }
 .orderStats{
-    margin-top: auto;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
+    background: var(--info);
+    border-radius: 0 0 5px 5px;
+    height: 100px;
+    clip-path: polygon(0 100%, 0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% 100%);
+}
+.btnPrintOrder,.btnEditOrder,.btnSaveOrder{
+    width: 36px;
+    height: 36px;
+    border: none;
+}
+.btnPrintOrder,.btnEditOrder{
+    background: var(--accent);
+}
+.btnSaveOrder{
+    background: var(--success);
+}
+.orderStats::before{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    content: '';
+    width: 75%;
+    border-bottom: 1px dashed black;
 }
 #orderDetails>hr{
     border: none;
@@ -245,7 +283,7 @@ aside{
     width: 30px;
     filter: invert();
 }
-#log{display: none;}
+#logs{display: none;}
 search{
     bottom: 60px;
     border: none;
