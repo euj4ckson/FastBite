@@ -4,13 +4,15 @@ const $=(element)=>document.querySelector(element),
     _=null,
     menu=getId('burgerIcon'),
     products=$('menu').querySelectorAll('li'),
-    btnAdd=$('.add2OrderBtn'),
+    cardBtnAdd=$('.add2OrderBtn'),
     search=$('search'),
     searchInput=getId('searchValue'),
     clearFilterBtn=getId('clearFilterBtn'),
     orders=getId('ordersBtn'),
     toast=getId('toast'),
     order=getId('orderDetails'),
+    orderBtnRemove=$('btnRemoveUnit'),
+    orderBtnAdd=$('btnAddUnit'),
     closeToast=getId('closeToast'),
     filters=getId('quickFilters').querySelectorAll('#pizzas,#burgers,#beverages'),
     log=getId('log')
@@ -111,7 +113,7 @@ menu.addEventListener('click',(e)=>changeSize(menu))
 // search.addEventListener('click',()=>resizeElement(search,100))
 orders.addEventListener('click',()=>toast.showModal())
 // orders.addEventListener('click',()=>console.log(createOrder()))
-btnAdd.addEventListener('click',()=>console.log(btnAdd))
+cardBtnAdd.addEventListener('click',()=>console.log(cardBtnAdd))
 closeToast.addEventListener('click',()=>toast.close())
 order.addEventListener('click',()=>order.close())
 filters.forEach((filter)=>{filter.addEventListener('click',(e)=>{filterList(e.target);setUIstate()})})
