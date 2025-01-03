@@ -140,11 +140,16 @@ aside>span,#orderDetails>img{
     height: 100px;
     clip-path: polygon(0 100%, 0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% 100%);
 }
-.orderStats>button{
+.btnPrintOrder,.btnEditOrder,.btnSaveOrder{
     width: 36px;
     height: 36px;
     border: none;
+}
+.btnPrintOrder,.btnEditOrder{
     background: var(--accent);
+}
+.btnSaveOrder{
+    background: var(--success);
 }
 .orderStats::before{
     position: absolute;
