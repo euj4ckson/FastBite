@@ -44,7 +44,7 @@ def init_produtos(app):
         except Exception as e:
             return jsonify({"error": str(e)}), 500
     #DELETE PRODUTO
-    @app.route('/deletar_produto/<int:id>', methods=['DELETE'])
+    @app.route('/deletar_produto/<int:id>', methods=['GET', 'POST'])
     def deletar_produto(id):
         try:
             produto = Produto.query.get(id)

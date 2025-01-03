@@ -45,7 +45,7 @@ def init_usuarios(app):
             return jsonify(usuario.to_dict()), 200
         except Exception as e:
             return jsonify({"error": str(e)}), 500
-    @app.route('/deletar_usuario/<int:id>', methods=['DELETE'])
+    @app.route('/deletar_usuario/<int:id>', methods=['GET', 'POST'])
     def deletar_usuario(id):
         try:
             usuario = Usuario.query.get(id)
