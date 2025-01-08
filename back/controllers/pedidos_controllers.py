@@ -8,12 +8,27 @@ import re
 def init_pedidos(app):
     @app.route('/pedidos', methods=['GET'])
     def listar_pedidos():
-        try:
-            pedidos = Pedidos.query.all()
-            return render_template('listar_pedidos.html', pedidos=pedidos)
-        except Exception as e:
-            flash('Erro ao listar pedidos: ' + str(e))
-            return redirect(url_for('listar_pedidos'))
+    # Capturar os parâmetros de data
+        data_inicio = request.args.get('data_inicio')
+        data_fim = request.args.get('data_fim')
+
+        # Query base
+        query = Pedidos.query
+
+        # Aplicar filtros apenas se as datas forem válidas
+        if data_inicio:
+            query = query.filter(Pedidos.criado_em >= data_inicio)
+        if data_fim:
+            query = query.filter(Pedidos.criado_em <= data_fim)
+
+        # Obter os pedidos filtrados
+        pedidos = query.all()
+
+        # Calcular o valor do caixa com os pedidos filtrados
+        valor_caixa = sum(pedido.valor_total for pedido in pedidos)
+
+        # Renderizar a página
+        return render_template('listar_pedidos.html', pedidos=pedidos, valor_caixa=valor_caixa)
 
     @app.route('/api/pedido/<int:id>', methods=['GET'])
     def obter_detalhes_pedido(id):

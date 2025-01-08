@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Pedido</title>
+    <link rel="shortcut icon" href="./favicon.ico">
     <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
@@ -27,9 +28,9 @@
                         </option>
                         {% endfor %}
                     </select>
-                    <input type="number" name="itens[{{ loop.index0 }}][quantidade]" min="1" value="{{ item.quantidade }}" 
+                    <input id="qtdeinput" type="number" name="itens[{{ loop.index0 }}][quantidade]" min="1" value="{{ item.quantidade }}" 
                         oninput="updateResumo()" required>
-                    <button type="button" onclick="removeProduto(this)">Remover</button>
+                    <button id="deletebtn" type="button" onclick="removeProduto(this)">Remover</button>
                 </div>
                 {% endfor %}
             </div>

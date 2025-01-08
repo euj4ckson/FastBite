@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/style_listagem.css">
+    <link rel="shortcut icon" href="./favicon.ico">
     <title>Listar Pedidos</title>
+    
     <style>
     
     </style>
@@ -14,6 +16,19 @@
         <h1>Lista de Pedidos</h1>
     </header>
     <main>
+        <form method="GET" action="{{ url_for('listar_pedidos') }}" class="filtro-form">
+            <label for="data_inicio">Data Início:</label>
+            <input type="date" id="data_inicio" name="data_inicio" value="{{ request.args.get('data_inicio', '') }}">
+            
+            <label for="data_fim">Data Fim:</label>
+            <input type="date" id="data_fim" name="data_fim" value="{{ request.args.get('data_fim', '') }}">
+            
+            <button type="submit" class="btn">Filtrar</button>
+        </form>
+        
+        <div class="caixa-total">
+            <strong>Total do Caixa:</strong> R$ {{ valor_caixa | round(2) }}
+        </div>    
         <table>
             <thead>
                 <tr>
