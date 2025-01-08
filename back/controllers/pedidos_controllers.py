@@ -20,7 +20,7 @@ def init_pedidos(app):
             query = query.filter(Pedidos.criado_em >= data_inicio)
         if data_fim:
             query = query.filter(Pedidos.criado_em <= data_fim)
-
+        query = query.order_by(Pedidos.criado_em.desc())
         # Obter os pedidos filtrados
         pedidos = query.all()
 
