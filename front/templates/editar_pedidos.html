@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Pedido</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Editar Pedido</h1>
+    </header>
+    <main>
+        <form method="POST" action="/editar_pedido/{{ pedido.id }}">
+            <label for="cliente_nome">Nome do Cliente:</label>
+            <input type="text" id="cliente_nome" name="cliente_nome" value="{{ pedido.cliente_nome }}" required>
+            
+            <label for="produto">Editar Produtos:</label>
+            <div id="itens">
+                {% for item in pedido_itens %}
+                <div class="produto-item">
+                    <select name="itens[{{ loop.index0 }}][produto]" onchange="updateResumo()" required>
+                        {% for produto in produtos %}
+                        <option value="{{ produto.id }}" {% if produto.id == item.produto_id %}selected{% endif %} 
+                            data-valor="{{ produto.valor }}">
+                            {{ produto.nome }} - R$ {{ produto.valor }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <input type="number" name="itens[{{ loop.index0 }}][quantidade]" min="1" value="{{ item.quantidade }}" 
+                        oninput="updateResumo()" required>
+                    <button type="button" onclick="removeProduto(this)">Remover</button>
+                </div>
+                {% endfor %}
+            </div>
+            <button type="button" onclick="addProduto()">Adicionar Outro Produto</button>
+
+            <button type="submit">Salvar Alterações</button>
+        </form>
+        <div class="resumo">
+            <h3>Resumo do Pedido</h3>
+            <p>Nome do Cliente: <span id="resumo-cliente">{{ pedido.cliente_nome }}</span></p>
+            <ul id="resumo-itens">
+                {% for item in pedido_itens %}
+                <li>{{ item.quantidade }}x {{ item.produto.nome }} - R$ {{ (item.produto.valor * item.quantidade) | round(2) }}</li>
+                {% endfor %}
+            </ul>
+            <p>Total: R$ <span id="resumo-total">
+                {{ pedido_itens | sum(attribute='subtotal') | round(2) }}
+            </span></p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 - Minha Aplicação</p>
+    </footer>
+    <script>
+        const resumoCliente = document.getElementById('resumo-cliente');
+        const resumoItens = document.getElementById('resumo-itens');
+        const resumoTotal = document.getElementById('resumo-total');
+        const clienteNomeInput = document.getElementById('cliente_nome');
+        const itensContainer = document.getElementById('itens');
+
+        clienteNomeInput.addEventListener('input', () => {
+            resumoCliente.textContent = clienteNomeInput.value || '-';
+        });
+
+        function addProduto() {
+            const index = itensContainer.children.length;
+            const div = document.createElement('div');
+            div.classList.add('produto-item');
+            div.innerHTML = `
+                <select name="itens[${index}][produto]" onchange="updateResumo()" required>
+                    {% for produto in produtos %}
+                    <option value="{{ produto.id }}" data-valor="{{ produto.valor }}">{{ produto.nome }} - R$ {{ produto.valor }}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="itens[${index}][quantidade]" min="1" placeholder="Quantidade" oninput="updateResumo()" required>
+                <button type="button" onclick="removeProduto(this)">Remover</button>
+            `;
+            itensContainer.appendChild(div);
+            updateResumo();
+        }
+
+        function removeProduto(button) {
+            button.parentElement.remove();
+            updateResumo();
+        }
+
+        function updateResumo() {
+            const itens = itensContainer.querySelectorAll('.produto-item');
+            resumoItens.innerHTML = '';
+            let total = 0;
+
+            itens.forEach((item) => {
+                const produtoSelect = item.querySelector('select');
+                const quantidadeInput = item.querySelector('input[type="number"]');
+                const valor = parseFloat(produtoSelect.options[produtoSelect.selectedIndex].dataset.valor || 0);
+                const quantidade = parseInt(quantidadeInput.value || 0);
+
+                if (quantidade > 0) {
+                    total += valor * quantidade;
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${produtoSelect.options[produtoSelect.selectedIndex].textContent} x ${quantidade} = R$ ${(valor * quantidade).toFixed(2)}`;
+                    resumoItens.appendChild(listItem);
+                }
+            });
+
+            resumoTotal.textContent = total.toFixed(2);
+
+            if (!resumoItens.children.length) {
+                resumoItens.innerHTML = '<li>Nenhum item adicionado ainda</li>';
+            }
+        }
+
+        // Inicializa o resumo ao carregar a página
+        updateResumo();
+    </script>
+</body>
+</html>

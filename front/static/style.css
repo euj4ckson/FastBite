@@ -1,0 +1,47 @@
+ 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #222;
+    color: #FFD700;
+    margin: 0;
+    padding: 0;
+}
+header, footer {
+    background-color: #444;
+    color: #FFD700;
+    text-align: center;
+    padding: 10px 0;
+}
+main {
+    display: flex;
+    padding: 20px;
+}
+form {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 5px;
+    width: 50%;
+    margin-right: 20px;
+}
+form input, form select, form button {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+form button {
+    background-color: #FFD700;
+    color: #222;
+    font-weight: bold;
+    cursor: pointer;
+}
+.resumo {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 5px;
+    width: 50%;
+}
+.resumo h3 {
+    margin-top: 0;
+} 

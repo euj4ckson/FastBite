@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style_listagem.css">
+    <title>Listar Pedidos</title>
+    <style>
+    
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lista de Pedidos</h1>
+    </header>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Valor Total (R$)</th>
+                    <th>Criado em</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pedido in pedidos %}
+                <tr>
+                    <td>{{ pedido.id }}</td>
+                    <td>{{ pedido.cliente_nome }}</td>
+                    <td>{{ pedido.valor_total | round(2) }}</td>
+                    <td>{{ pedido.criado_em }}</td>
+                    <td>
+                        <a href="{{ url_for('editar_pedido', id=pedido.id) }}" class="btn">Editar</a>
+                        <a href="{{ url_for('deletar_pedido', id=pedido.id) }}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja deletar este pedido?')">Deletar</a>
+                        <button class="btn" onclick="abrirModal('{{ pedido.id }}')">Ver Produtos</button>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">Nenhum pedido encontrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('cadastro_pedido') }}" class="btn">Cadastrar Novo Pedido</a>
+    </main>
+
+    <!-- Modal -->
+    <div id="detalhesModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModal()">&times;</span>
+            <h3>Detalhes do Pedido</h3>
+            <div id="detalhesPedido">
+                <!-- Os detalhes do pedido serão carregados aqui -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 - Minha Aplicação</p>
+    </footer>
+
+    <script>
+        async function abrirModal(pedidoId) {
+            const modal = document.getElementById('detalhesModal');
+            const detalhesDiv = document.getElementById('detalhesPedido');
+
+            try {
+                // Realizando a requisição para obter os detalhes do pedido
+                const response = await fetch(`/api/pedido/${pedidoId}`);
+                if (response.ok) {
+                    const pedido = await response.json();
+
+                    // Montando o HTML com os dados do pedido
+                    let html = `
+                        <p><strong>ID do Pedido:</strong> ${pedido.id}</p>
+                        <p><strong>Cliente:</strong> ${pedido.cliente_nome}</p>
+                        <p><strong>Valor Total:</strong> R$ ${parseFloat(pedido.valor_total).toFixed(2)}</p>
+                        <h4>Itens do Pedido:</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Quantidade</th>
+                                    <th>Valor Unitário</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                    `;
+
+                    // Iterando sobre os itens para preencher a tabela
+                    for (const item of pedido.itens) {
+                        const produto = item.produto || {};
+                        html += `
+                            <tr>
+                                <td>${produto.nome || 'Produto não encontrado'}</td>
+                                <td>${item.quantidade}</td>
+                                <td>R$ ${produto.valor ? parseFloat(produto.valor).toFixed(2) : '0.00'}</td>
+                                <td>R$ ${(produto.valor ? produto.valor * item.quantidade : 0).toFixed(2)}</td>
+                            </tr>
+                        `;
+                    }
+
+                    html += `
+                            </tbody>
+                        </table>
+                    `;
+
+                    // Exibindo os dados no modal
+                    detalhesDiv.innerHTML = html;
+                    modal.style.display = 'block';
+                } else {
+                    // Exibindo mensagem de erro no modal
+                    detalhesDiv.innerHTML = `<p>Erro ao carregar os detalhes do pedido.</p>`;
+                    modal.style.display = 'block';
+                }
+            } catch (error) {
+                // Exibindo mensagem de erro no modal
+                detalhesDiv.innerHTML = `<p>Erro ao carregar os detalhes do pedido.</p>`;
+                console.error('Erro ao buscar os detalhes do pedido:', error);
+                modal.style.display = 'block';
+            }
+        }
+
+        // Fechar o modal
+        function fecharModal() {
+            const modal = document.getElementById('detalhesModal');
+            modal.style.display = 'none';
+        }
+
+    </script>
+</body>
+</html>

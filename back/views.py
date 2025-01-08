@@ -5,8 +5,8 @@ def render_login():
 
 def render_cadastro():
     return render_template('cadastro.html')  # Template de cadastro
-def render_cadastro_pedido():
-    return render_template('cadastro_pedido.html')  # Template de cadastro pedidos
+def render_cadastro_pedido(produtos):
+    return render_template('cadastrar_pedidos.html', produtos = produtos)  # Template de cadastro pedidos
 
 def render_usuarios(usuarios):
     return render_template('usuarios.html', usuarios=usuarios)  # Template para listar usuários

@@ -70,6 +70,11 @@ class pedido_itens(db.Model):
     pedido_id = db.Column(db.Integer, db.ForeignKey('pedidos.id'), nullable=False)
     produto_id = db.Column(db.Integer, db.ForeignKey('produtos.id'), nullable=False)
     quantidade = db.Column(db.Integer, nullable=False)
+    @property
+    def subtotal(self):
+        """Calcula o subtotal com base na quantidade e no valor do produto."""
+        return float(self.produto.valor) * self.quantidade if self.produto and self.produto.valor else 0.0
+
 
     # Relacionamento com Produto
     produto = db.relationship('Produto', backref='pedido_itens', lazy=True)
