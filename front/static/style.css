@@ -14,7 +14,7 @@ header, footer {
 }
 main {
     display: flex;
-    padding: 20px;
+    padding: 20px; 
 }
 form {
     background-color: #333;
@@ -54,44 +54,4 @@ form button:hover{
 }
 #qtdeinput{
     max-width: 580px;
-}
-.filtro-form {
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.filtro-form label {
-    font-weight: bold;
-    color: #222;
-}
-
-.filtro-form input {
-    padding: 5px;
-    border: 1px solid #FFD700;
-    border-radius: 4px;
-}
-
-.caixa-total {
-    margin-bottom: 20px;
-    font-size: 1.2em;
-    color: #FFD700;
-    font-weight: bold;
-}
-
-.filtro-form .btn {
-    background-color: #FFD700;
-    color: #222;
-    font-weight: bold;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-}
-
-.filtro-form .btn:hover {
-    background-color: #333;
-    color: #FFD700;
 }

@@ -17,6 +17,7 @@ main {
 table {
     width: 100%;
     border-collapse: collapse;
+    border-radius: 1px;
     margin-bottom: 20px;
 }
 table th, table td {
@@ -38,8 +39,12 @@ table tr:nth-child(even) {
     font-weight: bold;
     color: #222;
     background-color: #FFD700;
+    border-radius: 5px; 
+   
+    border: none;
+    padding: 8px 12px; 
     border-radius: 5px;
-    cursor: pointer;
+    transition: background-color 0.3s;
 }
 .btn:hover {
     background-color: #FFC300;
@@ -92,4 +97,44 @@ table tr:nth-child(even) {
 }
 .modal table th {
     background-color: #444;
+}
+.filtro-form {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filtro-form label {
+    font-weight: bold;
+    color: #FFD700;
+}
+
+.filtro-form input {
+    padding: 5px;
+    border: 1px solid #FFD700;
+    border-radius: 4px;
+}
+
+.caixa-total {
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    color: #FFD700;
+    font-weight: bold;
+}
+
+.filtro-form .btn {
+    background-color: #FFD700;
+    color: #222;
+    font-weight: bold;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.filtro-form .btn:hover {
+    background-color: #333;
+    color: #FFD700;
 }
