@@ -17,6 +17,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'control
 from controllers.usuarios_controllers import init_usuarios
 from controllers.pedidos_controllers import init_pedidos
 from controllers.produtos_controllers import init_produtos
+from controllers.login_controllers import init_login
 
 app = Flask(
     __name__, 
@@ -30,6 +31,7 @@ CORS(app)
 init_usuarios(app)
 init_pedidos(app)
 init_produtos(app)
+init_login(app)
 
 # Configurações do banco de dados
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@127.0.0.1:3306/minha_aplicacao'
