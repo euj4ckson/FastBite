@@ -2,6 +2,7 @@ from flask import Flask, request, redirect, url_for, flash, render_template,sess
 from models.models import Pedidos, Produto, pedido_itens
 from models.database import db
 from routes.views import render_cadastro_pedido,render_pedidos
+from datetime import datetime, timedelta
 from usuarios_controllers import init_usuarios
 import re
 
@@ -16,13 +17,29 @@ def init_pedidos(app):
         query = Pedidos.query
 
         # Aplicar filtros apenas se as datas forem válidas
+
+        # Aplicar filtros apenas se as datas forem válidas
         if data_inicio:
-            query = query.filter(Pedidos.criado_em >= data_inicio)
+            try:
+                data_inicio = datetime.strptime(data_inicio, '%Y-%m-%d')  # Converter para datetime
+                query = query.filter(Pedidos.criado_em >= data_inicio)
+            except ValueError:
+                raise ValueError("Formato inválido para data_inicio. Use o formato YYYY-MM-DD.")
+
         if data_fim:
-            query = query.filter(Pedidos.criado_em <= data_fim)
+            try:
+                # Adicionar 1 dia e subtrair 1 segundo para incluir até o final do dia
+                data_fim = datetime.strptime(data_fim, '%Y-%m-%d') + timedelta(days=1) - timedelta(seconds=1)
+                query = query.filter(Pedidos.criado_em <= data_fim)
+            except ValueError:
+                raise ValueError("Formato inválido para data_fim. Use o formato YYYY-MM-DD.")
+
         query = query.order_by(Pedidos.criado_em.desc())
+
         # Obter os pedidos filtrados
         pedidos = query.all()
+        print(pedidos)
+
 
         # Calcular o valor do caixa com os pedidos filtrados
         valor_caixa = sum(pedido.valor_total for pedido in pedidos)
@@ -78,7 +95,7 @@ def init_pedidos(app):
             flash('Pedido cadastrado com sucesso!')
             return redirect(url_for('listar_pedidos'))
         
-        produtos = Produto.query.all()
+        produtos = [produto.to_dict() for produto in Produto.query.all()]
         return render_cadastro_pedido(produtos)
 
     @app.route('/editar_pedido/<int:id>', methods=['GET', 'POST'])
@@ -117,7 +134,8 @@ def init_pedidos(app):
             flash('Pedido atualizado com sucesso!')
             return redirect(url_for('listar_pedidos'))
         
-        produtos = Produto.query.all()
+        produtos = [produto.to_dict() for produto in Produto.query.all()]
+
         pedido_itens_lista = pedido_itens.query.filter_by(pedido_id=pedido.id).all()
         return render_template('editar_pedidos.html', pedido=pedido, produtos=produtos, pedido_itens=pedido_itens_lista)
 

@@ -1,5 +1,5 @@
 body {
-    background-color: #000;
+    background-color: #000000c2;
     color: #FFD700;
     font-family: Arial, sans-serif;
     display: flex;
@@ -11,7 +11,7 @@ body {
 
 .login-container {
     background-color: #222;
-    padding: 20px;
+    padding: 50px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     width: 300px;
@@ -77,4 +77,9 @@ input[type="password"]:focus {
 
 .messages .info {
     color: #2196F3;
+}
+img{
+    width: 170px;
+    margin-bottom: -19px;
+    margin-top: -42px;
 }
