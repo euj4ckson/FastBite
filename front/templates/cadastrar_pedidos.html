@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./favicon.ico">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/pedidos/cadastrar_pedidos.js') }}"></script>
+    
 
     <title>Cadastrar Pedido</title>
  
@@ -21,7 +23,7 @@
             <label for="produto">Adicionar Produtos:</label>
             <div id="itens">
                 <div class="produto-item">
-                    <select name="itens[0][produto]" onchange="updateResumo()" required>
+                    <select id="produtonovo" name="itens[0][produto]" onchange="updateResumo()" required>
                         {% for produto in produtos %}
                         <option value="{{ produto.id }}" data-valor="{{ produto.valor }}">{{ produto.nome }} - R$ {{ produto.valor }}</option>
                         {% endfor %}
@@ -47,64 +49,9 @@
     <footer>
         <p>&copy; 2025 - Meireles lanchonete</p>
     </footer>
+    <script src="{{ url_for('static', filename='js/pedidos/cadastrar_pedidos.js') }}"></script>
     <script>
-        const resumoCliente = document.getElementById('resumo-cliente');
-        const resumoItens = document.getElementById('resumo-itens');
-        const resumoTotal = document.getElementById('resumo-total');
-        const clienteNomeInput = document.getElementById('cliente_nome');
-        const itensContainer = document.getElementById('itens');
-
-        clienteNomeInput.addEventListener('input', () => {
-            resumoCliente.textContent = clienteNomeInput.value || '-';
-        });
-
-        function addProduto() {
-            const index = itensContainer.children.length;
-            const div = document.createElement('div');
-            div.classList.add('produto-item');
-            div.innerHTML = `
-                <select name="itens[${index}][produto]" onchange="updateResumo()" required>
-                    {% for produto in produtos %}
-                    <option value="{{ produto.id }}" data-valor="{{ produto.valor }}">{{ produto.nome }} - R$ {{ produto.valor }}</option>
-                    {% endfor %}
-                </select>
-                <input type="number" name="itens[${index}][quantidade]" min="1" placeholder="Quantidade" oninput="updateResumo()" required><br>
-                <button type="button" onclick="removeProduto(this)">Remover</button>
-            `;
-            itensContainer.appendChild(div);
-            updateResumo();
-        }
-
-        function removeProduto(button) {
-            button.parentElement.remove();
-            updateResumo();
-        }
-
-        function updateResumo() {
-            const itens = itensContainer.querySelectorAll('.produto-item');
-            resumoItens.innerHTML = '';
-            let total = 0;
-            
-            itens.forEach((item, index) => {
-                const produtoSelect = item.querySelector('select');
-                const quantidadeInput = item.querySelector('input[type="number"]');
-                const valor = parseFloat(produtoSelect.options[produtoSelect.selectedIndex].dataset.valor || 0);
-                const quantidade = parseInt(quantidadeInput.value || 0);
-
-                if (quantidade > 0) {
-                    total += valor * quantidade;
-                    const listItem = document.createElement('li');
-                    listItem.textContent = `${produtoSelect.options[produtoSelect.selectedIndex].textContent} x ${quantidade} = R$ ${(valor * quantidade).toFixed(2)}`;
-                    resumoItens.appendChild(listItem);
-                }
-            });
-
-            resumoTotal.textContent = total.toFixed(2);
-
-            if (!resumoItens.children.length) {
-                resumoItens.innerHTML = '<li>Nenhum item adicionado ainda</li>';
-            }
-        }
-    </script>
+        const produtos = JSON.parse('{{ produtos | tojson }}');   
+    </script>    
 </body>
 </html>
