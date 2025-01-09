@@ -1,7 +1,7 @@
 from flask import Flask, request, redirect, url_for, flash, render_template,session,Blueprint,jsonify
-from models import Pedidos, Produto, pedido_itens
-from database import db
-from views import render_cadastro_pedido,render_pedidos
+from models.models import Pedidos, Produto, pedido_itens
+from models.database import db
+from routes.views import render_cadastro_pedido,render_pedidos
 from usuarios_controllers import init_usuarios
 import re
 
