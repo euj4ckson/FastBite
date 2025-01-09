@@ -22,7 +22,7 @@ from controllers.login_controllers import init_login
 app = Flask(
     __name__, 
     template_folder=os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'front', 'templates'),
-    static_folder=os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'front', 'static')
+    static_folder=os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'front', 'src','static')
 )
 CORS(app)
 # migrate = migrate(app, db)
