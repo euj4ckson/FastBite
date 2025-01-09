@@ -8,7 +8,7 @@ from flask_cors import CORS
 # Adiciona o diretório raiz ao sys.path
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
-from models import db
+from models.models import db
 
 # Adiciona o diretório 'controllers' ao sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'controllers')))

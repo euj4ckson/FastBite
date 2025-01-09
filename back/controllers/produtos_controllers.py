@@ -1,6 +1,6 @@
 from flask import Flask, request, redirect, url_for, flash, render_template,session,Blueprint,jsonify
-from models import Pedidos, Produto, pedido_itens,Usuario
-from database import db
+from models.models import Pedidos, Produto, pedido_itens,Usuario
+from models.database import db
 from flask import jsonify
 
 def init_produtos(app):

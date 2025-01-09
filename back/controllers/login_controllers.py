@@ -1,5 +1,5 @@
 from flask import Flask, request, redirect, url_for, flash, render_template,session,Blueprint,jsonify
-from models import Usuario
+from models.models import Usuario
 from werkzeug.security import check_password_hash
 def init_login(app):
     @app.route('/login', methods=['GET', 'POST'])

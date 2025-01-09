@@ -1,6 +1,6 @@
 from flask import Flask, request, redirect, url_for, flash, render_template,session,Blueprint,jsonify
-from models import Usuario
-from database import db
+from models.models import Usuario
+from models.database import db
 from werkzeug.security import check_password_hash, generate_password_hash
  
 
