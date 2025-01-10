@@ -50,7 +50,8 @@
                     <td>
                         <a href="{{ url_for('editar_pedido', id=pedido.id) }}" class="btn">Editar</a>
                         <a href="{{ url_for('deletar_pedido', id=pedido.id) }}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja deletar este pedido?')">Deletar</a>
-                        <button class="btn" onclick="abrirModal('{{ pedido.id }}')">Ver Produtos</button>
+                        <a class="btn" onclick="abrirModal('{{ pedido.id }}')">Ver Produtos</a>
+                        <a href="{{ url_for('gerar_cupom', id=pedido.id) }}" class="btn">Gerar cupom</a>
                     </td>
                 </tr>
                 {% else %}

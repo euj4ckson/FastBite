@@ -52,12 +52,13 @@ def init_pedidos(app):
         pedido = Pedidos.query.get_or_404(id)
         pedido_dict = pedido.to_dict()
         for item in pedido_dict['itens']:
-            print(pedido_dict)
+            
             produto = Produto.query.get(item['produto_id'])
             item['produto'] = {
                 'nome': produto.nome,
                 'valor': produto.valor
             }
+        print(pedido_dict)
         return jsonify(pedido_dict)
 
     @app.route('/cadastro_pedido', methods=['GET', 'POST'])
