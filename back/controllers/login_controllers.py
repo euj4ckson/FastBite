@@ -2,7 +2,7 @@ from flask import Flask, request, redirect, url_for, flash, render_template,sess
 from models.models import Usuario
 from werkzeug.security import check_password_hash
 def init_login(app):
-    @app.route('/login', methods=['GET', 'POST'])
+    @app.route('/', methods=['GET', 'POST'])
     def login():
         if request.method == 'POST':
             email = request.form['email']
