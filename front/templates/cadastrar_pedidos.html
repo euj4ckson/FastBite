@@ -23,14 +23,13 @@
             <label for="produto">Adicionar Produtos:</label>
             <div id="itens">
                 <div class="produto-item">
-                    <select id="produtonovo" name="itens[0][produto]" onchange="updateResumo()" required>
+                    <select name="itens[0][produto]" onchange="updateResumo()" required>
                         {% for produto in produtos %}
                         <option value="{{ produto.id }}" data-valor="{{ produto.valor }}">{{ produto.nome }} - R$ {{ produto.valor }}</option>
                         {% endfor %}
                     </select><br>
-                    <label for="quantidade">Quantidade:</label>
-                    <input id="quantidadeitem" type="number" name="itens[0][quantidade]" min="1" placeholder="Quantidade" oninput="updateResumo()" required><br>
-                    <button type="button" onclick="removeProduto(this)">Remover</button>
+                    <input id="qtdeinput" type="number" name="itens[0][quantidade]" min="1" placeholder="Quantidade" oninput="updateResumo()" required><br>
+                    <button type="button" id="deletebtn" onclick="removeProduto(this)">Remover</button>
                 </div>
             </div>
             <button type="button" onclick="addProduto()">Adicionar Outro Produto</button>

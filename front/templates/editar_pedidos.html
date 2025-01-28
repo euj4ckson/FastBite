@@ -22,7 +22,7 @@
             <div id="itens">
                 {% for item in pedido_itens %}
                 <div class="produto-item">
-                    <select name="itens[{{ loop.index0 }}][produto]" onchange="updateResumo()" required>
+                    <select  name="itens[{{ loop.index0 }}][produto]" onchange="updateResumo()" required>
                         {% for produto in produtos %}
                         <option value="{{ produto.id }}" {% if produto.id == item.produto_id %}selected{% endif %} 
                             data-valor="{{ produto.valor }}">
