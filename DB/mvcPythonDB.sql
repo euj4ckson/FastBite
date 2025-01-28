@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `alembic_version` (
   PRIMARY KEY (`version_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
--- Copiando dados para a tabela minha_aplicacao.alembic_version: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela minha_aplicacao.alembic_version: ~0 rows (aproximadamente)
 INSERT INTO `alembic_version` (`version_num`) VALUES
 	('3af07fd60a5a');
 
@@ -37,11 +37,15 @@ CREATE TABLE IF NOT EXISTS `pedidos` (
   `valor_total` decimal(10,2) NOT NULL DEFAULT 0.00,
   `entregue` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
--- Copiando dados para a tabela minha_aplicacao.pedidos: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela minha_aplicacao.pedidos: ~5 rows (aproximadamente)
 INSERT INTO `pedidos` (`id`, `cliente_nome`, `criado_em`, `valor_total`, `entregue`) VALUES
-	(16, 'teste 66666666', '2024-12-10 15:43:39', 13.00, 0);
+	(25, 'jackson', '2025-01-09 10:37:10', 78.00, 0),
+	(27, 'MARIAO', '2025-01-07 21:12:33', 34.00, 0),
+	(31, 'ULTIMO TESTE DE VERDADE EDITADO', '2025-01-09 15:42:18', 36.00, 0),
+	(32, 'hoje', '2025-01-23 11:19:57', 67.50, 0),
+	(33, 'TESTE', '2025-01-28 16:50:37', 28.00, 0);
 
 -- Copiando estrutura para tabela minha_aplicacao.pedido_itens
 CREATE TABLE IF NOT EXISTS `pedido_itens` (
@@ -54,12 +58,21 @@ CREATE TABLE IF NOT EXISTS `pedido_itens` (
   KEY `produto_id` (`produto_id`),
   CONSTRAINT `pedido_itens_ibfk_1` FOREIGN KEY (`pedido_id`) REFERENCES `pedidos` (`id`),
   CONSTRAINT `pedido_itens_ibfk_2` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
--- Copiando dados para a tabela minha_aplicacao.pedido_itens: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela minha_aplicacao.pedido_itens: ~11 rows (aproximadamente)
 INSERT INTO `pedido_itens` (`id`, `pedido_id`, `produto_id`, `quantidade`) VALUES
-	(13, 16, 1, 1),
-	(14, 16, 9, 1);
+	(34, 25, 3, 2),
+	(41, 27, 4, 1),
+	(46, 27, 7, 2),
+	(47, 27, 1, 1),
+	(48, 25, 4, 2),
+	(49, 25, 7, 4),
+	(52, 31, 3, 2),
+	(54, 31, 9, 2),
+	(55, 32, 1, 3),
+	(56, 32, 8, 5),
+	(57, 33, 4, 2);
 
 -- Copiando estrutura para tabela minha_aplicacao.produtos
 CREATE TABLE IF NOT EXISTS `produtos` (
@@ -78,7 +91,6 @@ INSERT INTO `produtos` (`id`, `nome`, `valor`, `criado_em`, `atualizado_em`) VAL
 	(3, 'X-Bacon', 15, '2024-12-09 16:14:21', '2024-12-09 16:14:21'),
 	(4, 'X-Egg', 14, '2024-12-09 16:14:21', '2024-12-09 16:14:21'),
 	(5, 'X-Tudo', 20, '2024-12-09 16:14:21', '2024-12-09 16:14:21'),
-	(6, 'Porção de Batata Frita', 8, '2024-12-09 16:14:21', '2024-12-09 16:14:21'),
 	(7, 'Refrigerante Lata', 5, '2024-12-09 16:14:21', '2024-12-09 16:14:21'),
 	(8, 'Refrigerante 600ml', 7.5, '2024-12-09 16:14:21', '2024-12-09 16:14:21'),
 	(9, 'Água Mineral', 3, '2024-12-09 16:14:21', '2024-12-09 16:14:21');
