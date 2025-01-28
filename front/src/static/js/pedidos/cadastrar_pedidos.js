@@ -67,6 +67,7 @@ function addProduto() {
     inputQuantidade.type = 'number';
     inputQuantidade.name = `itens[${index}][quantidade]`;
     inputQuantidade.min = 1;
+    inputQuantidade.id = 'qtdeinput'
     inputQuantidade.placeholder = 'Quantidade';
     inputQuantidade.required = true;
     inputQuantidade.oninput = updateResumo;
@@ -74,6 +75,7 @@ function addProduto() {
     const buttonRemover = document.createElement('button');
     buttonRemover.type = 'button';
     buttonRemover.textContent = 'Remover';
+    buttonRemover.id="deletebtn"
     buttonRemover.onclick = () => {
         div.remove();
         updateResumo();

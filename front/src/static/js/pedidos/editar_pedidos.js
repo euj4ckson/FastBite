@@ -69,11 +69,14 @@ function addProduto() {
     inputQuantidade.min = 1;
     inputQuantidade.placeholder = 'Quantidade';
     inputQuantidade.required = true;
+    inputQuantidade.id = 'qtdeinput'
     inputQuantidade.oninput = updateResumo;
 
     const buttonRemover = document.createElement('button');
     buttonRemover.type = 'button';
     buttonRemover.textContent = 'Remover';
+    buttonRemover.id="deletebtn"
+
     buttonRemover.onclick = () => {
         div.remove();
         updateResumo();
