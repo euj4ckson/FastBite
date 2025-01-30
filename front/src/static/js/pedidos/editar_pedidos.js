@@ -53,6 +53,7 @@ function addProduto() {
     const select = document.createElement('select');
     select.name = `itens[${index}][produto]`;
     select.required = true;
+    select.id='prdform'
     select.onchange = updateResumo;
 
     produtos.forEach((produto) => {

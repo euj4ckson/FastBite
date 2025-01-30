@@ -22,13 +22,26 @@ form {
     border-radius: 5px;
     width: 50%;
     margin-right: 20px;
+     
+    max-height: 400px; /* Defina a altura máxima desejada */
+    overflow-y: auto; 
+    padding: 30px;
+ 
 }
 form input, form select, form button {
-    width: 100%;
     margin-bottom: 15px;
     padding: 10px;
     border: none;
     border-radius: 5px;
+}
+#qtdeinput{
+    margin-left: 5px;
+}
+#deletebtn{
+    margin-left: 10px;
+}
+#prdform{
+    width: 217px; 
 }
 form button  {
     background-color: #FFD700;
