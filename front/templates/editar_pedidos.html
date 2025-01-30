@@ -15,26 +15,28 @@
     </header>
     <main>
         <form method="POST" action="/editar_pedido/{{ pedido.id }}">
-            <label for="cliente_nome">Nome do Cliente:</label>
-            <input type="text" id="cliente_nome" name="cliente_nome" value="{{ pedido.cliente_nome }}" required>
-            
-            <label for="produto">Editar Produtos:</label>
-            <div id="itens">
-                {% for item in pedido_itens %}
-                <div class="produto-item">
-                    <select  name="itens[{{ loop.index0 }}][produto]" onchange="updateResumo()" required>
-                        {% for produto in produtos %}
-                        <option value="{{ produto.id }}" {% if produto.id == item.produto_id %}selected{% endif %} 
-                            data-valor="{{ produto.valor }}">
-                            {{ produto.nome }} - R$ {{ produto.valor }}
-                        </option>
-                        {% endfor %}
-                    </select>
-                    <input id="qtdeinput" type="number" name="itens[{{ loop.index0 }}][quantidade]" min="1" value="{{ item.quantidade }}" 
-                        oninput="updateResumo()" required>
-                    <button id="deletebtn" type="button" onclick="removeProduto(this)">Remover</button>
+            <div id="rolagem">
+                <label for="cliente_nome">Nome do Cliente:</label><br>
+                <input type="text" id="cliente_nome" name="cliente_nome" value="{{ pedido.cliente_nome }}" required><br>
+                
+                <label for="produto">Editar Produtos:</label>
+                <div id="itens">
+                    {% for item in pedido_itens %}
+                    <div class="produto-item">
+                        <select  name="itens[{{ loop.index0 }}][produto]" onchange="updateResumo()" required>
+                            {% for produto in produtos %}
+                            <option value="{{ produto.id }}" {% if produto.id == item.produto_id %}selected{% endif %} 
+                                data-valor="{{ produto.valor }}">
+                                {{ produto.nome }} - R$ {{ produto.valor }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        <input id="" type="number" name="itens[{{ loop.index0 }}][quantidade]" min="1" value="{{ item.quantidade }}" 
+                            oninput="updateResumo()" required>
+                        <button id="deletebtn" type="button" onclick="removeProduto(this)">Remover</button>
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
             <button type="button" onclick="addProduto()">Adicionar Outro Produto</button>
 
