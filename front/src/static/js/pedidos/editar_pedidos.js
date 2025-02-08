@@ -44,40 +44,38 @@ function updateResumo() {
         resumoItens.innerHTML = '<li>Nenhum item adicionado ainda</li>';
     }
 }
-
 function addProduto() {
-    const index = itensContainer.children.length;
+    const select = document.createElement('select');
+    const inputQuantidade = document.createElement('input');
+    const buttonRemover = document.createElement('button');
     const div = document.createElement('div');
     div.classList.add('produto-item');
 
-    const select = document.createElement('select');
-    select.name = `itens[${index}][produto]`;
+    // Preenche o select com as opções de produtos
+    select.name = `itens[${itensContainer.children.length}][produto]`;
     select.required = true;
-    select.id='prdform'
-    select.onchange = updateResumo;
+    select.id = 'prdform';
+    select.onchange = validarProduto; // Nova validação no onchange
 
     produtos.forEach((produto) => {
         const option = document.createElement('option');
-        option.value = produto.id;
+        option.value = produto.id; // ID do produto
         option.textContent = `${produto.nome} - R$ ${produto.valor}`;
         option.dataset.valor = produto.valor;
         select.appendChild(option);
     });
 
-    const inputQuantidade = document.createElement('input');
     inputQuantidade.type = 'number';
-    inputQuantidade.name = `itens[${index}][quantidade]`;
+    inputQuantidade.name = `itens[${itensContainer.children.length}][quantidade]`;
     inputQuantidade.min = 1;
     inputQuantidade.placeholder = 'Quantidade';
     inputQuantidade.required = true;
-    inputQuantidade.id = 'qtdeinput'
+    inputQuantidade.id = 'qtdeinput';
     inputQuantidade.oninput = updateResumo;
 
-    const buttonRemover = document.createElement('button');
     buttonRemover.type = 'button';
     buttonRemover.textContent = 'Remover';
-    buttonRemover.id="deletebtn"
-
+    buttonRemover.id = "deletebtn";
     buttonRemover.onclick = () => {
         div.remove();
         updateResumo();
@@ -90,6 +88,25 @@ function addProduto() {
 
     updateResumo();
 }
+
+// Nova função para validar se o produto já foi adicionado
+function validarProduto(event) {
+    const selectAtual = event.target;
+    const produtoSelecionado = selectAtual.value;
+    const itensExistentes = document.querySelectorAll('.produto-item select');
+
+    for (let item of itensExistentes) {
+        if (item !== selectAtual && item.value === produtoSelecionado) {
+            alert(" produto já adicionado, remova da lista ou edite a quantidade!");
+            selectAtual.value = ""; // Reseta a seleção para evitar duplicação
+            return;
+        }
+    }
+    
+    updateResumo();
+}
+
+
 
 function removeProduto(button) {
     button.parentElement.remove();
