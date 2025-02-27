@@ -64,6 +64,7 @@ def init_pedidos(app):
     def cadastro_pedido():
         if request.method == 'POST':
             cliente_nome = request.form['cliente_nome']
+            observacao = request.form['observacao']
             total_pedido = 0.00
             itens = []
             for key in request.form.keys():
@@ -83,7 +84,7 @@ def init_pedidos(app):
                 produto = Produto.query.get(produto_id)
                 if produto:
                     total_pedido += produto.valor * quantidade
-            novo_pedido = Pedidos(cliente_nome=cliente_nome, valor_total=total_pedido)
+            novo_pedido = Pedidos(cliente_nome=cliente_nome, valor_total=total_pedido, observacao= observacao)
             db.session.add(novo_pedido)
             db.session.commit()
             for _, item_data in parsed_itens.items():

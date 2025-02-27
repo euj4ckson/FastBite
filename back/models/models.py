@@ -52,12 +52,14 @@ class Pedidos(db.Model):
     criado_em = db.Column(db.DateTime, default=db.func.current_timestamp())
     valor_total = db.Column(db.Numeric(10, 2), default=0.00, nullable=False)
     entregue = db.Column(db.Integer, default=0, nullable=False)
+    observacao = db.Column(db.String(100), nullable=False)
     # Relacionamento com os itens do pedido
     itens = db.relationship('pedido_itens', backref='pedido_rel', lazy=True)
     def to_dict(self):
         return{
             "id": self.id,
             "cliente_nome": self.cliente_nome,
+            "observacao": self.observacao,
             "valor_total": self.valor_total,
             "criado_em": self.criado_em.isoformat() if self.criado_em else None,
             "itens": [item.to_dict() for item in self.itens]
