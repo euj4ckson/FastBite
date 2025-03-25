@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./favicon.ico">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_cadastroproduto.css') }}">
+    <script src="{{ url_for('static', filename='js/produtos/cadastrar_produtos.js') }}"></script>
+    <title>Cadastrar Produto</title>
+</head>
+<body>
+    <header>
+        <h1>Cadastrar Produto</h1>
+    </header>
+    <main>
+        <form method="POST" action="/cadastrar_produto">
+            <label for="nome">Nome do Produto:</label><br>
+            <input type="text" id="nome" name="nome" required><br>
+
+            <label for="valor">Valor do Produto:</label><br>
+            <input type="number" id="valor" name="valor" min="0" step="0.01" required><br>
+
+            <button type="submit">Cadastrar Produto</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2025 - Meireles Lanchonete</p>
+    </footer>
+</body>
+</html>

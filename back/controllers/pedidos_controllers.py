@@ -1,7 +1,7 @@
 from flask import Flask, request, redirect, url_for, flash, render_template,session,Blueprint,jsonify
 from models.models import Pedidos, Produto, pedido_itens
 from models.database import db
-from routes.views import render_cadastro_pedido,render_pedidos
+from routes.views import render_cadastro_pedido
 from datetime import datetime, timedelta
 from usuarios_controllers import init_usuarios
 import re
@@ -45,7 +45,7 @@ def init_pedidos(app):
         valor_caixa = sum(pedido.valor_total for pedido in pedidos)
 
         # Renderizar a página
-        return render_template('listar_pedidos.html', pedidos=pedidos, valor_caixa=valor_caixa)
+        return render_template('pedidos/listar_pedidos.html', pedidos=pedidos, valor_caixa=valor_caixa)
 
     @app.route('/api/pedido/<int:id>', methods=['GET'])
     def obter_detalhes_pedido(id):
@@ -138,7 +138,7 @@ def init_pedidos(app):
         produtos = [produto.to_dict() for produto in Produto.query.all()]
 
         pedido_itens_lista = pedido_itens.query.filter_by(pedido_id=pedido.id).all()
-        return render_template('editar_pedidos.html', pedido=pedido, produtos=produtos, pedido_itens=pedido_itens_lista)
+        return render_template('pedidos/editar_pedidos.html', pedido=pedido, produtos=produtos, pedido_itens=pedido_itens_lista)
 
     @app.route('/deletar_pedido/<int:id>', methods=['GET', 'POST'])
     def deletar_pedido(id):  

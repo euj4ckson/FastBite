@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_listagem.css') }}">
+    <script src="{{ url_for('static', filename='js/produtos/listar_produtos.js') }}"></script>
+    <link rel="shortcut icon" href="./favicon.ico">
+    <title>Listar Produtos</title>
+    
+    <style>
+    
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lista de Produtos</h1>
+        <a href="">teste</a>
+    </header>
+    <main> 
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descrição</th>
+                    <th>Valor unitario</th>
+                    <th>Criado em</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for produto in produtos %}
+                <tr>
+                    <td>{{ produto.id }}</td>
+                    <td>{{ produto.nome }}</td>
+                    <td>{{ produto.valor}}</td>
+                    <td>{{ produto.criado_em }}</td>
+                    <td>
+                        <a href="{{ url_for('editar_produto', id=produto.id) }}" class="btn">Editar</a>
+                        <a href="{{ url_for('deletar_produto', id=produto.id) }}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja deletar este produto?')">Deletar</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">Nenhum produto encontrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('cadastrar_produto') }}" class="btn">Cadastrar Novo produto</a>
+    </main>
+ 
+    <footer>
+        <p>&copy; 2025 - Meireles lanchonete</p>
+    </footer>
+
+    <script>
+
+    </script>
+</body>
+</html>

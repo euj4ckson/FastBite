@@ -22,7 +22,7 @@ from controllers.cupom_controller import initcupom
 
 app = Flask(
     __name__, 
-    template_folder=os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'front', 'templates'),
+    template_folder=os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'front','templates' ),
     static_folder=os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'front', 'src','static')
 )
 CORS(app)
