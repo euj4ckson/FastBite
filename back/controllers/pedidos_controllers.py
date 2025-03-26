@@ -12,6 +12,7 @@ def init_pedidos(app):
     # Capturar os parâmetros de data
         data_inicio = request.args.get('data_inicio')
         data_fim = request.args.get('data_fim')
+        apenas_nao_finalizados = request.args.get('entregues') == 'on'   
 
         # Query base
         query = Pedidos.query
@@ -35,6 +36,8 @@ def init_pedidos(app):
                 raise ValueError("Formato inválido para data_fim. Use o formato YYYY-MM-DD.")
 
         query = query.order_by(Pedidos.criado_em.desc())
+        if apenas_nao_finalizados:
+            query = query.filter(Pedidos.entregue == False)  # Apenas não finalizados
 
         # Obter os pedidos filtrados
         pedidos = query.all()
@@ -150,3 +153,11 @@ def init_pedidos(app):
         db.session.commit()
         flash('Pedido e itens associados deletados com sucesso!')
         return redirect(url_for('listar_pedidos'))
+    @app.route('/confirmar_pedido/<int:id>', methods=['GET', 'POST'])
+    def confirmar_pedido(id):
+        pedido = Pedidos.query.get_or_404(id)
+        pedido.entregue = 1  # Atualiza o status para entregue
+        db.session.commit()
+        flash('Pedido marcado como entregue com sucesso!')
+        return redirect(url_for('listar_pedidos'))
+

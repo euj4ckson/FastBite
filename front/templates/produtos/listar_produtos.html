@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style_listagem.css') }}">
     <script src="{{ url_for('static', filename='js/produtos/listar_produtos.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <link rel="shortcut icon" href="./favicon.ico">
     <title>Listar Produtos</title>
     
@@ -19,6 +21,10 @@
     </header>
     <main> 
         <table>
+            <form>
+                <h1>Lista de Produtos</h1>
+                <input type="text" id="filtro" class="filtro" placeholder="Buscar produto..." onkeyup="filtrarProdutos()">
+            </form>
             <thead>
                 <tr>
                     <th>ID</th>
@@ -36,8 +42,8 @@
                     <td>{{ produto.valor}}</td>
                     <td>{{ produto.criado_em }}</td>
                     <td>
-                        <a href="{{ url_for('editar_produto', id=produto.id) }}" class="btn">Editar</a>
-                        <a href="{{ url_for('deletar_produto', id=produto.id) }}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja deletar este produto?')">Deletar</a>
+                        <a href="{{ url_for('editar_produto', id=produto.id) }}" class="btn"><i class="fa-solid fa-pen"></i></a>
+                        <a href="{{ url_for('deletar_produto', id=produto.id) }}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja deletar este produto?')"><i class="fa-solid fa-trash"></i></a>
                     </td>
                 </tr>
                 {% else %}
@@ -54,8 +60,9 @@
         <p>&copy; 2025 - Meireles lanchonete</p>
     </footer>
 
-    <script>
+    <script> 
 
     </script>
+ 
 </body>
 </html>

@@ -81,7 +81,7 @@ def init_produtos(app):
                 return jsonify({"message": "Produto não encontrado"}), 404
             db.session.delete(produto)
             db.session.commit()
-            return jsonify({"message": "Produto deletado com sucesso"}), 200
+            return redirect(url_for('listar_produtos'))
         except Exception as e:
             return jsonify({"error": str(e)}), 500
  

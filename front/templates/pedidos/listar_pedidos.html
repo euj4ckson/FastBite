@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style_listagem.css') }}">
     <script src="{{ url_for('static', filename='js/pedidos/listar_pedidos.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <link rel="shortcut icon" href="./favicon.ico">
     <title>Listar Pedidos</title>
     
@@ -25,9 +27,11 @@
             <label for="data_fim">Data Fim:</label>
             <input type="date" id="data_fim" name="data_fim" value="{{ request.args.get('data_fim', '') }}">
             
+            <input type="checkbox" name="entregues" id="entregues" {% if request.args.get('entregues') == 'on' %}checked{% endif %}>
+            <label for="entregues">Apenas não finalizados</label>
             <button type="submit" class="btn">Filtrar</button>
-        </form>
-        
+        </form> 
+        <br><br>
         <div class="caixa-total">
             <strong>Total do Caixa:</strong> R$ {{ valor_caixa | round(2) }}
         </div>    
@@ -38,6 +42,7 @@
                     <th>Cliente</th>
                     <th>Valor Total (R$)</th>
                     <th>Criado em</th>
+                    <th>Finalizado</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -49,10 +54,18 @@
                     <td>{{ pedido.valor_total | round(2) }}</td>
                     <td>{{ pedido.criado_em }}</td>
                     <td>
-                        <a href="{{ url_for('editar_pedido', id=pedido.id) }}" class="btn">Editar</a>
-                        <a href="{{ url_for('deletar_pedido', id=pedido.id) }}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja deletar este pedido?')">Deletar</a>
-                        <a class="btn" onclick="abrirModal('{{ pedido.id }}')">Ver Produtos</a>
-                        <a href="{{ url_for('gerar_cupom', id=pedido.id) }}" class="btn" onclick="return confirm('Gerar cupom?')">Gerar cupom</a>
+                        {% if pedido.entregue %}
+                            <span class="status verde"></span>
+                        {% else %}
+                            <span class="status vermelho"></span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ url_for('editar_pedido', id=pedido.id) }}" class="btn"><i class="fa-solid fa-pen"></i></a>
+                        <a class="btn" onclick="abrirModal('{{ pedido.id }}')"><i class="fa-solid fa-eye"></i></i></a>
+                        <a href="{{ url_for('gerar_cupom', id=pedido.id) }}" class="btn" onclick="return confirm('Gerar cupom?')"><i class="fa-solid fa-print"></i></a>
+                        <a href="{{ url_for('confirmar_pedido', id=pedido.id) }}" class="btn_green" onclick="return confirm('Tem certeza que deseja finalizar esse pedido?')"><i class="fa-solid fa-check"></i></a>
+                        <a href="{{ url_for('deletar_pedido', id=pedido.id) }}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja deletar este pedido?')" > <i class="fa-solid fa-trash"></i></a>
                     </td>
                 </tr>
                 {% else %}
