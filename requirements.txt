@@ -31,3 +31,5 @@ waitress==2.1.2
 Flask-Migrate==4.0.4
 gunicorn==23.0.0
 flask-cors==5.0.1
+fpdf2==2.7.6
+
