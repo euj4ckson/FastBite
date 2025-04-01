@@ -37,7 +37,7 @@ init_login(app)
 initcupom(app)
 
 # Configurações do banco de dados
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:gpQEgnKhEixOpMYwCuHgEHfZNVxiXlFD@nozomi.proxy.rlwy.net:12713/railway'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:gpQEgnKhEixOpMYwCuHgEHfZNVxiXlFD@nozomi.proxy.rlwy.net:12713/minha_aplicacao'
 db.init_app(app)
 
 if __name__ == '__main__':
