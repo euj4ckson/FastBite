@@ -16,13 +16,13 @@
 </head>
 <body>
     <header>
-        <h1>Lista de Produtos</h1>
-        <a href="">teste</a>
+        <h3>Lista de Produtos</h3>
+        <a href="{{ url_for('listar_pedidos') }}">Voltar aos pedidos</a>
     </header>
     <main> 
         <table>
             <form>
-                <h1>Lista de Produtos</h1>
+                <h3>Pesquisa:</h3>
                 <input type="text" id="filtro" class="filtro" placeholder="Buscar produto..." onkeyup="filtrarProdutos()">
             </form>
             <thead>

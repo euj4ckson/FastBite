@@ -1,91 +1,135 @@
+/* Estilos Gerais */
 body {
     font-family: Arial, sans-serif;
-    background-color: #222;
-    color: #FFD700;
+    background-color: #181818; /* Fundo escuro */
+    color: #FFD700; /* Texto dourado */
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center; /* Alinha o conteúdo horizontalmente */
-    align-items: center; /* Alinha o conteúdo verticalmente */
-    height: 100vh; /* Faz com que o body ocupe toda a altura da janela */
     flex-direction: column;
+    min-height: 100vh; /* Garante que o conteúdo ocupe toda a altura da tela */
 }
 
-header, footer {
-    background-color: #444;
+/* 🔹 Header (Cabeçalho) */
+header {
+    background-color: #222;
+    width: 100%;
     color: #FFD700;
     text-align: center;
-    padding: 10px 0;
-    width: 100%;
+    padding: 15px 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
 }
 
+header h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header nav {
+    display: flex;
+    gap: 15px;
+}
+
+header a {
+    color: #FFD700;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+header a:hover {
+    text-decoration: underline;
+    color: #FFC300;
+}
+
+/* 🔹 Footer (Rodapé) */
+footer {
+    background-color: #222;
+    color: #FFD700;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 15px 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+
+/* Layout principal */
 main {
+    flex: 1; /* Faz com que o conteúdo principal ocupe o máximo de espaço possível */
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
     padding: 20px;
 }
 
+ 
+
+/* Formulário de Cadastro de Produtos */
 form {
-    background-color: #333;
+    background-color: #222;
     padding: 30px;
-    border-radius: 5px;
-    width: 400px; /* Defina uma largura fixa para o formulário */
-    max-height: 400px; /* Limite de altura para o formulário */
+    border-radius: 10px;
+    width: 400px;
+    max-height: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.3);
 }
 
-form label, form input {
-    width: 100%;
-    height: 20px;
-    margin-bottom: 15px;
-}
-form button{
-    width: 100%;
-
-}
+/* Labels e Inputs */
 form label {
+    width: 100%;
     text-align: left;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 1rem;
 }
 
 form input, form select, form button {
-    padding: 10px;
+    width: 100%;
+    padding: 12px;
     border: none;
     border-radius: 5px;
-    background-color: #444;
+    background-color: #333;
     color: #FFD700;
+    font-size: 1rem;
+    margin-bottom: 15px;
 }
 
+/* Borda dourada ao focar */
 form input:focus, form select:focus {
     border: 2px solid #FFD700;
     outline: none;
 }
 
+/* Botão de Cadastro */
 form button {
     background-color: #FFD700;
     color: #222;
     font-weight: bold;
     cursor: pointer;
     text-align: center;
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    transition: background 0.3s ease;
 }
 
 form button:hover {
     background-color: #494949;
     color: #FFD700;
-}
-
-footer {
-    text-align: center;
-    background-color: #444;
-    color: #FFD700;
-    padding: 10px 0;
-    width: 100%;
-}
-
-footer p {
-    margin: 0;
 }
