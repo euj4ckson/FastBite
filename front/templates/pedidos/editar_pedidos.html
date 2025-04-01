@@ -33,7 +33,7 @@
                         </select>
                         <input id="" type="number" name="itens[{{ loop.index0 }}][quantidade]" min="1" value="{{ item.quantidade }}" 
                             oninput="updateResumo()" required>
-                        <button id="deletebtn" type="button" onclick="removeProduto(this)">Remover</button>
+                        <button id="deletebtn" type="button" onclick="removeProduto(this)">X</button>
                     </div>
                     {% endfor %}
                 </div>

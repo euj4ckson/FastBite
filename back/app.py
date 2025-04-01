@@ -2,6 +2,7 @@ import sys
 import os
 from flask import Flask
 from flask_cors import CORS
+from waitress import serve
 # from flask_migrate import Migrate
 
 
@@ -37,15 +38,11 @@ initcupom(app)
 
 # Configurações do banco de dados
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@127.0.0.1:3306/minha_aplicacao'
-app.config['SECRET_KEY'] = '1q2w3e4rr4e3w2q1'
 db.init_app(app)
 
 if __name__ == '__main__':
-    # Definir o host e a porta
-    host = '0.0.0.0'
-    port = 8000
-    # Imprimir a URL de acesso
+    host = os.getenv('FLASK_RUN_HOST', '0.0.0.0')
+    port = int(os.getenv('FLASK_RUN_PORT', 8000))
+    
     print(f"A aplicação Flask está rodando em http://{host}:{port}")
-    # Iniciar o servidor
-    app.run(debug=True, host=host, port=port)
-
+    serve(app, host=host, port=port)

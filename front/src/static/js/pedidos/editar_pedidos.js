@@ -15,12 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Inicializa o resumo ao carregar a página
     updateResumo();
 });
-
 function updateResumo() {
     const resumoItens = document.getElementById('resumo-itens');
     const resumoTotal = document.getElementById('resumo-total');
 
-    const itens = itensContainer.querySelectorAll('.produto-item');
+    const itens = document.querySelectorAll('.produto-item');
     resumoItens.innerHTML = '';
     let total = 0;
 
@@ -31,14 +30,32 @@ function updateResumo() {
         const quantidade = parseInt(quantidadeInput.value || 0);
 
         if (quantidade > 0) {
-            total += valor * quantidade;
+            const subtotal = valor * quantidade;
+            total += subtotal;
+
             const listItem = document.createElement('li');
-            listItem.textContent = `${produtoSelect.options[produtoSelect.selectedIndex].textContent} x ${quantidade} = R$ ${(valor * quantidade).toFixed(2)}`;
+            
+            // Nome do Produto
+            const nomeProduto = document.createElement('span');
+            nomeProduto.classList.add('produto-nome');
+            nomeProduto.textContent = produtoSelect.options[produtoSelect.selectedIndex].textContent.split(' - ')[0];
+
+            // Detalhes (Valor, Quantidade, Subtotal)
+            const detalhesProduto = document.createElement('div');
+            detalhesProduto.classList.add('produto-detalhes');
+            detalhesProduto.innerHTML = `
+                <strong>Valor Unitário: R$ ${valor.toFixed(2)}  
+                <strong>QTDE:</strong> ${quantidade}  <br>
+               <strong>Subtotal:</strong> R$ ${subtotal.toFixed(2)}
+            `;
+
+            listItem.appendChild(nomeProduto);
+            listItem.appendChild(detalhesProduto);
             resumoItens.appendChild(listItem);
         }
     });
 
-    resumoTotal.textContent = total.toFixed(2);
+    resumoTotal.textContent = ` ${total.toFixed(2)}`;
 
     if (!resumoItens.children.length) {
         resumoItens.innerHTML = '<li>Nenhum item adicionado ainda</li>';
@@ -74,7 +91,7 @@ function addProduto() {
     inputQuantidade.oninput = updateResumo;
 
     buttonRemover.type = 'button';
-    buttonRemover.textContent = 'Remover';
+    buttonRemover.textContent = '';
     buttonRemover.id = "deletebtn";
     buttonRemover.onclick = () => {
         div.remove();
