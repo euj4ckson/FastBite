@@ -1,7 +1,7 @@
 from flask import Flask, request, redirect, url_for, flash, render_template,session,Blueprint,jsonify
 from models.models import  Produto
 from models.database import db
-from routes.views import render_produtos,render_cadastro_produto
+from routes.views import render_produtos,render_cadastro_produto,render_cadastrarpedido_cliente
 from flask import jsonify
 
 def init_produtos(app):
@@ -84,4 +84,14 @@ def init_produtos(app):
             return redirect(url_for('listar_produtos'))
         except Exception as e:
             return jsonify({"error": str(e)}), 500
- 
+    @app.route('/cadastrarpedido_cliente', methods=['GET', 'POST'])
+    def cadastrarpedido_cliente():
+
+        return render_cadastrarpedido_cliente()
+
+    @app.route('/api/produtos', methods=['GET'])
+    def obter_produtos():
+        produtos = Produto.query.all()
+        produtosdict = [produto.to_dict() for produto in produtos]  # Transformando corretamente para JSON
+        return jsonify(produtosdict)
+

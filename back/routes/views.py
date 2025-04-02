@@ -28,3 +28,8 @@ def render_produtos(produtos):
 
 def render_cadastro_produto():
     return render_template('produtos/cadastrar_produto.html')  # Template de cadastro produtos
+
+
+# PEDIDO CLIENTE
+def render_cadastrarpedido_cliente():
+    return render_template('pedidos/cadastrarpedido_cliente.html')  # Template de cadastro produtos

@@ -53,6 +53,7 @@ class Pedidos(db.Model):
     valor_total = db.Column(db.Numeric(10, 2), default=0.00, nullable=False)
     entregue = db.Column(db.Integer, default=0, nullable=False)
     observacao = db.Column(db.String(100), nullable=False)
+    endereco = db.Column(db.String(255), nullable=True)
     # Relacionamento com os itens do pedido
     itens = db.relationship('pedido_itens', backref='pedido_rel', lazy=True)
     def to_dict(self):
@@ -62,6 +63,7 @@ class Pedidos(db.Model):
             "observacao": self.observacao,
             "valor_total": self.valor_total,
             "criado_em": self.criado_em.isoformat() if self.criado_em else None,
+            "endereco": self.endereco,
             "itens": [item.to_dict() for item in self.itens]
         }
 
@@ -76,7 +78,7 @@ class pedido_itens(db.Model):
     def subtotal(self):
         """Calcula o subtotal com base na quantidade e no valor do produto."""
         return float(self.produto.valor) * self.quantidade if self.produto and self.produto.valor else 0.0
-
+    
 
     # Relacionamento com Produto
     produto = db.relationship('Produto', backref='pedido_itens', lazy=True)
