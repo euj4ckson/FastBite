@@ -13,6 +13,7 @@ async function abrirModal(pedidoId) {
                 <p><strong>ID do Pedido:</strong> ${pedido.id}</p>
                 <p><strong>Cliente:</strong> ${pedido.cliente_nome}</p>
                 <p><strong>Observação:</strong> ${pedido.observacao}</p>
+                <p><strong>Endereço:</strong> ${pedido.endereco}</p>
                 <p><strong>Valor Total:</strong> R$ ${parseFloat(pedido.valor_total).toFixed(2)}</p>
                 <h4>Itens do Pedido:</h4>
                 <table>

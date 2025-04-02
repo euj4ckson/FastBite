@@ -1,7 +1,7 @@
 from flask import Flask, request, redirect, url_for, flash, render_template,session,Blueprint,jsonify
 from models.models import Pedidos, Produto, pedido_itens
 from models.database import db
-from routes.views import render_cadastro_pedido
+from routes.views import render_cadastro_pedido,render_cadastrarpedido_cliente
 from datetime import datetime, timedelta
 from usuarios_controllers import init_usuarios
 import re
@@ -161,3 +161,41 @@ def init_pedidos(app):
         flash('Pedido marcado como entregue com sucesso!')
         return redirect(url_for('listar_pedidos'))
 
+    from flask import request, jsonify
+
+    @app.route('/cadastrarpedido_clientes', methods=['GET','POST'])
+    def cadastrarpedido_clientes():
+        data = request.get_json()  # <-- Aqui pegamos os dados JSON
+
+        if not data:
+            return jsonify({"error": "Dados inválidos!"}), 400
+
+        cliente_nome = data.get('cliente_nome')
+        observacao = data.get('observacao', '')
+        endereco = data.get('endereco','')  # Obter o endereço do JSON
+        itens = data.get('itens', [])
+
+        if not cliente_nome or not itens or not endereco:  # Verificar se o endereço foi informado
+            return jsonify({"error": "Nome do cliente, endereço e itens são obrigatórios!"}), 400
+
+        total_pedido = 0.00
+        for item in itens:
+            produto_id = int(item['produto'])
+            quantidade = int(item['quantidade'])
+            produto = Produto.query.get(produto_id)
+            if produto:
+                total_pedido += produto.valor * quantidade
+
+        novo_pedido = Pedidos(cliente_nome=cliente_nome, valor_total=total_pedido, observacao=observacao, endereco=endereco)  # Passar o endereço
+        db.session.add(novo_pedido)
+        db.session.commit()
+
+        for item in itens:
+            produto_id = int(item['produto'])
+            quantidade = int(item['quantidade'])
+            novo_item = pedido_itens(pedido_id=novo_pedido.id, produto_id=produto_id, quantidade=quantidade)
+            db.session.add(novo_item)
+
+        db.session.commit()
+
+        return jsonify({"message": "Obrigado pelo seu pedido! Ele foi cadastrado com sucesso."}), 201

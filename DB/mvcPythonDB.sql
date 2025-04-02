@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `alembic_version` (
 
 -- Copiando dados para a tabela minha_aplicacao.alembic_version: ~0 rows (aproximadamente)
 INSERT INTO `alembic_version` (`version_num`) VALUES
-	('3af07fd60a5a');
+	('a91b1b727100');
 
 -- Copiando estrutura para tabela minha_aplicacao.pedidos
 CREATE TABLE IF NOT EXISTS `pedidos` (
@@ -36,16 +36,27 @@ CREATE TABLE IF NOT EXISTS `pedidos` (
   `criado_em` datetime DEFAULT current_timestamp(),
   `valor_total` decimal(10,2) NOT NULL DEFAULT 0.00,
   `entregue` int(11) NOT NULL,
+  `observacao` varchar(100) NOT NULL,
+  `endereco` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
--- Copiando dados para a tabela minha_aplicacao.pedidos: ~5 rows (aproximadamente)
-INSERT INTO `pedidos` (`id`, `cliente_nome`, `criado_em`, `valor_total`, `entregue`) VALUES
-	(25, 'jackson', '2025-01-09 10:37:10', 78.00, 0),
-	(27, 'MARIAO', '2025-01-07 21:12:33', 34.00, 0),
-	(31, 'ULTIMO TESTE DE VERDADE EDITADO', '2025-01-09 15:42:18', 36.00, 0),
-	(32, 'hoje', '2025-01-23 11:19:57', 67.50, 0),
-	(33, 'TESTE', '2025-01-28 16:50:37', 28.00, 0);
+-- Copiando dados para a tabela minha_aplicacao.pedidos: ~8 rows (aproximadamente)
+INSERT INTO `pedidos` (`id`, `cliente_nome`, `criado_em`, `valor_total`, `entregue`, `observacao`, `endereco`) VALUES
+	(39, 'Jackson Eduardo Da Silva Costa', '2025-02-26 14:59:48', 113.00, 0, 'pedido com itens iguais', ''),
+	(44, 'teste finalizar pedido', '2025-03-26 16:02:08', 982.00, 1, 'finalizar pedido', ''),
+	(46, 'asdasd 3333', '2025-04-02 09:26:38', 64.50, 0, 'asdasdsdasdasdsd 333', ''),
+	(47, 'jackson pelo celular', '2025-04-02 09:58:26', 50.00, 1, 'teste do celular', ''),
+	(48, 'asd', '2025-04-02 10:13:44', 42.00, 0, 'asdasd', ''),
+	(49, 'asd', '2025-04-02 10:15:11', 25.00, 0, 'asd', ''),
+	(50, 'asd', '2025-04-02 10:21:33', 42.00, 0, 'asd', ''),
+	(51, 'asd', '2025-04-02 10:25:56', 42.00, 0, 'asd', ''),
+	(52, 'teste finalizar pedido', '2025-04-02 11:32:58', 29.00, 0, 'asdasdasd', 'rua da agua, 123, centro, Ewbank da Câmara, MG, CEP: 36108000'),
+	(53, 'teste finalizar pedido produto 2x', '2025-04-02 11:37:01', 57.00, 0, 'asdasdasd', 'rua da agua, 123, centro, Ewbank da Câmara, MG, CEP: 36108000'),
+	(54, 'teste finalizar pedido produto 2x', '2025-04-02 11:42:08', 71.00, 0, 'asdasdasd', 'rua da agua, 123, centro, Ewbank da Câmara, MG, CEP: 36108000'),
+	(55, 'teste limpar', '2025-04-02 11:46:16', 22.50, 0, 'teste limpar', 'alfredo rodrigues, 123, centro, Ewbank da Câmara, MG, CEP: 36108000'),
+	(56, 'teste finalizar pedido', '2025-04-02 12:02:22', 56.00, 0, 'asdasdasdasd', 'rua da agua, 123, centro, Ewbank da Câmara, MG, CEP: 36108000'),
+	(57, 'teste finalizar pedido', '2025-04-02 12:14:50', 40.00, 0, 'teste finalizar pedido observação', 'rua da agua, 123, centro, Ewbank da Câmara, MG, CEP: 36108000');
 
 -- Copiando estrutura para tabela minha_aplicacao.pedido_itens
 CREATE TABLE IF NOT EXISTS `pedido_itens` (
@@ -58,21 +69,34 @@ CREATE TABLE IF NOT EXISTS `pedido_itens` (
   KEY `produto_id` (`produto_id`),
   CONSTRAINT `pedido_itens_ibfk_1` FOREIGN KEY (`pedido_id`) REFERENCES `pedidos` (`id`),
   CONSTRAINT `pedido_itens_ibfk_2` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
--- Copiando dados para a tabela minha_aplicacao.pedido_itens: ~11 rows (aproximadamente)
+-- Copiando dados para a tabela minha_aplicacao.pedido_itens: ~13 rows (aproximadamente)
 INSERT INTO `pedido_itens` (`id`, `pedido_id`, `produto_id`, `quantidade`) VALUES
-	(34, 25, 3, 2),
-	(41, 27, 4, 1),
-	(46, 27, 7, 2),
-	(47, 27, 1, 1),
-	(48, 25, 4, 2),
-	(49, 25, 7, 4),
-	(52, 31, 3, 2),
-	(54, 31, 9, 2),
-	(55, 32, 1, 3),
-	(56, 32, 8, 5),
-	(57, 33, 4, 2);
+	(71, 39, 2, 2),
+	(72, 39, 4, 2),
+	(73, 39, 5, 3),
+	(82, 44, 4, 23),
+	(83, 44, 3, 44),
+	(86, 46, 4, 3),
+	(87, 46, 8, 3),
+	(88, 47, 7, 2),
+	(89, 47, 5, 2),
+	(90, 48, 4, 3),
+	(91, 49, 2, 2),
+	(92, 50, 4, 3),
+	(93, 51, 4, 3),
+	(94, 52, 4, 1),
+	(95, 52, 8, 2),
+	(96, 53, 4, 2),
+	(97, 53, 8, 2),
+	(98, 53, 4, 3),
+	(99, 54, 4, 1),
+	(100, 54, 8, 2),
+	(101, 54, 4, 3),
+	(102, 55, 8, 3),
+	(103, 56, 4, 4),
+	(104, 57, 5, 2);
 
 -- Copiando estrutura para tabela minha_aplicacao.produtos
 CREATE TABLE IF NOT EXISTS `produtos` (
@@ -82,11 +106,11 @@ CREATE TABLE IF NOT EXISTS `produtos` (
   `criado_em` datetime DEFAULT current_timestamp(),
   `atualizado_em` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
--- Copiando dados para a tabela minha_aplicacao.produtos: ~9 rows (aproximadamente)
+-- Copiando dados para a tabela minha_aplicacao.produtos: ~8 rows (aproximadamente)
 INSERT INTO `produtos` (`id`, `nome`, `valor`, `criado_em`, `atualizado_em`) VALUES
-	(1, 'Hambúrguer Simples', 10, '2024-12-09 16:14:21', '2024-12-09 16:14:21'),
+	(1, 'SELECIONE O PRODUTO', 12, '2024-12-09 16:14:21', '2025-04-01 09:32:17'),
 	(2, 'Cheeseburger', 12.5, '2024-12-09 16:14:21', '2024-12-09 16:14:21'),
 	(3, 'X-Bacon', 15, '2024-12-09 16:14:21', '2024-12-09 16:14:21'),
 	(4, 'X-Egg', 14, '2024-12-09 16:14:21', '2024-12-09 16:14:21'),
