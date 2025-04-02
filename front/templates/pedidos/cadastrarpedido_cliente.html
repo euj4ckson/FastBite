@@ -121,6 +121,9 @@
             max-width: 400px;
             width: 80%;
         }
+        img{
+            margin-top: 10px;
+        }
 
         .modal button {
             background: linear-gradient(135deg, #FFD700, #FFC300);
@@ -188,6 +191,7 @@
     <!-- Modal -->
     <div id="modal" class="modal">
         <div class="modal-content">
+            <img src="{{ url_for('static', filename='img/motoboy.png') }}" alt="logo_empresa">
             <p id="modalMessage">Pedido cadastrado com sucesso!</p>
             <button onclick="fecharModal()">Fechar</button>
         </div>
