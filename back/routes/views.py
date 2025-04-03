@@ -33,3 +33,5 @@ def render_cadastro_produto():
 # PEDIDO CLIENTE
 def render_cadastrarpedido_cliente():
     return render_template('pedidos/cadastrarpedido_cliente.html')  # Template de cadastro produtos
+def render_acompanhamentopedido_cliente(pedido):
+    return render_template('pedidos/acompanhamento.html',pedido=pedido)  # Template de cadastro produtos

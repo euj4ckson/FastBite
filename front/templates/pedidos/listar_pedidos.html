@@ -42,7 +42,7 @@
                     <th>Cliente</th>
                     <th>Valor Total (R$)</th>
                     <th>Criado em</th>
-                    <th>Finalizado</th>
+                    <th>Status</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -54,7 +54,9 @@
                     <td>{{ pedido.valor_total | round(2) }}</td>
                     <td>{{ pedido.criado_em }}</td>
                     <td>
-                        {% if pedido.entregue %}
+                        {% if pedido.entregue==1 %}
+                            <span class="status amarelo"></span>
+                        {% elif pedido.entregue==2 %}
                             <span class="status verde"></span>
                         {% else %}
                             <span class="status vermelho"></span>

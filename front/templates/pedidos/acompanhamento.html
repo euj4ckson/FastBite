@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acompanhamento do Pedido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #181818;
+            color: #FFD700;
+        }
+        .container {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            width: 90%;
+            max-width: 400px;
+        }
+        .status {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .entregue { color: green; }
+        .pendente { color: orange; }
+        .btn_green {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+            background-color: #FFD700;
+            color: #181818;
+        }
+    </style>
+</head>
+<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <div class="container">
+        <h1>Pedido #<span id="pedido_id">{{ pedido.id }}</span></h1>
+        <p><strong>Cliente:</strong> <span id="cliente_nome">{{ pedido.cliente_nome }}</span></p>
+        <p><strong>Endereço:</strong> <span id="endereco">{{ pedido.endereco }}</span></p>
+        <p><strong>Observação:</strong> <span id="observacao">{{ pedido.observacao or "Nenhuma" }}</span></p>
+
+        <p id="status_pedido" class="status {% if pedido.entregue == 1 %}entregue{% else %}pendente{% endif %}">
+            {% if pedido.entregue == 1 %}
+                🛵 A caminho
+            {% elif pedido.entregue == 2 %}
+                ✅ Finalizado
+            {% else %}
+                ⏳ Em andamento
+            {% endif %}
+        </p>
+
+        <a href="{{ url_for('Entregar_pedido', id=pedido.id) }}" class="btn_green" onclick="return confirm('Tem certeza que deseja finalizar o processo de entrega desse pedido?')">Confirmar Entrega</a>
+    </div>
+
+    <script>
+        function atualizarPedido() {
+            const pedidoId = document.getElementById('pedido_id').innerText;
+
+            fetch(`/api/acompanhamento/${pedidoId}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('cliente_nome').innerText = data.cliente_nome;
+                    document.getElementById('endereco').innerText = data.endereco;
+                    document.getElementById('observacao').innerText = data.observacao;
+
+                    const statusElement = document.getElementById('status_pedido');
+                    if (data.entregue == 1) {
+                        statusElement.innerHTML = "🛵 A caminho";
+                        statusElement.className = "status entregue";
+                    } else if (data.entregue == 2) {
+                        statusElement.innerHTML = "✅ Finalizado";
+                        statusElement.className = "status entregue";
+                    } else {
+                        statusElement.innerHTML = "⏳ Em andamento";
+                        statusElement.className = "status pendente";
+                    }
+                })
+                .catch(error => console.error("Erro ao buscar atualização do pedido:", error));
+        }
+
+        // Atualiza a cada 5 segundos
+        setInterval(atualizarPedido, 5000);
+    </script>
+</body>
+</html>

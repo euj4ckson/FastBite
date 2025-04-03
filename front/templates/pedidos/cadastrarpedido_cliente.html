@@ -204,6 +204,7 @@
             <p><strong>Itens:</strong></p>
             <ul id="confirmItens"></ul>
             <p><strong>Observação:</strong> <span id="confirmObservacao"></span></p>
+
             <button onclick="enviarPedido()">Confirmar Pedido</button>
             <button onclick="fecharModalConfirmacao()">Cancelar</button>
         </div>
@@ -222,8 +223,9 @@
             div.className = 'item';
             div.innerHTML = `
                 <select class="produto">
-                    ${produtos.map(produto => `<option value="${produto.id}">${produto.nome}</option>`).join('')}
+                    ${produtos.map(produto => `<option value="${produto.id}" data-preco="${produto.valor}">${produto.nome} - R$${produto.valor.toFixed(2)}</option>`).join('')}
                 </select>
+
                 <input type="number" class="quantidade" placeholder="Quantidade" min="1" required>
                 <button type="button" class="remove-btn" onclick="removerItem(this)">X</button>
             `;
@@ -252,15 +254,23 @@
             // Captura os itens corretamente
             const itens = [];
             document.querySelectorAll('.item').forEach(item => {
-                const selectElement = item.querySelector('select');  // Agora pega o elemento select corretamente
-                const produto_id = selectElement.value;  // Pega o ID do produto
-                const produto_nome = selectElement.selectedOptions[0].text;  // Pega o nome do produto
+                const selectElement = item.querySelector('select');  
+                const produto_id = selectElement.value;
+                const produto_nome = selectElement.selectedOptions[0].text;
                 const quantidade = item.querySelector('.quantidade').value.trim();
+                const preco = parseFloat(selectElement.selectedOptions[0].getAttribute('data-preco')); // Pega o preço do produto
 
                 if (produto_id && quantidade) {
-                    itens.push({ produto: parseInt(produto_id, 10), produto_nome, quantidade: parseInt(quantidade, 10) });
+                    itens.push({
+                        produto: parseInt(produto_id, 10),
+                        produto_nome,
+                        quantidade: parseInt(quantidade, 10),
+                        preco,  // Adiciona o preço unitário
+                        total: preco * parseInt(quantidade, 10) // Calcula o total do item
+                    });
                 }
             });
+
 
 
             // Validação
@@ -275,12 +285,22 @@
             document.getElementById('confirmObservacao').textContent = observacao || "Nenhuma";
 
             const itensLista = document.getElementById('confirmItens');
-            itensLista.innerHTML = "";  // Limpa a lista antes de adicionar os novos itens
+            itensLista.innerHTML = "";  
+
+            let totalPedido = 0;
             itens.forEach(item => {
+                totalPedido += item.total; // Soma o total do pedido
+
                 const li = document.createElement('li');
-                li.textContent = `${item.quantidade}x ${item.produto_nome}`;
+                li.textContent = `${item.quantidade}x ${item.produto_nome} - R$${item.preco.toFixed(2)} cada (Total: R$${item.total.toFixed(2)})`;
                 itensLista.appendChild(li);
             });
+
+            // Adiciona o total do pedido ao modal
+            const totalElement = document.createElement('p');
+            totalElement.innerHTML = `<strong>Total do Pedido:</strong> R$${totalPedido.toFixed(2)}`;
+            itensLista.appendChild(totalElement);
+
 
             // Armazena os dados temporariamente para envio posterior
             window.pedidoData = { cliente_nome, observacao, endereco, itens };
@@ -290,39 +310,47 @@
         });
 
         function enviarPedido() {
-            // Enviar os dados armazenados
             fetch('/cadastrarpedido_clientes', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(window.pedidoData),
             })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        alert("Erro: " + data.error);
-                    } else {
-                        mostrarModal(data.message);
-                        document.getElementById('pedidoForm').reset();
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro ao cadastrar pedido:', error);
-                });
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert("Erro: " + data.error);
+                } else {
+                    window.pedidoID = data.pedido_id; // Armazena o ID do pedido
+                    console.log("ID do pedido:", window.pedidoID);
+                    mostrarModal(data.message);
+                    document.getElementById('pedidoForm').reset();
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao cadastrar pedido:', error);
+            });
 
             fecharModalConfirmacao();
         }
 
-        function fecharModalConfirmacao() {
-            document.getElementById('modalConfirmacao').style.display = 'none';
+
+        function fecharModal() {
+            document.getElementById('modal').style.display = 'none';
+
+            if (window.pedidoID) {
+                window.location.href = `/acompanhamento/${window.pedidoID}`;
+            }
         }
+
         function mostrarModal(mensagem) {
             document.getElementById('modalMessage').textContent = mensagem;
             document.getElementById('modal').style.display = 'flex';
         }
-
-        function fecharModal() {
-            document.getElementById('modal').style.display = 'none';
+ 
+        function fecharModalConfirmacao() {
+            document.getElementById('modalConfirmacao').style.display = 'none';
         }
+
 
         // Função para consultar o CEP via API
         async function consultarCep() {
