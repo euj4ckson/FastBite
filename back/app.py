@@ -39,7 +39,7 @@ initcupom(app)
 # Configurações do banco de dados
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:gpQEgnKhEixOpMYwCuHgEHfZNVxiXlFD@nozomi.proxy.rlwy.net:12713/minha_aplicacao'
 app.config['SECRET_KEY'] = 'a3f1c9d7e4b5c6a8f2e9d1b7c0a5e6f4d3b2c1a7f8e9d6c5a4b3c2d1e7f9g8h'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:gpQEgnKhEixOpMYwCuHgEHfZNVxiXlFD@nozomi.proxy.rlwy.net:12713/minha_aplicacao?charset=utf8mb4&timezone=America/Sao_Paulo'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:gpQEgnKhEixOpMYwCuHgEHfZNVxiXlFD@nozomi.proxy.rlwy.net:12713/minha_aplicacao?charset=utf8mb4'
 
 db.init_app(app)
 
