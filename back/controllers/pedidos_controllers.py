@@ -4,7 +4,6 @@ from models.database import db
 from routes.views import render_cadastro_pedido, render_acompanhamentopedido_cliente
 from datetime import datetime, timedelta
 from flask import request, jsonify
-
 import re
 
 def init_pedidos(app):
@@ -38,7 +37,6 @@ def init_pedidos(app):
 
       
         pedidos = query.all()
-        print(pedidos)
 
 
         # Calcular o valor do caixa com os pedidos filtrados
@@ -46,13 +44,48 @@ def init_pedidos(app):
 
         # Renderizar a página
         return render_template('pedidos/listar_pedidos.html', pedidos=pedidos, valor_caixa=valor_caixa)
+    @app.route('/api/pedidos', methods=['GET'])
+    def api_listar_pedidos():
+        data_inicio = request.args.get('data_inicio')
+        data_fim = request.args.get('data_fim')
+        apenas_nao_finalizados = request.args.get('entregues') == 'on'   
+
+        query = Pedidos.query
+
+        if data_inicio:
+            try:
+                data_inicio = datetime.strptime(data_inicio, '%Y-%m-%d')   
+                query = query.filter(Pedidos.criado_em >= data_inicio)
+            except ValueError:
+                return jsonify({"erro": "Formato inválido para data_inicio"}), 400
+
+        if data_fim:
+            try:
+                data_fim = datetime.strptime(data_fim, '%Y-%m-%d') + timedelta(days=1) - timedelta(seconds=1)
+                query = query.filter(Pedidos.criado_em <= data_fim)
+            except ValueError:
+                return jsonify({"erro": "Formato inválido para data_fim"}), 400
+
+        if apenas_nao_finalizados:
+            query = query.filter(Pedidos.entregue == False)  
+
+        pedidos = query.order_by(Pedidos.criado_em.desc()).all()
+
+        pedidos_json = [{
+            "id": pedido.id,
+            "cliente_nome": pedido.cliente_nome,
+            "valor_total": float(pedido.valor_total) if pedido.valor_total else 0, 
+            "criado_em": pedido.criado_em.strftime('%d/%m/%Y %H:%M'),
+            "entregue": pedido.entregue
+        } for pedido in pedidos]
+
+        return jsonify({"pedidos": pedidos_json})
 
     @app.route('/api/pedido/<int:id>', methods=['GET'])
     def obter_detalhes_pedido(id):
         pedido = Pedidos.query.get_or_404(id)
         pedido_dict = pedido.to_dict()
         for item in pedido_dict['itens']:
-            print(pedido_dict)
             produto = Produto.query.get(item['produto_id'])
             item['produto'] = {
                 'nome': produto.nome,
