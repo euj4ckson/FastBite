@@ -305,6 +305,9 @@ table tbody tr:hover {
 .vermelho {
     background-color: red;
 }
+.amarelo {
+    background-color: rgb(255, 239, 9);
+}
 
 /* Rodapé */
  

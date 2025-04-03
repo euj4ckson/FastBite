@@ -1,9 +1,10 @@
 from flask import Flask, request, redirect, url_for, flash, render_template,session,Blueprint,jsonify
 from models.models import Pedidos, Produto, pedido_itens
 from models.database import db
-from routes.views import render_cadastro_pedido,render_cadastrarpedido_cliente
+from routes.views import render_cadastro_pedido, render_acompanhamentopedido_cliente
 from datetime import datetime, timedelta
-from usuarios_controllers import init_usuarios
+from flask import request, jsonify
+
 import re
 
 def init_pedidos(app):
@@ -13,23 +14,19 @@ def init_pedidos(app):
         data_inicio = request.args.get('data_inicio')
         data_fim = request.args.get('data_fim')
         apenas_nao_finalizados = request.args.get('entregues') == 'on'   
-
-        # Query base
+ 
         query = Pedidos.query
-
-        # Aplicar filtros apenas se as datas forem válidas
-
-        # Aplicar filtros apenas se as datas forem válidas
+ 
         if data_inicio:
             try:
-                data_inicio = datetime.strptime(data_inicio, '%Y-%m-%d')  # Converter para datetime
+                data_inicio = datetime.strptime(data_inicio, '%Y-%m-%d')   
                 query = query.filter(Pedidos.criado_em >= data_inicio)
             except ValueError:
                 raise ValueError("Formato inválido para data_inicio. Use o formato YYYY-MM-DD.")
 
         if data_fim:
             try:
-                # Adicionar 1 dia e subtrair 1 segundo para incluir até o final do dia
+                
                 data_fim = datetime.strptime(data_fim, '%Y-%m-%d') + timedelta(days=1) - timedelta(seconds=1)
                 query = query.filter(Pedidos.criado_em <= data_fim)
             except ValueError:
@@ -37,9 +34,9 @@ def init_pedidos(app):
 
         query = query.order_by(Pedidos.criado_em.desc())
         if apenas_nao_finalizados:
-            query = query.filter(Pedidos.entregue == False)  # Apenas não finalizados
+            query = query.filter(Pedidos.entregue == False)  
 
-        # Obter os pedidos filtrados
+      
         pedidos = query.all()
         print(pedidos)
 
@@ -151,18 +148,20 @@ def init_pedidos(app):
             db.session.delete(item)
         db.session.delete(pedido)
         db.session.commit()
-        flash('Pedido e itens associados deletados com sucesso!')
         return redirect(url_for('listar_pedidos'))
     @app.route('/confirmar_pedido/<int:id>', methods=['GET', 'POST'])
     def confirmar_pedido(id):
         pedido = Pedidos.query.get_or_404(id)
         pedido.entregue = 1  # Atualiza o status para entregue
         db.session.commit()
-        flash('Pedido marcado como entregue com sucesso!')
+        flash('Pedido marcado como finalizado com sucesso!')
         return redirect(url_for('listar_pedidos'))
-
-    from flask import request, jsonify
-
+    @app.route('/Entregar_pedido/<int:id>', methods=['GET', 'POST'])
+    def Entregar_pedido(id):
+        pedido = Pedidos.query.get_or_404(id)
+        pedido.entregue = 2  # Atualiza o status para entregue
+        db.session.commit()
+        return redirect(url_for('acompanhamento_pedido', pedido_id=id))
     @app.route('/cadastrarpedido_clientes', methods=['GET','POST'])
     def cadastrarpedido_clientes():
         data = request.get_json()  # <-- Aqui pegamos os dados JSON
@@ -198,4 +197,26 @@ def init_pedidos(app):
 
         db.session.commit()
 
-        return jsonify({"message": "Obrigado pelo seu pedido! Ele foi cadastrado com sucesso."}), 201
+        return jsonify({"message": "Obrigado pelo seu pedido! Ele foi cadastrado com sucesso.", "pedido_id": novo_pedido.id}), 201
+ 
+    @app.route('/acompanhamento/<int:pedido_id>', methods=['GET'])
+    
+    def acompanhamento_pedido(pedido_id):
+        pedido = db.session.execute(db.select(Pedidos).filter_by(id=pedido_id)).scalar_one_or_none()
+
+        if not pedido:
+            return render_template("erro.html", mensagem="Pedido não encontrado"), 404
+
+        return render_acompanhamentopedido_cliente(pedido)
+    @app.route('/api/acompanhamento/<int:pedido_id>', methods=['GET'])
+    def acompanhamento_api(pedido_id):
+        pedido = db.session.execute(db.select(Pedidos).filter_by(id=pedido_id)).scalar_one_or_none()
+        if not pedido:
+            return jsonify({'error': 'Pedido não encontrado'}), 404
+        return jsonify({
+            'id': pedido.id,
+            'cliente_nome': pedido.cliente_nome,
+            'endereco': pedido.endereco,
+            'observacao': pedido.observacao or "Nenhuma",
+            'entregue': pedido.entregue  # Status do pedido (0 = em andamento, 1 = a caminho, 2 = finalizado)
+        })
