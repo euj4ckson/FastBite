@@ -87,11 +87,17 @@ def gerar_cupom_pdf(pedido):
     pdf.cell(0, linha_altura, "OBRIGADO PELA PREFERENCIA!", ln=True, align="C")
     pdf.cell(0, linha_altura, "VOLTE SEMPRE!", ln=True, align="C")
 
-    # Salvar PDF
-    caminho_destino = "C:/Users/jacksonSS/Pictures/cupom/"
-    if not os.path.exists(caminho_destino):
-        os.makedirs(caminho_destino)
-    arquivo_pdf = os.path.join(caminho_destino, f"cupom_venda_{venda_id}.pdf")
+    # Salvar PDF 
+    # Obtém o diretório de Downloads do usuário
+    diretorio_downloads = os.path.join(os.path.expanduser("~"), "Downloads")
+
+    # Garante que a pasta existe (por segurança)
+    os.makedirs(diretorio_downloads, exist_ok=True)
+
+    # Caminho final do PDF
+    arquivo_pdf = os.path.join(diretorio_downloads, f"cupom_venda_{venda_id}.pdf")
+
+    # Salvar o PDF no diretório de Downloads
     pdf.output(arquivo_pdf)
 
     return arquivo_pdf
