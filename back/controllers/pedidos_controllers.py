@@ -76,7 +76,9 @@ def init_pedidos(app):
             "cliente_nome": pedido.cliente_nome,
             "valor_total": float(pedido.valor_total) if pedido.valor_total else 0, 
             "criado_em": pedido.criado_em.strftime('%d/%m/%Y %H:%M'),
-            "entregue": pedido.entregue
+            "entregue": pedido.entregue,
+            "forma_pagamento": pedido.forma_pagamento,
+            "valor_entregue": pedido.valor_entregue
         } for pedido in pedidos]
 
         return jsonify({"pedidos": pedidos_json})
@@ -233,7 +235,7 @@ def init_pedidos(app):
 
         db.session.commit()
 
-        return jsonify({"message": "Obrigado pelo seu pedido! Ele foi cadastrado com sucesso.", "pedido_id": novo_pedido.id}), 201
+        return jsonify({"message": "Obrigado pelo seu pedido! Você será redirecionado para acompanhamento.", "pedido_id": novo_pedido.id}), 201
  
     @app.route('/acompanhamento/<int:pedido_id>', methods=['GET'])
     

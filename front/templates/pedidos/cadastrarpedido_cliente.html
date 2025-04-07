@@ -30,12 +30,12 @@
             <h3>Adicione seus itens</h3>
             <div id="itensContainer"></div>
             <button type="button" onclick="adicionarItem()">+ Adicionar Item</button>
-            <h3>Forma de Pagamento</h3>
+            <h2>Pagamento</h2>
             <h5>Total do Pedido</h5>
             <p id="totalPedidoDisplay"><strong>R$ 0.00</strong></p>
 
-            <select id="forma_pagamento" required onchange="toggleTroco()">
-                <option value="">Selecione</option>
+            <select id="forma_pagamento" class="forma_pagamento" required onchange="toggleTroco()">
+                <option value="">Selecione a forma de pagamento</option>
                 <option value="Cartão">Cartão</option>
                 <option value="Dinheiro">Dinheiro</option>
             </select>
@@ -53,7 +53,7 @@
         <div class="modal-content">
             <img src="{{ url_for('static', filename='img/motoboy.png') }}" alt="logo_empresa">
             <p id="modalMessage">Pedido cadastrado com sucesso!</p>
-            <button onclick="fecharModal()">Fechar</button>
+            <button onclick="fecharModal()">Acompanhar</button>
         </div>
     </div>
     <div id="modalConfirmacao" class="modal">
@@ -90,9 +90,14 @@
                 <button type="button" class="remove-btn" onclick="removerItem(this)">X</button>
             `;
             container.appendChild(div);
-                    
+            const select = div.querySelector('.produto');       // Aqui é onde definimos o select
+            const quantidade = div.querySelector('.quantidade');
+
+            // Agora que select e quantidade estão definidos, podemos adicionar eventos
             select.addEventListener('change', atualizarTotalPedido);
             quantidade.addEventListener('input', atualizarTotalPedido);
+
+                    
 
             // Atualiza o total imediatamente ao adicionar
             atualizarTotalPedido();
@@ -162,7 +167,10 @@
                 totalPedido += item.total; // Soma o total do pedido
 
                 const li = document.createElement('li');
-                li.textContent = `${item.quantidade}x ${item.produto_nome} - R$${item.preco.toFixed(2)} cada (Total: R$${item.total.toFixed(2)})`;
+                li.innerHTML = `
+                <div>${item.quantidade}x ${item.produto_nome}</div>
+                <div>(Total: R$${item.total.toFixed(2)})</div>
+                `;
                 itensLista.appendChild(li);
             });
             if (forma_pagamento === 'Dinheiro' && valor_entregue && !isNaN(valor_entregue)) {

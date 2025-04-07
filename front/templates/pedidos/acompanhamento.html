@@ -50,6 +50,7 @@
         <p><strong>Cliente:</strong> <span id="cliente_nome">{{ pedido.cliente_nome }}</span></p>
         <p><strong>Endereço:</strong> <span id="endereco">{{ pedido.endereco }}</span></p>
         <p><strong>Observação:</strong> <span id="observacao">{{ pedido.observacao or "Nenhuma" }}</span></p>
+        <h3><strong>Valor a pagar:</strong> <span id="observacao">{{ pedido.valor_total }}</span></h3>
 
         <p id="status_pedido" class="status {% if pedido.entregue == 1 %}entregue{% else %}pendente{% endif %}">
             {% if pedido.entregue == 1 %}
@@ -57,7 +58,7 @@
             {% elif pedido.entregue == 2 %}
                 ✅ Finalizado
             {% else %}
-                ⏳ Em andamento
+                ⏳ Preparando pedido
             {% endif %}
         </p>
 

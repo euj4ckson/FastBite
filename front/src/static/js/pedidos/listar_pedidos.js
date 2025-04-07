@@ -7,7 +7,11 @@ async function abrirModal(pedidoId) {
         const response = await fetch(`/api/pedido/${pedidoId}`);
         if (response.ok) {
             const pedido = await response.json();
-
+            let trocoHtml = "";
+            if (pedido.valor_entregue != pedido.valor_total) {
+                const troco = (pedido.valor_entregue - pedido.valor_total).toFixed(2);
+                trocoHtml = `<p><strong>Troco:</strong> R$ ${troco}</p>`;
+            }
             // Montando o HTML com os dados do pedido
             let html = `
                 <p><strong>ID do Pedido:</strong> ${pedido.id}</p>
@@ -15,6 +19,8 @@ async function abrirModal(pedidoId) {
                 <p><strong>Observação:</strong> ${pedido.observacao}</p>
                 <p><strong>Endereço:</strong> ${pedido.endereco}</p>
                 <p><strong>Valor Total:</strong> R$ ${parseFloat(pedido.valor_total).toFixed(2)}</p>
+                <p><strong>Forma de pagamento</strong>  ${pedido.forma_pagamento}</p>
+                ${trocoHtml} 
                 <h4>Itens do Pedido:</h4>
                 <table>
                     <thead>
