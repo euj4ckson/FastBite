@@ -206,6 +206,9 @@ def init_pedidos(app):
         observacao = data.get('observacao', '')
         endereco = data.get('endereco','')  # Obter o endereço do JSON
         itens = data.get('itens', [])
+        forma_pagamento = data.get('forma_pagamento')
+        valor_entregue = data.get('valor_entregue')  # pode ser None se não for dinheiro
+
 
         if not cliente_nome or not itens or not endereco:  # Verificar se o endereço foi informado
             return jsonify({"error": "Nome do cliente, endereço e itens são obrigatórios!"}), 400
@@ -218,7 +221,7 @@ def init_pedidos(app):
             if produto:
                 total_pedido += produto.valor * quantidade
 
-        novo_pedido = Pedidos(cliente_nome=cliente_nome, valor_total=total_pedido, observacao=observacao, endereco=endereco)  # Passar o endereço
+        novo_pedido = Pedidos(cliente_nome=cliente_nome, valor_total=total_pedido, observacao=observacao, endereco=endereco,forma_pagamento=forma_pagamento,valor_entregue=valor_entregue)  # Passar o endereço
         db.session.add(novo_pedido)
         db.session.commit()
 
