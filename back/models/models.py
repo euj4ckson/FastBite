@@ -67,6 +67,8 @@ class Pedidos(db.Model):
             "valor_total": self.valor_total,
             "criado_em": self.criado_em.isoformat() if self.criado_em else None,
             "endereco": self.endereco,
+            "forma_pagamento": self.forma_pagamento,
+            "valor_entregue": self.valor_entregue,
             "itens": [item.to_dict() for item in self.itens]
         }
 
