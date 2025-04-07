@@ -3,7 +3,7 @@ import os
 from flask import Flask
 from flask_cors import CORS
 from waitress import serve
-# from flask_migrate import Migrate
+from flask_migrate import Migrate
 
 
 # Adiciona o diretório raiz ao sys.path
@@ -27,7 +27,7 @@ app = Flask(
     static_folder=os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'front', 'src','static')
 )
 CORS(app)
-# migrate = migrate(app, db)
+migrate = Migrate(app, db)
 
 # Envia o app para os controllers
 init_usuarios(app)

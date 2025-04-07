@@ -1,0 +1,154 @@
+body {
+    margin-top: 50px;
+    background-color: #181818;
+    color: #FFD700;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    width: 170px;
+    margin-bottom: -19px;
+    margin-top: -42px;
+}
+
+.container {
+    margin-top: 10px;
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+    padding: 30px;
+    background: #222;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+input,
+select,
+textarea,
+button {
+    width: 90%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    background: #333;
+    color: #FFD700;
+    outline: none;
+}
+
+button {
+    background: linear-gradient(135deg, #FFD700, #FFC300);
+    color: #181818;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #FFC300, #FFD700);
+    transform: scale(1.05);
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #333;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.remove-btn {
+    background: #FF4444;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.remove-btn:hover {
+    background: #CC0000;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #181818;
+    color: #FFD700;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+    max-width: 400px;
+    width: 80%;
+}
+img{
+    margin-top: 10px;
+}
+
+.modal button {
+    background: linear-gradient(135deg, #FFD700, #FFC300);
+    color: #181818;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.modal button:hover {
+    background: linear-gradient(135deg, #FFC300, #FFD700);
+}
+
+/* Endereço responsivo */
+.endereco-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.endereco-container input {
+    width: 90%;
+}
+
+/* Responsividade para telas pequenas */
+@media (max-width: 768px) {
+    .endereco-container {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        padding: 20px;
+    }
+} 

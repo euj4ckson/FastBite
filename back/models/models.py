@@ -54,6 +54,9 @@ class Pedidos(db.Model):
     entregue = db.Column(db.Integer, default=0, nullable=False)
     observacao = db.Column(db.String(100), nullable=False)
     endereco = db.Column(db.String(255), nullable=True)
+    forma_pagamento = db.Column(db.String(50), nullable=False)
+    valor_entregue = db.Column(db.Numeric(10, 2), nullable=True)  # Apenas se for dinheiro
+
     # Relacionamento com os itens do pedido
     itens = db.relationship('pedido_itens', backref='pedido_rel', lazy=True)
     def to_dict(self):
