@@ -27,7 +27,13 @@
                 <input type="text" id="cidade" placeholder="Cidade" required>
                 <input type="text" id="estado" placeholder="Estado" required>
             </div>
+            <h3>Adicione seus itens</h3>
+            <div id="itensContainer"></div>
+            <button type="button" onclick="adicionarItem()">+ Adicionar Item</button>
             <h3>Forma de Pagamento</h3>
+            <h5>Total do Pedido</h5>
+            <p id="totalPedidoDisplay"><strong>R$ 0.00</strong></p>
+
             <select id="forma_pagamento" required onchange="toggleTroco()">
                 <option value="">Selecione</option>
                 <option value="Cartão">Cartão</option>
@@ -37,9 +43,6 @@
             <div id="trocoContainer" style="display: none;">
                 <input type="number" id="valor_entregue" placeholder="Valor entregue (Dinheiro)" min="0" step="0.01">
             </div>
-            <h3>Adicione seus itens</h3>
-            <div id="itensContainer"></div>
-            <button type="button" onclick="adicionarItem()">+ Adicionar Item</button>
             <textarea id="observacao" placeholder="Observações"></textarea>
             <button type="submit">Enviar Pedido</button>
         </form>
@@ -87,10 +90,17 @@
                 <button type="button" class="remove-btn" onclick="removerItem(this)">X</button>
             `;
             container.appendChild(div);
+                    
+            select.addEventListener('change', atualizarTotalPedido);
+            quantidade.addEventListener('input', atualizarTotalPedido);
+
+            // Atualiza o total imediatamente ao adicionar
+            atualizarTotalPedido();
         }
 
         function removerItem(botao) {
             botao.parentElement.remove();
+            atualizarTotalPedido();
         }
 
         document.getElementById('pedidoForm').addEventListener('submit', function (event) {
@@ -201,6 +211,24 @@
 
             fecharModalConfirmacao();
         }
+        function atualizarTotalPedido() {
+            const itens = document.querySelectorAll('.item');
+            let total = 0;
+
+            itens.forEach(item => {
+                const selectElement = item.querySelector('select');
+                const quantidadeInput = item.querySelector('.quantidade');
+                const preco = parseFloat(selectElement.selectedOptions[0].getAttribute('data-preco'));
+                const quantidade = parseInt(quantidadeInput.value) || 0;
+
+                if (!isNaN(preco) && !isNaN(quantidade)) {
+                    total += preco * quantidade;
+                }
+            });
+
+            document.getElementById('totalPedidoDisplay').innerHTML = `<strong>R$ ${total.toFixed(2)}</strong>`;
+        }
+
 
 
         function fecharModal() {
