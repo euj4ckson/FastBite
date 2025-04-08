@@ -165,3 +165,44 @@ img{
     color: #FFD700;
     outline: none;
 } 
+.formaentrega-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #FFD700;
+    font-family: sans-serif;
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;  
+    align-items: center;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 5px;  
+    margin-left: 10px;
+
+}
+.radio-content{
+    margin-left: -6px;
+}
+
+
+
+.btnanteriorproximo {
+    background: linear-gradient(135deg, #FFC300, #FFD700);
+    color: #181818;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btnanteriorproximo:hover {
+    background: linear-gradient(grey);
+    transform: scale(1.05);
+}

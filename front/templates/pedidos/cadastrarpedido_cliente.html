@@ -13,38 +13,59 @@
 <body>
     <div class="container">
         <img src="{{ url_for('static', filename='img/hamburguer.png') }}" alt="logo_empresa">
-        <h2>Faça seu pedido</h2>
+        <h2 id="formtitulo" class="formtitulo">Faça seu pedido</h2>
         <form id="pedidoForm" method="POST" action="/cadastrarpedido_clientes">
-            <input type="text" id="cliente_nome" placeholder="Nome Completo" required>
+            <div id="etapa1">
+                <input type="text" id="cliente_nome" placeholder="Nome Cliente" required>
 
-            <!-- Endereço de Entrega -->
-            <h3>Endereço de Entrega</h3>
-            <div class="endereco-container">
-                <input type="text" id="cep" placeholder="CEP" required onblur="consultarCep()">
-                <input type="text" id="rua" placeholder="Rua" required>
-                <input type="text" id="numero" placeholder="Número" required>
-                <input type="text" id="bairro" placeholder="Bairro" required>
-                <input type="text" id="cidade" placeholder="Cidade" required>
-                <input type="text" id="estado" placeholder="Estado" required>
+                <!-- Endereço de Entrega -->
+                <div class="formaentrega-container">
+                    <h3>Entrega</h3>
+                    <div class="radio-group">
+                        <p>Retirada no local</p>
+                        <label class="radio-option">
+                            <input type="radio" name="retirada" value="sim" onchange="toggleEndereco()">
+                            <p class="radio-content">Sim</p>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="retirada" value="nao" onchange="toggleEndereco()">
+                            <p class="radio-content">Não</p>
+                        </label>
+                    </div>
+                </div>
+                <div id="endereco-container" class="endereco-container">
+                    <input type="text" id="cep" id="cep"  placeholder="CEP" required onblur="consultarCep()">
+                    <input type="text" id="rua"id="rua" placeholder="Rua" required>
+                    <input type="text" id="numero" name="numero" placeholder="Número" required>
+                    <input type="text" id="bairro" name="bairro" placeholder="Bairro" required>
+                    <input type="text" id="cidade" name="cidade" placeholder="Cidade" required>
+                    <input type="text" id="estado" name="estado" placeholder="Estado" required>
+                </div>
+                <h3>Adicione seus itens</h3>
+                <div id="itensContainer"></div>
+                <button type="button" onclick="adicionarItem()">+ Adicionar Item</button>
+                <button type="button" class="btnanteriorproximo" onclick="irParaEtapa2()">Ir para Pagamento</button>
             </div>
-            <h3>Adicione seus itens</h3>
-            <div id="itensContainer"></div>
-            <button type="button" onclick="adicionarItem()">+ Adicionar Item</button>
-            <h2>Pagamento</h2>
-            <h5>Total do Pedido</h5>
-            <p id="totalPedidoDisplay"><strong>R$ 0.00</strong></p>
+            <div id="etapa2" style="display: none;">
 
-            <select id="forma_pagamento" class="forma_pagamento" required onchange="toggleTroco()">
-                <option value="">Selecione a forma de pagamento</option>
-                <option value="Cartão">Cartão</option>
-                <option value="Dinheiro">Dinheiro</option>
-            </select>
 
-            <div id="trocoContainer" style="display: none;">
-                <input type="number" id="valor_entregue" placeholder="Valor entregue (Dinheiro)" min="0" step="0.01">
+                <h2>Pagamento</h2>
+                <h5>Total do Pedido</h5>
+                <p id="totalPedidoDisplay"><strong>R$ 0.00</strong></p>
+
+                <select id="forma_pagamento" class="forma_pagamento" required onchange="toggleTroco()">
+                    <option value="">Selecione a forma de pagamento</option>
+                    <option value="Cartão">Cartão</option>
+                    <option value="Dinheiro">Dinheiro</option>
+                </select>
+
+                <div id="trocoContainer" style="display: none;">
+                    <input type="number" id="valor_entregue" placeholder="Valor entregue (Dinheiro)" min="0" step="0.01">
+                </div>
+                <textarea id="observacao" placeholder="Observações do pedido (retirada de ingrediente e/ou instruções de entrega)"></textarea>
+                <button type="button"class="btnanteriorproximo" onclick="irParaEtapa1()">Anterior</button>
+                <button type="submit">Enviar Pedido</button>
             </div>
-            <textarea id="observacao" placeholder="Observações"></textarea>
-            <button type="submit">Enviar Pedido</button>
         </form>
     </div>
 
@@ -70,6 +91,7 @@
         </div>
     </div>
     <script>
+        
         let produtos = [];
         async function carregarProdutos() {
             const response = await fetch('/api/produtos');
@@ -115,17 +137,27 @@
             const observacao = document.getElementById('observacao').value.trim();
             const forma_pagamento = document.getElementById('forma_pagamento').value;
             let valor_entregue = parseFloat(document.getElementById('valor_entregue').value) || null;
+            let endereco
+            const selecionado = document.querySelector('input[name="retirada"]:checked');
+            const enderecoContainer = document.getElementById('endereco-container');
 
+            if (selecionado && selecionado.value === 'sim') {
+                endereco = "Retirada em loja";
+                console.log("Retirada em loja");                 
 
-            // Captura e formata os dados do endereço corretamente
-            const cep = document.getElementById('cep').value.trim();
-            const rua = document.getElementById('rua').value.trim();
-            const numero = document.getElementById('numero').value.trim();
-            const bairro = document.getElementById('bairro').value.trim();
-            const cidade = document.getElementById('cidade').value.trim();
-            const estado = document.getElementById('estado').value.trim();
-            const endereco = `${rua}, ${numero}, ${bairro}, ${cidade}, ${estado}, CEP: ${cep}`;
+            } else {
+                const cep = document.getElementById('cep').value.trim();
+                const rua = document.getElementById('rua').value.trim();
+                const numero = document.getElementById('numero').value.trim();
+                const bairro = document.getElementById('bairro').value.trim();
+                const cidade = document.getElementById('cidade').value.trim();
+                const estado = document.getElementById('estado').value.trim();
+                endereco= `${rua}, ${numero}, ${bairro}, ${cidade}, ${estado}, CEP: ${cep}`;
 
+            }
+             
+
+             
             // Captura os itens corretamente
             const itens = [];
             document.querySelectorAll('.item').forEach(item => {
@@ -282,6 +314,43 @@
         function toggleTroco() {
             const forma = document.getElementById('forma_pagamento').value;
             document.getElementById('trocoContainer').style.display = (forma === 'Dinheiro') ? 'block' : 'none';
+        }
+        function toggleEndereco() {
+            const selecionado = document.querySelector('input[name="retirada"]:checked');
+            const enderecoContainer = document.getElementById('endereco-container');
+            const camposEndereco = enderecoContainer.querySelectorAll('input');
+
+            if (selecionado && selecionado.value === 'sim') {
+                enderecoContainer.style.display = 'none';
+                camposEndereco.forEach(campo => campo.disabled = true);
+
+            } else {
+                enderecoContainer.style.display = 'block';
+                camposEndereco.forEach(campo => campo.disabled = false);
+            }
+        }
+        function irParaEtapa2() {
+            const nome = document.getElementById("cliente_nome").value;
+            if (!nome) {
+                alert("Por favor, preencha o nome.");
+                return;
+            }
+
+            // Validar mais campos se quiser...
+
+            document.getElementById("etapa1").style.display = "none";
+            document.getElementById("etapa2").style.display = "block";
+            document.getElementById("formtitulo").style.display = "none";
+
+        }
+        function irParaEtapa1() {
+ 
+            // Validar mais campos se quiser...
+
+            document.getElementById("etapa1").style.display = "block";
+            document.getElementById("etapa2").style.display = "none";
+            document.getElementById("formtitulo").style.display = "block";
+
         }
 
     </script>
