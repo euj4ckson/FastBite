@@ -52,6 +52,39 @@ button {
     color: #FFD700;
     outline: none;
 }
+.quantidade-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantidade-control .quantidade {
+    width: 10px;
+    text-align: center;
+    background: #333;
+    color: #FFD700;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.btn-menor,
+.btn-maior {
+    background: #444;
+    color: #FFD700;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-menor:hover,
+.btn-maior:hover {
+    background: #666;
+}
+
 
 button {
     background: linear-gradient(135deg, #FFD700, #FFC300);
@@ -78,12 +111,16 @@ button:hover {
 
 .remove-btn {
     background: #FF4444;
-    color: white;
-    padding: 8px 12px;
+    color: black;
+    width: 55px;
+    padding: 10px 10px;
     border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
     transition: 0.3s;
+    margin-left: 10px; 
+    text-align: center;
+    align-items: center;
 }
 
 .remove-btn:hover {

@@ -108,9 +108,15 @@
                     ${produtos.map(produto => `<option value="${produto.id}" data-preco="${produto.valor}">${produto.nome} - R$${produto.valor.toFixed(2)}</option>`).join('')}
                 </select>
 
-                <input type="number" class="quantidade" placeholder="Quantidade" min="1" required>
+                <div class="quantidade-control">
+                    <button type="button" class="btn-menor" onclick="alterarQuantidade(this, -1)">−</button>
+                    <input type="text" class="quantidade" value="1" readonly>
+                    <button type="button" class="btn-maior" onclick="alterarQuantidade(this, 1)">+</button>
+                </div>
+
                 <button type="button" class="remove-btn" onclick="removerItem(this)">X</button>
             `;
+
             container.appendChild(div);
             const select = div.querySelector('.produto');       // Aqui é onde definimos o select
             const quantidade = div.querySelector('.quantidade');
@@ -352,6 +358,15 @@
             document.getElementById("formtitulo").style.display = "block";
 
         }
+        function alterarQuantidade(btn, delta) {
+            const input = btn.parentElement.querySelector('.quantidade');
+            let valor = parseInt(input.value) || 1;
+            valor += delta;
+            if (valor < 1) valor = 1;
+            input.value = valor;
+            atualizarTotalPedido();
+        }
+
 
     </script>
 </body>
