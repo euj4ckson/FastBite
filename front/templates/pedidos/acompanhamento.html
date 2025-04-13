@@ -51,6 +51,15 @@
         <p><strong>Endereço:</strong> <span id="endereco">{{ pedido.endereco }}</span></p>
         <p><strong>Observação:</strong> <span id="observacao">{{ pedido.observacao or "Nenhuma" }}</span></p>
         <h3><strong>Valor a pagar:</strong> <span id="observacao">{{ pedido.valor_total }}</span></h3>
+        {% if pedido.forma_pagamento == 'pix'%}
+            <p>Escaneie o QR Code abaixo para pagar com Pix:</p>
+            <img style="height: 200px; width: 200px;" src="{{ url_for('gerar_pix_qrcode', pedido_id=pedido.id) }}" alt="QR Code Pix">
+            <p>Ou copie o código Pix:</p>
+            <input style="width: 90%;" type="text" id="pix_code" placeholder="Carregando código Pix..." readonly style="width: 100%; padding: 10px;">
+            <button onclick="copiarPix()" class="btn_green">Copiar Código Pix</button>
+        
+        {% endif %}
+
 
         <p id="status_pedido" class="status {% if pedido.entregue == 1 %}entregue{% else %}pendente{% endif %}">
             {% if pedido.entregue == 1 %}
@@ -66,6 +75,35 @@
     </div>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            carregarPixCopiaCola();
+        });
+
+        function copiarPix() {
+            var copyText = document.getElementById("pix_code");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // Para mobile
+            document.execCommand("copy");
+            alert("Código Pix copiado!");
+        }
+        function carregarPixCopiaCola() {
+            const pedidoId = document.getElementById('pedido_id').innerText;
+
+            fetch(`/pix_copiaecola/${pedidoId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.pix) {
+                        document.getElementById("pix_code").value = data.pix;
+                    } else {
+                        document.getElementById("pix_code").value = "Erro ao carregar código Pix.";
+                    }
+                })
+                .catch(error => {
+                    console.error("Erro ao buscar código Pix:", error);
+                    document.getElementById("pix_code").value = "Erro ao carregar código Pix.";
+                });
+        }
+
         function atualizarPedido() {
             const pedidoId = document.getElementById('pedido_id').innerText;
 
