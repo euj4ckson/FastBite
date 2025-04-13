@@ -20,6 +20,7 @@ from controllers.pedidos_controllers import init_pedidos
 from controllers.produtos_controllers import init_produtos
 from controllers.login_controllers import init_login
 from controllers.cupom_controller import initcupom
+from controllers.qrcode import initqrcode
 
 app = Flask(
     __name__, 
@@ -35,6 +36,7 @@ init_pedidos(app)
 init_produtos(app)
 init_login(app)
 initcupom(app)
+initqrcode(app)
 
 # Configurações do banco de dados
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:gpQEgnKhEixOpMYwCuHgEHfZNVxiXlFD@nozomi.proxy.rlwy.net:12713/minha_aplicacao'
