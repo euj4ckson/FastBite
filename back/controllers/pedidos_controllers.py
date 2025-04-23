@@ -137,41 +137,39 @@ def init_pedidos(app):
     @app.route('/editar_pedido/<int:id>', methods=['GET', 'POST'])
     def editar_pedido(id):
         pedido = Pedidos.query.get_or_404(id)
+
         if request.method == 'POST':
             pedido.cliente_nome = request.form['cliente_nome']
+            pedido.forma_pagamento = request.form.get('forma_pagamento')
+            pedido.valor_entregue = request.form.get('valor_entregue') or None
+            pedido.endereco = request.form.get('endereco')
+            pedido.observacao = request.form.get('observacao')
+
+            # Remover todos os itens anteriores
+            pedido_itens.query.filter_by(pedido_id=pedido.id).delete()
+
+            novo_valor_total = 0
             itens_data = []
-            for key, value in request.form.items():
+
+            for key in request.form:
                 if key.startswith('itens[') and key.endswith('][produto]'):
                     index = key.split('[')[1].split(']')[0]
-                    produto_id = int(value)
-                    quantidade = int(request.form.get(f'itens[{index}][quantidade]', 0))
-                    itens_data.append({'produto': produto_id, 'quantidade': quantidade})
-            novos_itens_ids = []
-            novo_valor_total = 0
-            for item_data in itens_data:
-                produto_id = item_data['produto']
-                quantidade = item_data['quantidade']
-                produto = Produto.query.get_or_404(produto_id)
-                item_existente = pedido_itens.query.filter_by(pedido_id=pedido.id, produto_id=produto_id).first()
-                if item_existente:
-                    item_existente.quantidade = quantidade
-                    db.session.add(item_existente)
-                else:
+                    produto_id = int(request.form[key])
+                    quantidade = int(request.form.get(f'itens[{index}][quantidade]', 1))
+
                     novo_item = pedido_itens(pedido_id=pedido.id, produto_id=produto_id, quantidade=quantidade)
                     db.session.add(novo_item)
-                novo_valor_total += produto.valor * quantidade
-                novos_itens_ids.append(produto_id)
-            itens_antigos = pedido_itens.query.filter(pedido_itens.pedido_id == pedido.id).all()
-            for item_antigo in itens_antigos:
-                if item_antigo.produto_id not in novos_itens_ids:
-                    db.session.delete(item_antigo)
+
+                    produto = Produto.query.get(produto_id)
+                    novo_valor_total += produto.valor * quantidade
+
             pedido.valor_total = novo_valor_total
+
             db.session.commit()
             flash('Pedido atualizado com sucesso!')
             return redirect(url_for('listar_pedidos'))
-        
-        produtos = [produto.to_dict() for produto in Produto.query.all()]
 
+        produtos = [produto.to_dict() for produto in Produto.query.all()]
         pedido_itens_lista = pedido_itens.query.filter_by(pedido_id=pedido.id).all()
         return render_template('pedidos/editar_pedidos.html', pedido=pedido, produtos=produtos, pedido_itens=pedido_itens_lista)
 
@@ -187,7 +185,7 @@ def init_pedidos(app):
     @app.route('/confirmar_pedido/<int:id>', methods=['GET', 'POST'])
     def confirmar_pedido(id):
         pedido = Pedidos.query.get_or_404(id)
-        pedido.entregue = 1  # Atualiza o status para entregue
+        pedido.entregue = 1  # Atualiza o status para finalizado
         db.session.commit()
         flash('Pedido marcado como finalizado com sucesso!')
         return redirect(url_for('listar_pedidos'))
@@ -197,6 +195,13 @@ def init_pedidos(app):
         pedido.entregue = 2  # Atualiza o status para entregue
         db.session.commit()
         return redirect(url_for('acompanhamento_pedido', pedido_id=id))
+    @app.route('/Entregar_pedidoL/<int:id>', methods=['GET', 'POST'])
+    def Entregar_pedidoL(id):
+        pedido = Pedidos.query.get_or_404(id)
+        pedido.entregue = 2  # Atualiza o status para entregue
+        db.session.commit()
+        return redirect(url_for('listar_pedidos'))
+
     @app.route('/cadastrarpedido_clientes', methods=['GET','POST'])
     def cadastrarpedido_clientes():
         data = request.get_json()  # <-- Aqui pegamos os dados JSON

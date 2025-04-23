@@ -97,6 +97,7 @@ function addProduto() {
         div.remove();
         updateResumo();
     };
+    buttonRemover.textContent='X'
 
     div.appendChild(select);
     div.appendChild(inputQuantidade);
