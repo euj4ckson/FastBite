@@ -67,8 +67,7 @@ async function abrirModal(pedidoId) {
         modal.style.display = 'block';
     }
 }
-
-// Fechar o modal
+ 
 function fecharModal() {
     const modal = document.getElementById('detalhesModal');
     modal.style.display = 'none';
@@ -93,9 +92,24 @@ document.addEventListener("DOMContentLoaded", function () {
                     tbody.innerHTML = `<tr><td colspan="6">Nenhum pedido encontrado.</td></tr>`;
                     return;
                 }
-
                 data.pedidos.forEach(pedido => {
                     const row = document.createElement("tr");
+                    
+                    // Escolha do botão: Confirmar ou Entregar
+                    let botaoAcao = '';
+                    if (parseInt(pedido.entregue) === 1) {
+                        botaoAcao = `
+                            <a href="/Entregar_pedidoL/${pedido.id}" class="btn_green" onclick="return confirm('Tem certeza que deseja marcar como entregue?')">
+                                <i class="fa-solid fa-motorcycle"></i>
+                            </a>
+                        `; } else {
+                        botaoAcao = `
+                            <a href="/confirmar_pedido/${pedido.id}" class="btn_green" onclick="return confirm('Tem certeza que deseja finalizar esse pedido?')">
+                                <i class="fa-solid fa-check"></i> 
+                            </a>
+                        `;
+                    }
+                
                     row.innerHTML = `
                         <td>${pedido.id}</td>
                         <td>${pedido.cliente_nome}</td>
@@ -110,12 +124,15 @@ document.addEventListener("DOMContentLoaded", function () {
                             <a href="/editar_pedido/${pedido.id}" class="btn"><i class="fa-solid fa-pen"></i></a>
                             <a class="btn" onclick="abrirModal('${pedido.id}')"><i class="fa-solid fa-eye"></i></a> 
                             <a href="/gerar_cupom/${pedido.id}" class="btn" onclick="return confirm('Gerar cupom?')"><i class="fa-solid fa-print"></i></a>
-                            <a href="/confirmar_pedido/${pedido.id}" class="btn_green" onclick="return confirm('Tem certeza que deseja finalizar esse pedido?')"><i class="fa-solid fa-check"></i></a>
-                            <a href="/deletar_pedido/${pedido.id}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja deletar este pedido?')" > <i class="fa-solid fa-trash"></i></a>
+                            ${botaoAcao}
+                            <a href="/deletar_pedido/${pedido.id}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja deletar este pedido?')">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
                         </td>
                     `;
                     tbody.appendChild(row);
                 });
+                
             })
             .catch(error => console.error("Erro ao buscar pedidos:", error));
     }
