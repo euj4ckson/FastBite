@@ -7,3 +7,6 @@ pip install -r requirements.txt
 INIT: waitress-serve --host=0.0.0.0 --port=8000 back.app:app (raiz do projeto)
 
 LINK: http://127.0.0.1:8000
+
+
+Teste a aplicação em: mvppython-production.up.railway.app
