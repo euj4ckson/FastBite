@@ -7,7 +7,6 @@
     <link rel="shortcut icon" href="./favicon.ico">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="{{ url_for('static', filename='js/pedidos/editar_pedidos.js') }}"></script>
-
 </head>
 <body>
     <header>
@@ -18,12 +17,28 @@
             <div id="rolagem">
                 <label for="cliente_nome">Nome do Cliente:</label><br>
                 <input type="text" id="cliente_nome" name="cliente_nome" value="{{ pedido.cliente_nome }}" required><br>
-                
+
+                <label for="forma_pagamento">Forma de Pagamento:</label><br>
+                <select name="forma_pagamento" required>
+                    <option value="dinheiro" {% if pedido.forma_pagamento == 'dinheiro' %}selected{% endif %}>Dinheiro</option>
+                    <option value="cartao" {% if pedido.forma_pagamento == 'cartao' %}selected{% endif %}>Cartão</option>
+                    <option value="pix" {% if pedido.forma_pagamento == 'pix' %}selected{% endif %}>Pix</option>
+                </select><br>
+
+                <label for="valor_entregue">Valor Entregue (se dinheiro):</label><br>
+                <input type="number" name="valor_entregue" step="0.01" value="{{ pedido.valor_entregue or '' }}"><br>
+
+                <label for="endereco">Endereço:</label><br>
+                <input type="text" name="endereco" value="{{ pedido.endereco or '' }}"><br>
+
+                <label for="observacao">Observações:</label><br>
+                <textarea name="observacao" rows="3">{{ pedido.observacao or '' }}</textarea><br>
+
                 <label for="produto">Editar Produtos:</label>
                 <div id="itens">
                     {% for item in pedido_itens %}
                     <div class="produto-item">
-                        <select  name="itens[{{ loop.index0 }}][produto]" onchange="updateResumo()" required>
+                        <select name="itens[{{ loop.index0 }}][produto]" onchange="updateResumo()" required>
                             {% for produto in produtos %}
                             <option value="{{ produto.id }}" {% if produto.id == item.produto_id %}selected{% endif %} 
                                 data-valor="{{ produto.valor }}">
@@ -31,7 +46,7 @@
                             </option>
                             {% endfor %}
                         </select>
-                        <input id="" type="number" name="itens[{{ loop.index0 }}][quantidade]" min="1" value="{{ item.quantidade }}" 
+                        <input type="number" name="itens[{{ loop.index0 }}][quantidade]" min="1" value="{{ item.quantidade }}" 
                             oninput="updateResumo()" required>
                         <button id="deletebtn" type="button" onclick="removeProduto(this)">X</button>
                     </div>
@@ -39,9 +54,9 @@
                 </div>
             </div>
             <button type="button" onclick="addProduto()">Adicionar Outro Produto</button>
-
             <button type="submit">Salvar Alterações</button>
         </form>
+
         <div class="resumo">
             <h3>Resumo do Pedido</h3>
             <p>Nome do Cliente: <span id="resumo-cliente">{{ pedido.cliente_nome }}</span></p>
